@@ -703,7 +703,7 @@ API changes:
              - Banding suppression
              - High-frequency noise suppression
              - Green channel equalization
-          + New chromatic abberration correction.
+          + New chromatic aberration correction.
           All three methods are written by Emil Martinec for Raw Therapee.
           Adapted to LibRaw by Jacques Desmis
 
