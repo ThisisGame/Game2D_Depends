@@ -134,9 +134,6 @@
     <ClCompile Include="..\FreeImage\PluginEXR.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\FreeImage\PluginG3.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\FreeImage\PluginGIF.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -203,9 +200,6 @@
     <ClCompile Include="..\FreeImage\PluginTARGA.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
-    <ClCompile Include="..\FreeImage\PluginTIFF.cpp">
-      <Filter>Source Files\Plugins</Filter>
-    </ClCompile>
     <ClCompile Include="..\FreeImage\PluginWBMP.cpp">
       <Filter>Source Files\Plugins</Filter>
     </ClCompile>
@@ -255,9 +249,6 @@
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\Metadata\TagLib.cpp">
-      <Filter>Source Files\Metadata</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Metadata\XTIFF.cpp">
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\FreeImageToolkit\Background.cpp">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -26,25 +26,25 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -277,7 +277,6 @@ copy ..\FreeImage.h ..\..\Dist\x64
     <ClCompile Include="..\FreeImage\PluginCUT.cpp" />
     <ClCompile Include="..\FreeImage\PluginDDS.cpp" />
     <ClCompile Include="..\FreeImage\PluginEXR.cpp" />
-    <ClCompile Include="..\FreeImage\PluginG3.cpp" />
     <ClCompile Include="..\FreeImage\PluginGIF.cpp" />
     <ClCompile Include="..\FreeImage\PluginHDR.cpp" />
     <ClCompile Include="..\FreeImage\PluginICO.cpp" />
@@ -300,7 +299,6 @@ copy ..\FreeImage.h ..\..\Dist\x64
     <ClCompile Include="..\FreeImage\PluginRAW.cpp" />
     <ClCompile Include="..\FreeImage\PluginSGI.cpp" />
     <ClCompile Include="..\FreeImage\PluginTARGA.cpp" />
-    <ClCompile Include="..\FreeImage\PluginTIFF.cpp" />
     <ClCompile Include="..\FreeImage\PluginWBMP.cpp" />
     <ClCompile Include="..\FreeImage\PluginWebP.cpp" />
     <ClCompile Include="..\FreeImage\PluginXBM.cpp" />
@@ -318,7 +316,6 @@ copy ..\FreeImage.h ..\..\Dist\x64
     <ClCompile Include="..\Metadata\IPTC.cpp" />
     <ClCompile Include="..\Metadata\TagConversion.cpp" />
     <ClCompile Include="..\Metadata\TagLib.cpp" />
-    <ClCompile Include="..\Metadata\XTIFF.cpp" />
     <ClCompile Include="..\FreeImageToolkit\Background.cpp" />
     <ClCompile Include="..\FreeImageToolkit\BSplineRotate.cpp" />
     <ClCompile Include="..\FreeImageToolkit\Channels.cpp" />
@@ -355,32 +352,12 @@ copy ..\FreeImage.h ..\..\Dist\x64
       <Project>{5e1d4e5f-e10c-4ba3-b663-f33014fd21d9}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\LibJXR\LibJXR.2013.vcxproj">
-      <Project>{244455e0-5f25-4451-9540-f317883e52a8}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="..\LibOpenJPEG\LibOpenJPEG.2013.vcxproj">
       <Project>{e3536c28-a7f1-4b53-8e52-7d2232f9e098}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\LibPNG\LibPNG.2013.vcxproj">
       <Project>{7db10b50-ce00-4d7a-b322-6824f05d2fcb}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\LibRawLite\LibRawLite.2013.vcxproj">
-      <Project>{07f662c1-1323-42ab-b6af-fbfd34a7437a}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\LibTIFF4\LibTIFF4.2013.vcxproj">
-      <Project>{ec085cbd-e9c3-477f-9a97-cb9d5da30e27}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\LibWebP\LibWebP.2013.vcxproj">
-      <Project>{097d9f6c-fd0e-4cbc-9676-009012aaeca8}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenEXR\OpenEXR.2013.vcxproj">
-      <Project>{17a4874b-0606-4687-90b6-f91f8cb3b8af}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\ZLib\ZLib.2013.vcxproj">
