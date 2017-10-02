@@ -249,7 +249,7 @@ FreeImage_Initialise(BOOL load_local_plugins_only) {
 			//s_plugins->AddNode(InitPCX);
 			//s_plugins->AddNode(InitPNM, NULL, "PGM", "Portable Greymap (ASCII)", "pgm", "^P2");
 			//s_plugins->AddNode(InitPNM, NULL, "PGMRAW", "Portable Greymap (RAW)", "pgm", "^P5");
-			//s_plugins->AddNode(InitPNG);
+			s_plugins->AddNode(InitPNG);
 			//s_plugins->AddNode(InitPNM, NULL, "PPM", "Portable Pixelmap (ASCII)", "ppm", "^P3");
 			//s_plugins->AddNode(InitPNM, NULL, "PPMRAW", "Portable Pixelmap (RAW)", "ppm", "^P6");
 			//s_plugins->AddNode(InitRAS);
@@ -806,13 +806,27 @@ FreeImage_Validate(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle) {
 		BOOL validated = FALSE;
 
 		PluginNode *node = s_plugins->FindNodeFromFIF(fif);
+		
 
-		if (node) {
+
+		if (node) 
+		{
+
+#ifdef ANDROID
+			LOGI("node ext %s", node->m_extension);
+#endif
+
 			long tell = io->tell_proc(handle);
 
 			validated = (node != NULL) ? (node->m_enabled) ? (node->m_plugin->validate_proc != NULL) ? node->m_plugin->validate_proc(io, handle) : FALSE : FALSE : FALSE;
 
 			io->seek_proc(handle, tell, SEEK_SET);
+		}
+		else
+		{
+#ifdef ANDROID
+			LOGI("node null");
+#endif
 		}
 
 		return validated;
