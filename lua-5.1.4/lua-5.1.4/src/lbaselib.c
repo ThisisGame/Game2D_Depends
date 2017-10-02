@@ -19,7 +19,18 @@
 #include "lauxlib.h"
 #include "lualib.h"
 
+#ifdef ANDROID
+#include <jni.h>
+#include <android/log.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define  LOG_TAG    "Lives2D"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+#endif
 
 
 /*
@@ -29,6 +40,13 @@
 ** (a console window or a log file, for instance).
 */
 static int luaB_print (lua_State *L) {
+
+	
+#ifdef ANDROID
+	char tmpLog[1024];
+	strcpy(tmpLog, "Lua Print:");
+#endif
+
   int n = lua_gettop(L);  /* number of arguments */
   int i;
   lua_getglobal(L, "tostring");
@@ -41,11 +59,33 @@ static int luaB_print (lua_State *L) {
     if (s == NULL)
       return luaL_error(L, LUA_QL("tostring") " must return a string to "
                            LUA_QL("print"));
-    if (i>1) fputs("\t", stdout);
-    fputs(s, stdout);
+	if (i > 1)
+	{
+#ifdef ANDROID
+		strcat(tmpLog, "\t");
+#else
+		fputs("\t", stdout);
+#endif
+	}
+    
+
+#ifdef ANDROID
+	strcat(tmpLog, s);
+#else
+	fputs(s, stdout);
+#endif
+	
+
     lua_pop(L, 1);  /* pop result */
   }
+  
+#ifdef ANDROID
+  strcat(tmpLog, "\n");
+  puts(tmpLog);
+  LOGI("%s",tmpLog);
+#else
   fputs("\n", stdout);
+#endif
   return 0;
 }
 
