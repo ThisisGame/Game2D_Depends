@@ -811,11 +811,6 @@ FreeImage_Validate(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle) {
 
 		if (node) 
 		{
-
-#ifdef ANDROID
-			LOGI("node ext %s", node->m_extension);
-#endif
-
 			long tell = io->tell_proc(handle);
 
 			validated = (node != NULL) ? (node->m_enabled) ? (node->m_plugin->validate_proc != NULL) ? node->m_plugin->validate_proc(io, handle) : FALSE : FALSE : FALSE;
@@ -824,9 +819,7 @@ FreeImage_Validate(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle) {
 		}
 		else
 		{
-#ifdef ANDROID
-			LOGI("node null");
-#endif
+			
 		}
 
 		return validated;
