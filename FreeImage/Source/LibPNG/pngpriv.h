@@ -129,6 +129,12 @@
 #  else
 #     define PNG_ARM_NEON_OPT 0
 #  endif
+
+
+#if defined(__APPLE__)
+#     define PNG_ARM_NEON_OPT 0
+#endif
+
 #endif
 
 #if PNG_ARM_NEON_OPT > 0
