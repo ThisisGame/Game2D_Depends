@@ -2,7 +2,7 @@
 // JPEG2000 helpers
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -69,7 +69,7 @@ _SeekProc(OPJ_OFF_T p_nb_bytes, FILE * p_user_data) {
 // --------------------------------------------------------------------------
 
 J2KFIO_t* 
-opj_freeimage_stream_create(FreeImageIO *io, fi_handle handle, BOOL bRead) {
+opj_freeimage_stream_create(FreeImageIO *io, fi_handle handle, FI_BOOL bRead) {
 	if(!handle) {
 		return NULL;
 	}
@@ -123,7 +123,7 @@ Convert a OpenJPEG image to a FIBITMAP
 @param header_only If TRUE, allocate a 'header only' FIBITMAP, otherwise allocate a full FIBITMAP
 @return Returns the converted image if successful, returns NULL otherwise
 */
-FIBITMAP* J2KImageToFIBITMAP(int format_id, const opj_image_t *image, BOOL header_only) {
+FIBITMAP* J2KImageToFIBITMAP(int format_id, const opj_image_t *image, FI_BOOL header_only) {
 	FIBITMAP *dib = NULL;
 
 	try {
@@ -141,7 +141,7 @@ FIBITMAP* J2KImageToFIBITMAP(int format_id, const opj_image_t *image, BOOL heade
 
 		int numcomps = image->numcomps;
 
-		BOOL bIsValid = TRUE;
+		FI_BOOL bIsValid = TRUE;
 		for(int c = 0; c < numcomps - 1; c++) {
 			if(	(image->comps[c].dx == image->comps[c+1].dx) && 
 				(image->comps[c].dy == image->comps[c+1].dy) &&

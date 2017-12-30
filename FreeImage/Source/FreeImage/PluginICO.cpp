@@ -3,7 +3,7 @@
 //
 // Design and implementation by
 // - Floris van den Berg (flvdberg@wxs.nl)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -114,14 +114,14 @@ CalculateImageOffset(std::vector<FIBITMAP*>& vPages, int nIndex ) {
 Vista icon support
 @return Returns TRUE if the bitmap data is stored in PNG format
 */
-static BOOL
+static FI_BOOL
 IsPNG(FreeImageIO *io, fi_handle handle) {
 	BYTE png_signature[8] = { 137, 80, 78, 71, 13, 10, 26, 10 };
 	BYTE signature[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	long tell = io->tell_proc(handle);
 	io->read_proc(&signature, 1, 8, handle);
-	BOOL bIsPNG = (memcmp(png_signature, signature, 8) == 0);
+	FI_BOOL bIsPNG = (memcmp(png_signature, signature, 8) == 0);
 	io->seek_proc(handle, tell, SEEK_SET);
 
 	return bIsPNG;
@@ -198,7 +198,7 @@ MimeType() {
 	return "image/vnd.microsoft.icon";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	ICONHEADER icon_header;
 
@@ -210,7 +210,7 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return ((icon_header.idReserved == 0) && (icon_header.idType == 1) && (icon_header.idCount > 0));
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return (
 			(depth == 1) ||
@@ -222,12 +222,12 @@ SupportsExportDepth(int depth) {
 		);
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return (type == FIT_BITMAP) ? TRUE : FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -235,7 +235,7 @@ SupportsNoPixels() {
 // ----------------------------------------------------------
 
 static void * DLL_CALLCONV
-Open(FreeImageIO *io, fi_handle handle, BOOL read) {
+Open(FreeImageIO *io, fi_handle handle, FI_BOOL read) {
 	// Allocate memory for the header structure
 	ICONHEADER *lpIH = (ICONHEADER*)malloc(sizeof(ICONHEADER));
 	if(lpIH == NULL) {
@@ -287,7 +287,7 @@ PageCount(FreeImageIO *io, fi_handle handle, void *data) {
 // ----------------------------------------------------------
 
 static FIBITMAP*
-LoadStandardIcon(FreeImageIO *io, fi_handle handle, int flags, BOOL header_only) {
+LoadStandardIcon(FreeImageIO *io, fi_handle handle, int flags, FI_BOOL header_only) {
 	FIBITMAP *dib = NULL;
 
 	// load the BITMAPINFOHEADER
@@ -401,7 +401,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 		page = 0;
 	}
 
-	BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+	FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 
 	if (handle != NULL) {
 		FIBITMAP *dib = NULL;
@@ -456,7 +456,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 
 // ----------------------------------------------------------
 
-static BOOL 
+static FI_BOOL 
 SaveStandardIcon(FreeImageIO *io, FIBITMAP *dib, fi_handle handle) {
 	BITMAPINFOHEADER *bmih = NULL;
 
@@ -655,7 +655,7 @@ SaveStandardIcon(FreeImageIO *io, FIBITMAP *dib, fi_handle handle) {
 	return TRUE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
 	ICONHEADER *icon_header = NULL;
 	std::vector<FIBITMAP*> vPages;

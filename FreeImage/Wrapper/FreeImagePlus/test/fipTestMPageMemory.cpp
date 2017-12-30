@@ -2,7 +2,7 @@
 // FreeImagePlus Test Script
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -26,7 +26,7 @@ using namespace std;
 
 // --------------------------------------------------------------------------
 
-static BOOL  
+static FI_BOOL  
 loadBuffer(const char *lpszPathName, BYTE **buffer, DWORD *length) {
 	struct stat file_info;
 	int result;
@@ -51,9 +51,9 @@ loadBuffer(const char *lpszPathName, BYTE **buffer, DWORD *length) {
 	return FALSE;
 }
 
-static BOOL 
+static FI_BOOL 
 extractPagesFromMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO) {
-	BOOL bMemoryCache = TRUE;
+	FI_BOOL bMemoryCache = TRUE;
 
 	char filename[256];
 	fipImage image;
@@ -87,8 +87,8 @@ extractPagesFromMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO) {
 	return src.close(0);
 }
 
-BOOL testLoadMultiBitmapFromMemory(const char *lpszPathName) {
-	BOOL bSuccess = FALSE;
+FI_BOOL testLoadMultiBitmapFromMemory(const char *lpszPathName) {
+	FI_BOOL bSuccess = FALSE;
 
 	BYTE *buffer = NULL;
 	DWORD buffer_size = 0;
@@ -120,12 +120,12 @@ BOOL testLoadMultiBitmapFromMemory(const char *lpszPathName) {
 
 // --------------------------------------------------------------------------
 
-BOOL testSaveMultiBitmapToMemory(const char *input, const char *output, int output_flag) {
-	BOOL bSuccess;
+FI_BOOL testSaveMultiBitmapToMemory(const char *input, const char *output, int output_flag) {
+	FI_BOOL bSuccess;
 
-	BOOL bCreateNew = FALSE;
-	BOOL bReadOnly = TRUE;
-	BOOL bMemoryCache = TRUE;
+	FI_BOOL bCreateNew = FALSE;
+	FI_BOOL bReadOnly = TRUE;
+	FI_BOOL bMemoryCache = TRUE;
 
 	// Open src file (read-only, use memory cache)
 	fipMultiPage src(bMemoryCache);
@@ -165,8 +165,8 @@ BOOL testSaveMultiBitmapToMemory(const char *input, const char *output, int outp
 	return FALSE;
 }
 
-BOOL testMemoryStreamMultiPageOpenSave(const char *lpszPathName, char *output, int input_flag, int output_flag) {
-	BOOL bSuccess = FALSE;
+FI_BOOL testMemoryStreamMultiPageOpenSave(const char *lpszPathName, char *output, int input_flag, int output_flag) {
+	FI_BOOL bSuccess = FALSE;
 
 	BYTE *buffer = NULL;
 	DWORD buffer_size = 0;
@@ -258,7 +258,7 @@ BOOL testMemoryStreamMultiPageOpenSave(const char *lpszPathName, char *output, i
 // --------------------------------------------------------------------------
 
 void testMultiPageMemory(const char *lpszPathName) {
-	BOOL bSuccess;
+	FI_BOOL bSuccess;
 
 	cout << "testMultiPageMemory ...\n";
 	

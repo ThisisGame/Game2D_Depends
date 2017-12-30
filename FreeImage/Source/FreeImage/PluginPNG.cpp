@@ -93,7 +93,7 @@ warning_handler(png_structp png_ptr, const char *warning) {
 // Metadata routines
 // ==========================================================
 
-static BOOL 
+static FI_BOOL 
 ReadMetadata(png_structp png_ptr, png_infop info_ptr, FIBITMAP *dib) {
 	// XMP keyword
 	const char *g_png_xmp_keyword = "XML:com.adobe.xmp";
@@ -160,14 +160,14 @@ ReadMetadata(png_structp png_ptr, png_infop info_ptr, FIBITMAP *dib) {
 	return TRUE;
 }
 
-static BOOL 
+static FI_BOOL 
 WriteMetadata(png_structp png_ptr, png_infop info_ptr, FIBITMAP *dib) {
 	// XMP keyword
 	const char *g_png_xmp_keyword = "XML:com.adobe.xmp";
 
 	FITAG *tag = NULL;
 	FIMETADATA *mdhandle = NULL;
-	BOOL bResult = TRUE;
+	FI_BOOL bResult = TRUE;
 
 	png_text text_metadata;
 	png_time mod_time;
@@ -269,7 +269,7 @@ MimeType() {
 	return "image/png";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	BYTE png_signature[8] = { 137, 80, 78, 71, 13, 10, 26, 10 };
 	BYTE signature[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -279,7 +279,7 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return (memcmp(png_signature, signature, 8) == 0);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return (
 			(depth == 1) ||
@@ -290,7 +290,7 @@ SupportsExportDepth(int depth) {
 		);
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return (
 		(type == FIT_BITMAP) ||
@@ -300,12 +300,12 @@ SupportsExportType(FREE_IMAGE_TYPE type) {
 	);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsICCProfiles() {
 	return TRUE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -322,7 +322,7 @@ Set conversion instructions as needed.
 @return Returns TRUE if successful, returns FALSE otherwise
 @see png_read_update_info
 */
-static BOOL 
+static FI_BOOL 
 ConfigureDecoder(png_structp png_ptr, png_infop info_ptr, int flags, FREE_IMAGE_TYPE *output_image_type) {
 	// get original image info
 	const int color_type = png_get_color_type(png_ptr, info_ptr);
@@ -332,7 +332,7 @@ ConfigureDecoder(png_structp png_ptr, png_infop info_ptr, int flags, FREE_IMAGE_
 	FREE_IMAGE_TYPE image_type = FIT_BITMAP;	// assume standard image type
 
 	// check for transparency table or single transparent color
-	BOOL bIsTransparent = png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS) == PNG_INFO_tRNS ? TRUE : FALSE;
+	FI_BOOL bIsTransparent = png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS) == PNG_INFO_tRNS ? TRUE : FALSE;
 
 	// check allowed combinations of colour type and bit depth
 	// then get converted FreeImage type
@@ -517,7 +517,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	fio.s_io = io;
     
 	if (handle) {
-		BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+		FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 
 		try {		
 			// check to see if the file is in fact a PNG file
@@ -801,13 +801,13 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 
 // --------------------------------------------------------------------------
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
 	png_structp png_ptr;
 	png_infop info_ptr;
 	png_colorp palette = NULL;
 	png_uint_32 width, height;
-	BOOL has_alpha_channel = FALSE;
+	FI_BOOL has_alpha_channel = FALSE;
 
 	RGBQUAD *pal;					// pointer to dib palette
 	int bit_depth, pixel_depth;		// pixel_depth = bit_depth * channels
@@ -873,7 +873,7 @@ Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void
 			height = FreeImage_GetHeight(dib);
 			pixel_depth = FreeImage_GetBPP(dib);
 
-			BOOL bInterlaced = FALSE;
+			FI_BOOL bInterlaced = FALSE;
 			if( (flags & PNG_INTERLACED) == PNG_INTERLACED) {
 				interlace_type = PNG_INTERLACE_ADAM7;
 				bInterlaced = TRUE;
@@ -907,7 +907,7 @@ Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void
 			}
 
 			// check for transparent images
-			BOOL bIsTransparent = 
+			FI_BOOL bIsTransparent = 
 				(image_type == FIT_BITMAP) && FreeImage_IsTransparent(dib) && (FreeImage_GetTransparencyCount(dib) > 0) ? TRUE : FALSE;
 
 			switch (FreeImage_GetColorType(dib)) {

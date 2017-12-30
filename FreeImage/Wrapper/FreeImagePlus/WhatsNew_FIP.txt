@@ -69,7 +69,7 @@ January 11th, 2007
 + [Herve Drolon] added PSD format support to fipMultiPage::open
 
 October 30th, 2006 - 3.9.2
-+ [Herve Drolon] added BOOL fipMultiPage::open(fipMemoryIO& memIO, int flags)
++ [Herve Drolon] added FI_BOOL fipMultiPage::open(fipMemoryIO& memIO, int flags)
 + [Herve Drolon] added fipMemoryIO::operator FIMEMORY*()
 * [Herve Drolon] fixed missing 'isValid' method in fipMetadataFind
 
@@ -171,8 +171,8 @@ January 26th, 2004
 + added fipWinImage::captureWindow
 
 ! changed fipImage constructor
-! fipWinImage::copyFromHandle now returns a BOOL
-! fipWinImage::copyFromBitmap now returns a BOOL
+! fipWinImage::copyFromHandle now returns a FI_BOOL
+! fipWinImage::copyFromBitmap now returns a FI_BOOL
 
 November 2, 2003
 + [Herve Drolon] added fipImage::getScanLine

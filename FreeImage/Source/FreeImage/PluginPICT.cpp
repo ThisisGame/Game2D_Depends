@@ -823,7 +823,7 @@ DecodeOp9a( FreeImageIO *io, fi_handle handle, FIBITMAP* dib, MacpixMap* pixMap 
 }
 
 static void 
-DecodeBitmap( FreeImageIO *io, fi_handle handle, FIBITMAP* dib, BOOL isRegion, MacRect* bounds, WORD rowBytes ) {
+DecodeBitmap( FreeImageIO *io, fi_handle handle, FIBITMAP* dib, FI_BOOL isRegion, MacRect* bounds, WORD rowBytes ) {
 	WORD mode = Read16( io, handle );
 	
 	if ( isRegion ) {
@@ -846,7 +846,7 @@ DecodeBitmap( FreeImageIO *io, fi_handle handle, FIBITMAP* dib, BOOL isRegion, M
 }
 
 static void 
-DecodePixmap( FreeImageIO *io, fi_handle handle, FIBITMAP* dib, BOOL isRegion, MacpixMap* pixMap, WORD rowBytes ) {
+DecodePixmap( FreeImageIO *io, fi_handle handle, FIBITMAP* dib, FI_BOOL isRegion, MacpixMap* pixMap, WORD rowBytes ) {
 	// Read mac colour table into windows palette.
 	WORD numColors;    // Palette size.
 	RGBQUAD ct[256];
@@ -911,7 +911,7 @@ MimeType() {
 	return "image/x-pict";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	if(io->seek_proc(handle, 522, SEEK_SET) == 0) {
 		BYTE pict_signature[] = { 0x00, 0x11, 0x02, 0xFF, 0x0C, 0X00 };
@@ -931,17 +931,17 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsICCProfiles() {
 	return FALSE;
 }
@@ -986,8 +986,8 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 		int hRes = 0x480000; // in pixels/inch (72 by default == 0x480000 in fixed point)
 		int vRes = 0x480000; // in pixels/inch (72 by default == 0x480000 in fixed point)
 		WORD rowBytes = 0;
-		BOOL isRegion = FALSE;
-		BOOL done = FALSE;
+		FI_BOOL isRegion = FALSE;
+		FI_BOOL done = FALSE;
 		long currentPos = 0;
 
 		while ( !done ) {
@@ -1158,7 +1158,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 			else if (opcode == 0x8200) {
 				// jpeg
 				long opLen = Read32( io, handle );
-				BOOL found = FALSE;
+				FI_BOOL found = FALSE;
 				int i = 0;
 				
 				// skip to JPEG header.

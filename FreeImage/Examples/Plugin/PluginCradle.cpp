@@ -3,7 +3,7 @@
 //
 // Design and implementation by
 // - Floris van den Berg (flvdberg@wxs.nl)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -28,7 +28,7 @@
 
 // ==========================================================
 
-BOOL APIENTRY
+FI_BOOL APIENTRY
 DllMain(HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
 	switch (ul_reason_for_call) {
 		case DLL_PROCESS_ATTACH :
@@ -118,7 +118,7 @@ MimeType() {
 	it on the command line, but this can result in a dead DLL if the plugin
 	was not made for the bitmap.
 */
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO &io, fi_handle handle) {
 	return FALSE;
 }
@@ -129,7 +129,7 @@ Validate(FreeImageIO &io, fi_handle handle) {
 	can save a bitmap in the required bitdepth. If it can't the bitmap has to be
 	converted by the user or another plugin has to be chosen.
 */
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
@@ -140,7 +140,7 @@ SupportsExportDepth(int depth) {
 	able to save all non-standard images. The PNG plugin is able to save unsigned 16-bit
 	images.
 */
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return (type == FIT_BITMAP) ? TRUE : FALSE;
 }
@@ -150,7 +150,7 @@ SupportsExportType(FREE_IMAGE_TYPE type) {
 	This function returns TRUE if the plugin can load and save a profile.
 	ICC profile information is accessed via freeimage->get_icc_profile_proc(dib)
 */
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsICCProfiles() {
 	return FALSE;
 }
@@ -200,7 +200,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	return NULL;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
 	return FALSE;
 }

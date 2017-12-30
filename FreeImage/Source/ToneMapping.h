@@ -2,7 +2,7 @@
 // High Dynamic Range bitmap conversion routines
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -26,12 +26,12 @@
 extern "C" {
 #endif
 
-BOOL ConvertInPlaceRGBFToYxy(FIBITMAP *dib);
-BOOL ConvertInPlaceYxyToRGBF(FIBITMAP *dib);
+FI_BOOL ConvertInPlaceRGBFToYxy(FIBITMAP *dib);
+FI_BOOL ConvertInPlaceYxyToRGBF(FIBITMAP *dib);
 FIBITMAP* ConvertRGBFToY(FIBITMAP *src);
 
-BOOL LuminanceFromYxy(FIBITMAP *dib, float *maxLum, float *minLum, float *worldLum);
-BOOL LuminanceFromY(FIBITMAP *dib, float *maxLum, float *minLum, float *Lav, float *Llav);
+FI_BOOL LuminanceFromYxy(FIBITMAP *dib, float *maxLum, float *minLum, float *worldLum);
+FI_BOOL LuminanceFromY(FIBITMAP *dib, float *maxLum, float *minLum, float *Lav, float *Llav);
 
 void NormalizeY(FIBITMAP *Y, float minPrct, float maxPrct);
 

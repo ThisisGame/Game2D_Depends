@@ -5,7 +5,7 @@
 // - Floris van den Berg (flvdberg@wxs.nl)
 // - Mark Sibly (marksibly@blitzbasic.com)
 // - Aaron Shumate (trek@startreker.com)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -156,7 +156,7 @@ MimeType() {
 	return "image/x-iff";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	DWORD type = 0;
 
@@ -183,12 +183,12 @@ Validate(FreeImageIO *io, fi_handle handle) {
 }
 
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return FALSE;
 }

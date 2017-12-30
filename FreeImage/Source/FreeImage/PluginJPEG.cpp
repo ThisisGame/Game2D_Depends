@@ -7,7 +7,7 @@
 // - Jan L. Nauta (jln@magentammt.com)
 // - Markus Loibl (markus.loibl@epost.de)
 // - Karl-Heinz Bussian (khbussian@moss.de)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Jascha Wetzel (jascha@mainia.de)
 // - Mihail Naydenov (mnaydenov@users.sourceforge.net)
 //
@@ -425,7 +425,7 @@ jpeg_freeimage_dst (j_compress_ptr cinfo, fi_handle outfile, FreeImageIO *io) {
 /**
 	Read JPEG_COM marker (comment)
 */
-static BOOL 
+static FI_BOOL 
 jpeg_read_comment(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen) {
 	size_t length = datalen;
 	BYTE *profile = (BYTE*)dataptr;
@@ -467,7 +467,7 @@ jpeg_read_comment(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen) {
 /**
 Handy subroutine to test whether a saved marker is an ICC profile marker.
 */
-static BOOL 
+static FI_BOOL 
 marker_is_icc(jpeg_saved_marker_ptr marker) {
     // marker identifying string "ICC_PROFILE" (null-terminated)
 	const BYTE icc_signature[12] = { 0x49, 0x43, 0x43, 0x5F, 0x50, 0x52, 0x4F, 0x46, 0x49, 0x4C, 0x45, 0x00 };
@@ -502,7 +502,7 @@ marker_is_icc(jpeg_saved_marker_ptr marker) {
   NOTE: if the file contains invalid ICC APP2 markers, we just silently
   return FALSE.  You might want to issue an error message instead.
 */
-static BOOL 
+static FI_BOOL 
 jpeg_read_icc_profile(j_decompress_ptr cinfo, JOCTET **icc_data_ptr, unsigned *icc_data_len) {
 	jpeg_saved_marker_ptr marker;
 	int num_markers = 0;
@@ -597,7 +597,7 @@ jpeg_read_icc_profile(j_decompress_ptr cinfo, JOCTET **icc_data_ptr, unsigned *i
 /**
 	Read JPEG_APPD marker (IPTC or Adobe Photoshop profile)
 */
-static BOOL 
+static FI_BOOL 
 jpeg_read_iptc_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen) {
 	return read_iptc_profile(dib, dataptr, datalen);
 }
@@ -609,7 +609,7 @@ jpeg_read_iptc_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen)
 	@param datalen APP1 marker length
 	@return Returns TRUE if successful, FALSE otherwise
 */
-static BOOL  
+static FI_BOOL  
 jpeg_read_xmp_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen) {
 	// marker identifying string for XMP (null terminated)
 	const char *xmp_signature = "http://ns.adobe.com/xap/1.0/";
@@ -662,7 +662,7 @@ jpeg_read_xmp_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen) 
 	@param datalen APP0 marker length
 	@return Returns TRUE if successful, FALSE otherwise
 */
-static BOOL 
+static FI_BOOL 
 jpeg_read_jfxx(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen) {
 	if(datalen < 6) {
 		return FALSE;
@@ -705,7 +705,7 @@ jpeg_read_jfxx(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen) {
 /**
 	Read JPEG special markers
 */
-static BOOL 
+static FI_BOOL 
 read_markers(j_decompress_ptr cinfo, FIBITMAP *dib) {
 	jpeg_saved_marker_ptr marker;
 
@@ -762,7 +762,7 @@ read_markers(j_decompress_ptr cinfo, FIBITMAP *dib) {
 /**
 	Write JPEG_COM marker (comment)
 */
-static BOOL 
+static FI_BOOL 
 jpeg_write_comment(j_compress_ptr cinfo, FIBITMAP *dib) {
 	FITAG *tag = NULL;
 
@@ -784,7 +784,7 @@ jpeg_write_comment(j_compress_ptr cinfo, FIBITMAP *dib) {
 /** 
 	Write JPEG_APP2 marker (ICC profile)
 */
-static BOOL 
+static FI_BOOL 
 jpeg_write_icc_profile(j_compress_ptr cinfo, FIBITMAP *dib) {
     // marker identifying string "ICC_PROFILE" (null-terminated)
 	BYTE icc_signature[12] = { 0x49, 0x43, 0x43, 0x5F, 0x50, 0x52, 0x4F, 0x46, 0x49, 0x4C, 0x45, 0x00 };
@@ -821,7 +821,7 @@ jpeg_write_icc_profile(j_compress_ptr cinfo, FIBITMAP *dib) {
 	Write JPEG_APPD marker (IPTC or Adobe Photoshop profile)
 	@return Returns TRUE if successful, FALSE otherwise
 */
-static BOOL  
+static FI_BOOL  
 jpeg_write_iptc_profile(j_compress_ptr cinfo, FIBITMAP *dib) {
 	//const char *ps_header = "Photoshop 3.0\x08BIM\x04\x04\x0\x0\x0\x0";
 	const unsigned tag_length = 26;
@@ -868,7 +868,7 @@ jpeg_write_iptc_profile(j_compress_ptr cinfo, FIBITMAP *dib) {
 	Write JPEG_APP1 marker (XMP profile)
 	@return Returns TRUE if successful, FALSE otherwise
 */
-static BOOL  
+static FI_BOOL  
 jpeg_write_xmp_profile(j_compress_ptr cinfo, FIBITMAP *dib) {
 	// marker identifying string for XMP (null terminated)
 	const char *xmp_signature = "http://ns.adobe.com/xap/1.0/";
@@ -909,7 +909,7 @@ jpeg_write_xmp_profile(j_compress_ptr cinfo, FIBITMAP *dib) {
 	Write JPEG_APP1 marker (Exif profile)
 	@return Returns TRUE if successful, FALSE otherwise
 */
-static BOOL 
+static FI_BOOL 
 jpeg_write_exif_profile_raw(j_compress_ptr cinfo, FIBITMAP *dib) {
     // marker identifying string for Exif = "Exif\0\0"
     BYTE exif_signature[6] = { 0x45, 0x78, 0x69, 0x66, 0x00, 0x00 };
@@ -951,7 +951,7 @@ jpeg_write_exif_profile_raw(j_compress_ptr cinfo, FIBITMAP *dib) {
 /**
 	Write thumbnail (JFXX segment, JPEG compressed)
 */
-static BOOL
+static FI_BOOL
 jpeg_write_jfxx(j_compress_ptr cinfo, FIBITMAP *dib) {
 	// get the thumbnail to be stored
 	FIBITMAP* thumbnail = FreeImage_GetThumbnail(dib);
@@ -1029,7 +1029,7 @@ jpeg_write_jfxx(j_compress_ptr cinfo, FIBITMAP *dib) {
 /**
 	Write JPEG special markers
 */
-static BOOL 
+static FI_BOOL 
 write_markers(j_compress_ptr cinfo, FIBITMAP *dib) {
 	// write thumbnail as a JFXX marker
 	jpeg_write_jfxx(cinfo, dib);
@@ -1114,7 +1114,7 @@ MimeType() {
 	return "image/jpeg";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	BYTE jpeg_signature[] = { 0xFF, 0xD8 };
 	BYTE signature[2] = { 0, 0 };
@@ -1124,7 +1124,7 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return (memcmp(jpeg_signature, signature, sizeof(jpeg_signature)) == 0);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return (
 			(depth == 8) ||
@@ -1132,17 +1132,17 @@ SupportsExportDepth(int depth) {
 		);
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return (type == FIT_BITMAP) ? TRUE : FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsICCProfiles() {
 	return TRUE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -1154,7 +1154,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	if (handle) {
 		FIBITMAP *dib = NULL;
 
-		BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+		FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 
 		// set up the jpeglib structures
 
@@ -1395,7 +1395,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 
 // ----------------------------------------------------------
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
 	if ((dib) && (handle)) {
 		try {

@@ -2,7 +2,7 @@
 // Simple metadata reader
 //
 // Design and implementation by 
-// - Hervé Drolon
+// - Hervï¿½ Drolon
 //
 // This file is part of FreeImage 3
 //
@@ -77,7 +77,7 @@ FIBITMAP* GenericLoader(const char* lpszPathName, int flag) {
 */
 bool GenericWriter(FIBITMAP* dib, const char* lpszPathName, int flag) {
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
-	BOOL bSuccess = FALSE;
+	FI_BOOL bSuccess = FALSE;
 
 	if(dib) {
 		// try to guess the file format from the file extension

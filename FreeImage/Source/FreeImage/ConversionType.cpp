@@ -2,7 +2,7 @@
 // Bitmap conversion routines
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Tanner Helland (tannerhelland@users.sf.net)
 //
 // This file is part of FreeImage 3
@@ -73,11 +73,11 @@ template<class Tsrc>
 class CONVERT_TO_BYTE
 {
 public:
-	FIBITMAP* convert(FIBITMAP *src, BOOL scale_linear);
+	FIBITMAP* convert(FIBITMAP *src, FI_BOOL scale_linear);
 };
 
 template<class Tsrc> FIBITMAP* 
-CONVERT_TO_BYTE<Tsrc>::convert(FIBITMAP *src, BOOL scale_linear) {
+CONVERT_TO_BYTE<Tsrc>::convert(FIBITMAP *src, FI_BOOL scale_linear) {
 	FIBITMAP *dst = NULL;
 	unsigned x, y;
 
@@ -234,7 +234,7 @@ For complex images, the magnitude is extracted as a double image, then converted
 @param scale_linear Linear scaling / rounding switch
 */
 FIBITMAP* DLL_CALLCONV
-FreeImage_ConvertToStandardType(FIBITMAP *src, BOOL scale_linear) {
+FreeImage_ConvertToStandardType(FIBITMAP *src, FI_BOOL scale_linear) {
 	FIBITMAP *dst = NULL;
 
 	if(!src) return NULL;
@@ -304,7 +304,7 @@ FreeImage_ConvertToStandardType(FIBITMAP *src, BOOL scale_linear) {
 // ----------------------------------------------------------
 
 FIBITMAP* DLL_CALLCONV
-FreeImage_ConvertToType(FIBITMAP *src, FREE_IMAGE_TYPE dst_type, BOOL scale_linear) {
+FreeImage_ConvertToType(FIBITMAP *src, FREE_IMAGE_TYPE dst_type, FI_BOOL scale_linear) {
 	FIBITMAP *dst = NULL;
 
 	if(!FreeImage_HasPixels(src)) return NULL;

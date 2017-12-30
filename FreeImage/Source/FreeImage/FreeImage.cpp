@@ -3,7 +3,7 @@
 //
 // Design and implementation by
 // - Floris van den Berg (flvdberg@wxs.nl)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Karl-Heinz Bussian (khbussian@moss.de)
 //
 // This file is part of FreeImage 3
@@ -38,7 +38,7 @@ static const char *s_copyright = "This program uses FreeImage, a free, open sour
 #if defined(_WIN32) && !defined(__MINGW32__)
 #ifndef FREEIMAGE_LIB
 
-BOOL APIENTRY
+FI_BOOL APIENTRY
 DllMain(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
 	switch (ul_reason_for_call) {
 		case DLL_PROCESS_ATTACH :
@@ -92,7 +92,7 @@ FreeImage_GetCopyrightMessage() {
 
 //----------------------------------------------------------------------
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_IsLittleEndian() {
 	union {
 		DWORD i;

@@ -5,12 +5,12 @@ unit FreeImage;
 //
 // Design and implementation by
 // - Simon Beavis
-// - Peter Byström
+// - Peter Bystrï¿½m
 // - Anatoliy Pulyaevskiy (xvel84@rambler.ru)
 //
 // Contributors:
 // - Lorenzo Monti (LM)  lomo74@gmail.com
-// - Maurício (MAU)      mauricio_box@yahoo.com - see also http://sourceforge.net/projects/tcycomponents/
+// - Maurï¿½cio (MAU)      mauricio_box@yahoo.com - see also http://sourceforge.net/projects/tcycomponents/
 //
 // Revision history
 // When        Who   What
@@ -24,7 +24,7 @@ unit FreeImage;
 //                   - in 64 bits, the names of the exported function are different :
 //                      e.g. : _FreeImage_AcquireMemory@12 in 32 bits and FreeImage_AcquireMemory in 64 bits
 //                      so the define WIN32 will allow to distinguish 32 and 64 bits in the calls to the freeimage library
-//                   - in 64 bits, the Boolean type is not correctly converted to freeimage BOOL type (integer 32 bits)
+//                   - in 64 bits, the Boolean type is not correctly converted to freeimage FI_BOOL type (integer 32 bits)
 //                    ==> replace Boolean with LongBool in the calls to the freeimage library
 //                   - as linux sees the difference between uppercase and lowercase :
 //                    ==> replace FreeImage_GetMetaData with FreeImage_GetMetadata in the call to the freeimage library

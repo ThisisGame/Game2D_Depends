@@ -3,7 +3,7 @@
 //
 // Design and implementation by
 // - Ryan Rubley <ryan@lostreality.org> 
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -91,7 +91,7 @@ FreeImage_LoadFromMemory(FREE_IMAGE_FORMAT fif, FIMEMORY *stream, int flags) {
 }
 
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_SaveToMemory(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, FIMEMORY *stream, int flags) {
 	if (stream) {
 		FreeImageIO io;
@@ -114,7 +114,7 @@ FreeImage_SaveToMemory(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, FIMEMORY *stream, i
 // Memory stream buffer access
 // =====================================================================
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_AcquireMemory(FIMEMORY *stream, BYTE **data, DWORD *size_in_bytes) {
 	if (stream) {
 		FIMEMORYHEADER *mem_header = (FIMEMORYHEADER*)(stream->data);
@@ -154,7 +154,7 @@ Moves the memory pointer to a specified location
 @param origin Initial position
 @return Returns TRUE if successful, returns FALSE otherwise
 */
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_SeekMemory(FIMEMORY *stream, long offset, int origin) {
 	FreeImageIO io;
 	SetMemoryIO(&io);

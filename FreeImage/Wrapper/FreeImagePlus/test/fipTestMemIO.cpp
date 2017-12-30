@@ -2,7 +2,7 @@
 // FreeImagePlus Test Script
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -31,7 +31,7 @@ using namespace std;
 Test saving to a memory stream
 */
 void testSaveMemIO(const char *lpszPathName) {
-	BOOL bSuccess = FALSE;
+	FI_BOOL bSuccess = FALSE;
 
 	// load a regular file
 	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(lpszPathName);
@@ -77,7 +77,7 @@ Test loading from a buffer attached to a memory stream
 void testLoadMemIO(const char *lpszPathName) {
 	struct stat buf;
 	int result;
-	BOOL bSuccess = FALSE;
+	FI_BOOL bSuccess = FALSE;
 
 	// get data associated with lpszPathName
 	result = stat(lpszPathName, &buf);
@@ -117,7 +117,7 @@ void testLoadMemIO(const char *lpszPathName) {
 Test extracting a memory buffer from a memory stream
 */
 void testAcquireMemIO(const char *lpszPathName) {
-	BOOL bSuccess = FALSE;
+	FI_BOOL bSuccess = FALSE;
 
 	// load a regular file
 	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(lpszPathName);
@@ -151,7 +151,7 @@ void testAcquireMemIO(const char *lpszPathName) {
 Test Loading / Saving from / to a memory stream using fipImage
 */
 void testImageMemIO(const char *lpszPathName) {
-	BOOL bSuccess = FALSE;
+	FI_BOOL bSuccess = FALSE;
 
 	fipMemoryIO memIO;
 	fipImage image;

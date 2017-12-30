@@ -2,7 +2,7 @@
 // FreeImage 3 Test Script
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -25,7 +25,7 @@
 // Local test functions
 // ----------------------------------------------------------
 
-static void testBasicWrapper(BOOL copySource, BYTE *bits, FREE_IMAGE_TYPE type, int width, int height, int pitch, unsigned bpp) {
+static void testBasicWrapper(FI_BOOL copySource, BYTE *bits, FREE_IMAGE_TYPE type, int width, int height, int pitch, unsigned bpp) {
 	FIBITMAP *src = NULL;
 	FIBITMAP *clone = NULL;
 	FIBITMAP *dst = NULL;

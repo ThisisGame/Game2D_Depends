@@ -191,7 +191,7 @@ MimeType() {
   return "image/x-sgi";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	BYTE sgi_signature[2] = { 0x01, 0xDA };
 	BYTE signature[2] = { 0, 0 };
@@ -201,12 +201,12 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return (memcmp(sgi_signature, signature, sizeof(sgi_signature)) == 0);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
   return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
   return FALSE;
 }
@@ -234,7 +234,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 			throw FI_MSG_ERROR_MAGIC_NUMBER;
 		}
 		
-		BOOL bIsRLE = (sgiHeader.storage == 1) ? TRUE : FALSE;
+		FI_BOOL bIsRLE = (sgiHeader.storage == 1) ? TRUE : FALSE;
 	
 		// check for unsupported image types
 		if (sgiHeader.bpc != 1) {

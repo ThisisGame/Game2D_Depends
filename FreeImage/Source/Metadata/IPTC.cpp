@@ -2,7 +2,7 @@
 // Metadata functions implementation
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -35,7 +35,7 @@ static const char* IPTC_DELIMITER = ";";	// keywords/supplemental category delim
 /**
 	Read and decode IPTC binary data
 */
-BOOL 
+FI_BOOL 
 read_iptc_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen) {
 	char defaultKey[16];
 	size_t length = datalen;
@@ -258,7 +258,7 @@ append_iptc_tag(BYTE *profile, unsigned *profile_size, WORD id, DWORD length, co
 Encode IPTC metadata into a binary buffer. 
 The buffer is allocated by the function and must be freed by the caller. 
 */
-BOOL 
+FI_BOOL 
 write_iptc_profile(FIBITMAP *dib, BYTE **profile, unsigned *profile_size) {
 	FITAG *tag = NULL;
 	FIMETADATA *mdhandle = NULL;

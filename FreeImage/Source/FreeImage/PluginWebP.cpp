@@ -42,7 +42,7 @@ static int s_format_id;
 /**
 Read the whole file into memory
 */
-static BOOL
+static FI_BOOL
 ReadFileToWebPData(FreeImageIO *io, fi_handle handle, WebPData * const bitstream) {
   uint8_t *raw_data = NULL;
 
@@ -122,7 +122,7 @@ MimeType() {
 	return "image/webp";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	BYTE riff_signature[4] = { 0x52, 0x49, 0x46, 0x46 };
 	BYTE webp_signature[4] = { 0x57, 0x45, 0x42, 0x50 };
@@ -139,7 +139,7 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return (
 		(depth == 24) || 
@@ -147,17 +147,17 @@ SupportsExportDepth(int depth) {
 		);
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return (type == FIT_BITMAP) ? TRUE : FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsICCProfiles() {
 	return TRUE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -165,7 +165,7 @@ SupportsNoPixels() {
 // ----------------------------------------------------------
 
 static void * DLL_CALLCONV
-Open(FreeImageIO *io, fi_handle handle, BOOL read) {
+Open(FreeImageIO *io, fi_handle handle, FI_BOOL read) {
 	WebPMux *mux = NULL;
 	int copy_data = 1;	// 1 : copy data into the mux, 0 : keep a link to local data
 
@@ -222,7 +222,7 @@ DecodeImage(WebPData *webp_image, int flags) {
 
     VP8StatusCode webp_status = VP8_STATUS_OK;
 
-	BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+	FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 
 	// Main object storing the configuration for advanced decoding
 	WebPDecoderConfig decoder_config;
@@ -430,12 +430,12 @@ Encode a FIBITMAP to a WebP image
 @param flags FreeImage save flags
 @return Returns TRUE if successfull, returns FALSE otherwise
 */
-static BOOL
+static FI_BOOL
 EncodeImage(FIMEMORY *hmem, FIBITMAP *dib, int flags) {
 	WebPPicture picture;	// Input buffer
 	WebPConfig config;		// Coding parameters
 
-	BOOL bIsFlipped = FALSE;
+	FI_BOOL bIsFlipped = FALSE;
 
 	try {
 		const unsigned width = FreeImage_GetWidth(dib);
@@ -554,7 +554,7 @@ EncodeImage(FIMEMORY *hmem, FIBITMAP *dib, int flags) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
 	WebPMux *mux = NULL;
 	FIMEMORY *hmem = NULL;

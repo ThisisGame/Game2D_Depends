@@ -46,7 +46,7 @@ FI_STRUCT (PluginNode) {
 	/** The actual plugin, holding the function pointers */
 	Plugin *m_plugin;
 	/** Enable/Disable switch */
-	BOOL m_enabled;
+	FI_BOOL m_enabled;
 
 	/** Unique format string for the plugin */
 	const char *m_format;
@@ -73,7 +73,7 @@ public :
 	PluginNode *FindNodeFromFIF(int node_id);
 
 	int Size() const;
-	BOOL IsEmpty() const;
+	FI_BOOL IsEmpty() const;
 
 private :
 	std::map<int, PluginNode *> m_plugin_map;
@@ -97,8 +97,8 @@ int FreeImage_stricmp(const char *s1, const char *s2);
 // ==========================================================
 
 extern "C" {
-	BOOL DLL_CALLCONV FreeImage_Validate(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle);
-    void * DLL_CALLCONV FreeImage_Open(PluginNode *node, FreeImageIO *io, fi_handle handle, BOOL open_for_reading);
+	FI_BOOL DLL_CALLCONV FreeImage_Validate(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle);
+    void * DLL_CALLCONV FreeImage_Open(PluginNode *node, FreeImageIO *io, fi_handle handle, FI_BOOL open_for_reading);
     void DLL_CALLCONV FreeImage_Close(PluginNode *node, FreeImageIO *io, fi_handle handle, void *data); // plugin.cpp
     PluginList * DLL_CALLCONV FreeImage_GetPluginList(); // plugin.cpp
 }

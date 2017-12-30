@@ -2,7 +2,7 @@
 // Tone mapping operator (Fattal, 2002)
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -124,7 +124,7 @@ Compute a Gaussian pyramid using the specified number of levels.
 @param nlevels Number of resolution levels
 @return Returns TRUE if successful, returns FALSE otherwise
 */
-static BOOL GaussianPyramid(FIBITMAP *H, FIBITMAP **pyramid, int nlevels) {
+static FI_BOOL GaussianPyramid(FIBITMAP *H, FIBITMAP **pyramid, int nlevels) {
 	try {
 		// first level is the original image
 		pyramid[0] = FreeImage_Clone(H);
@@ -212,7 +212,7 @@ Calculate gradient magnitude and its average value on each pyramid level
 @param avgGrad [out] Average gradient on each level (array of size nlevels)
 @return Returns TRUE if successful, returns FALSE otherwise
 */
-static BOOL GradientPyramid(FIBITMAP **pyramid, int nlevels, FIBITMAP **gradients, float *avgGrad) {
+static FI_BOOL GradientPyramid(FIBITMAP **pyramid, int nlevels, FIBITMAP **gradients, float *avgGrad) {
 	try {
 		for(int k = 0; k < nlevels; k++) {
 			FIBITMAP *Hk = pyramid[k];

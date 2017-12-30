@@ -1,14 +1,14 @@
 //*@@@+++@@@@******************************************************************
 //
-// Copyright © Microsoft Corp.
+// Copyright ï¿½ Microsoft Corp.
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 // 
-// • Redistributions of source code must retain the above copyright notice,
+// ï¿½ Redistributions of source code must retain the above copyright notice,
 //   this list of conditions and the following disclaimer.
-// • Redistributions in binary form must reproduce the above copyright notice,
+// ï¿½ Redistributions in binary form must reproduce the above copyright notice,
 //   this list of conditions and the following disclaimer in the documentation
 //   and/or other materials provided with the distribution.
 // 
@@ -170,7 +170,7 @@
 *  ----------------------------------------------------------------------------
 *  Buffer Annotation Examples
 * 
-*  LWSTDAPI_(BOOL) StrToIntExA(
+*  LWSTDAPI_(FI_BOOL) StrToIntExA(
 *      LPCSTR pszString,  //  No annotation required, const implies __in.
 *      DWORD dwFlags,
 *      __out int *piRet   // A pointer whose dereference will be filled in.
@@ -184,7 +184,7 @@
 *                                       // may be freely used and modified.
 *  );
 * 
-*  LWSTDAPI_(BOOL) PathCompactPathExA(
+*  LWSTDAPI_(FI_BOOL) PathCompactPathExA(
 *      __out_ecount(cchMax) LPSTR pszOut, //  A string buffer with cch elements
 *                                         //  that will be '\0' terminated 
 *                                         //  on exit.
@@ -526,7 +526,7 @@
 *  ----------------------------------------------------------------------------
 *  Advanced Annotation Examples
 * 
-*  __success(return == TRUE) LWSTDAPI_(BOOL) 
+*  __success(return == TRUE) LWSTDAPI_(FI_BOOL) 
 *  PathCanonicalizeA(__out_ecount(MAX_PATH) LPSTR pszBuf, LPCSTR pszPath);
 *  //  pszBuf is only guaranteed to be null-terminated when TRUE is returned.
 * 

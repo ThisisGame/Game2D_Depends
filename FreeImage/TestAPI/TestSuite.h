@@ -2,7 +2,7 @@
 // FreeImage 3 Test Script
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -48,7 +48,7 @@ void showPlugins();
 // Image types test suite
 // ==========================================================
 void testAllocateCloneUnload(const char *lpszPathName);
-BOOL testAllocateCloneUnloadType(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height);
+FI_BOOL testAllocateCloneUnloadType(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height);
 void testImageType(unsigned width, unsigned height);
 void testImageTypeTIFF(unsigned width, unsigned height);
 

@@ -2,7 +2,7 @@
 // Tag manipulation functions
 //
 // Design and implementation by
-// - Hervé Drolon <drolon@infonie.fr>
+// - Hervï¿½ Drolon <drolon@infonie.fr>
 //
 // This file is part of FreeImage 3
 //
@@ -320,7 +320,7 @@ typedef struct tagTagInfo {
 
 
 /**
-Class to hold tag information (based on Meyers’ Singleton).<br>
+Class to hold tag information (based on Meyersï¿½ Singleton).<br>
 
 Sample usage :<br>
 <code>
@@ -401,7 +401,7 @@ private:
 	@param tag_table Tag info table
 	@return Returns TRUE if successful, returns FALSE otherwise
 	*/
-	BOOL addMetadataModel(MDMODEL md_model, TagInfo *tag_table);
+	FI_BOOL addMetadataModel(MDMODEL md_model, TagInfo *tag_table);
 
 public:
 	/// Destructor
@@ -477,18 +477,18 @@ extern "C" {
 
 // JPEG / JPEG-XR Exif profile (see Exif.cpp)
 // --------------------------------------------------------------------------
-BOOL jpeg_read_exif_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned datalen);
-BOOL jpeg_read_exif_profile_raw(FIBITMAP *dib, const BYTE *profile, unsigned length);
-BOOL jpegxr_read_exif_profile(FIBITMAP *dib, const BYTE *profile, unsigned length, unsigned file_offset);
-BOOL jpegxr_read_exif_gps_profile(FIBITMAP *dib, const BYTE *profile, unsigned length, unsigned file_offset);
+FI_BOOL jpeg_read_exif_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned datalen);
+FI_BOOL jpeg_read_exif_profile_raw(FIBITMAP *dib, const BYTE *profile, unsigned length);
+FI_BOOL jpegxr_read_exif_profile(FIBITMAP *dib, const BYTE *profile, unsigned length, unsigned file_offset);
+FI_BOOL jpegxr_read_exif_gps_profile(FIBITMAP *dib, const BYTE *profile, unsigned length, unsigned file_offset);
 
-BOOL tiff_get_ifd_profile(FIBITMAP *dib, FREE_IMAGE_MDMODEL md_model, BYTE **ppbProfile, unsigned *uProfileLength);
+FI_BOOL tiff_get_ifd_profile(FIBITMAP *dib, FREE_IMAGE_MDMODEL md_model, BYTE **ppbProfile, unsigned *uProfileLength);
 
 
 // JPEG / TIFF IPTC profile (see IPTC.cpp)
 // --------------------------------------------------------------------------
-BOOL read_iptc_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen);
-BOOL write_iptc_profile(FIBITMAP *dib, BYTE **profile, unsigned *profile_size);
+FI_BOOL read_iptc_profile(FIBITMAP *dib, const BYTE *dataptr, unsigned int datalen);
+FI_BOOL write_iptc_profile(FIBITMAP *dib, BYTE **profile, unsigned *profile_size);
 
 #if defined(__cplusplus)
 }

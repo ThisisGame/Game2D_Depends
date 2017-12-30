@@ -5,7 +5,7 @@
 // - Floris van den Berg (flvdberg@wxs.nl)
 // - Jani Kajala (janik@remedy.fi)
 // - Markus Loibl (markus.loibl@epost.de)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Juergen Riecker (j.riecker@gmx.de)
 //
 // This file is part of FreeImage 3
@@ -71,7 +71,7 @@ typedef struct tagPCXHEADER {
 // Internal functions
 // ==========================================================
 
-static BOOL 
+static FI_BOOL 
 pcx_validate(FreeImageIO *io, fi_handle handle) {
 	BYTE pcx_signature = 0x0A;
 	BYTE signature[4] = { 0, 0, 0, 0 };
@@ -97,7 +97,7 @@ pcx_validate(FreeImageIO *io, fi_handle handle) {
 }
 
 static unsigned
-readline(FreeImageIO &io, fi_handle handle, BYTE *buffer, unsigned length, BOOL rle, BYTE * ReadBuf, int * ReadPos) {
+readline(FreeImageIO &io, fi_handle handle, BYTE *buffer, unsigned length, FI_BOOL rle, BYTE * ReadBuf, int * ReadPos) {
 	// -----------------------------------------------------------//
 	// Read either run-length encoded or normal image data        //
 	//                                                            //
@@ -261,7 +261,7 @@ MimeType() {
 	because the end of the bitmap is not always known.
 */
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	return pcx_validate(io, handle);
 }
@@ -276,17 +276,17 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	returns FALSE if bitmap saving is not supported by the plugin at all.
 */
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -337,19 +337,19 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	RGBQUAD *pal;		  // Pointer to dib palette
 	BYTE *line = NULL;	  // PCX raster line
 	BYTE *ReadBuf = NULL; // buffer;
-	BOOL bIsRLE;		  // True if the file is run-length encoded
+	FI_BOOL bIsRLE;		  // True if the file is run-length encoded
 
 	if(!handle) {
 		return NULL;
 	}
 
-	BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+	FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 
 	try {
 		// check PCX identifier
 
 		long start_pos = io->tell_proc(handle);
-		BOOL validated = pcx_validate(io, handle);		
+		FI_BOOL validated = pcx_validate(io, handle);		
 		io->seek_proc(handle, start_pos, SEEK_SET);
 		if(!validated) {
 			throw FI_MSG_ERROR_MAGIC_NUMBER;

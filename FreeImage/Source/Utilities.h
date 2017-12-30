@@ -82,7 +82,7 @@ Allocate a FIBITMAP with possibly no pixel data
 @return Returns the allocated FIBITMAP
 @see FreeImage_AllocateT
 */
-DLL_API FIBITMAP * DLL_CALLCONV FreeImage_AllocateHeaderT(BOOL header_only, FREE_IMAGE_TYPE type, int width, int height, int bpp FI_DEFAULT(8), unsigned red_mask FI_DEFAULT(0), unsigned green_mask FI_DEFAULT(0), unsigned blue_mask FI_DEFAULT(0));
+DLL_API FIBITMAP * DLL_CALLCONV FreeImage_AllocateHeaderT(FI_BOOL header_only, FREE_IMAGE_TYPE type, int width, int height, int bpp FI_DEFAULT(8), unsigned red_mask FI_DEFAULT(0), unsigned green_mask FI_DEFAULT(0), unsigned blue_mask FI_DEFAULT(0));
 
 /**
 Allocate a FIBITMAP of type FIT_BITMAP, with possibly no pixel data 
@@ -97,7 +97,7 @@ Allocate a FIBITMAP of type FIT_BITMAP, with possibly no pixel data
 @return Returns the allocated FIBITMAP
 @see FreeImage_Allocate
 */
-DLL_API FIBITMAP * DLL_CALLCONV FreeImage_AllocateHeader(BOOL header_only, int width, int height, int bpp, unsigned red_mask FI_DEFAULT(0), unsigned green_mask FI_DEFAULT(0), unsigned blue_mask FI_DEFAULT(0));
+DLL_API FIBITMAP * DLL_CALLCONV FreeImage_AllocateHeader(FI_BOOL header_only, int width, int height, int bpp, unsigned red_mask FI_DEFAULT(0), unsigned green_mask FI_DEFAULT(0), unsigned blue_mask FI_DEFAULT(0));
 
 /**
 Allocate a FIBITMAP with no pixel data and wrap a user provided pixel buffer
@@ -119,7 +119,7 @@ DLL_API FIBITMAP * DLL_CALLCONV FreeImage_AllocateHeaderForBits(BYTE *ext_bits, 
 Helper for 16-bit FIT_BITMAP
 @see FreeImage_GetRGBMasks
 */
-DLL_API BOOL DLL_CALLCONV FreeImage_HasRGBMasks(FIBITMAP *dib);
+DLL_API FI_BOOL DLL_CALLCONV FreeImage_HasRGBMasks(FIBITMAP *dib);
 
 #if defined(__cplusplus)
 }
@@ -361,7 +361,7 @@ Swap red and blue channels in a 24- or 32-bit dib.
 @return Returns TRUE if successful, returns FALSE otherwise
 @see See definition in Conversion.cpp
 */
-BOOL SwapRedBlue32(FIBITMAP* dib);
+FI_BOOL SwapRedBlue32(FIBITMAP* dib);
 
 /**
 Inplace convert CMYK to RGBA.(8- and 16-bit). 
@@ -369,14 +369,14 @@ Alpha is filled with the first extra channel if any or white otherwise.
 @return Returns TRUE if successful, returns FALSE otherwise
 @see See definition in Conversion.cpp
 */
-BOOL ConvertCMYKtoRGBA(FIBITMAP* dib);
+FI_BOOL ConvertCMYKtoRGBA(FIBITMAP* dib);
 
 /**
 Inplace convert CIELab to RGBA (8- and 16-bit).
 @return Returns TRUE if successful, returns FALSE otherwise
 @see See definition in Conversion.cpp
 */
-BOOL ConvertLABtoRGB(FIBITMAP* dib);
+FI_BOOL ConvertLABtoRGB(FIBITMAP* dib);
 
 /**
 RGBA to RGB conversion

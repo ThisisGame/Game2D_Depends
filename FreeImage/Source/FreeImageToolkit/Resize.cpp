@@ -2,7 +2,7 @@
 // Upsampling / downsampling classes
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Detlev Vendt (detlev.vendt@brillit.de)
 // - Carsten Klein (cklein05@users.sourceforge.net)
 //
@@ -38,12 +38,12 @@ is greyscale, that is, it consists of grey colors only. This parameter can be NU
 @return the color type of the specified bitmap
 */
 static FREE_IMAGE_COLOR_TYPE
-GetExtendedColorType(FIBITMAP *dib, BOOL *bIsGreyscale) {
+GetExtendedColorType(FIBITMAP *dib, FI_BOOL *bIsGreyscale) {
 	const unsigned bpp = FreeImage_GetBPP(dib);
 	const unsigned size = CalculateUsedPaletteEntries(bpp);
 	const RGBQUAD * const pal = FreeImage_GetPalette(dib);
 	FREE_IMAGE_COLOR_TYPE color_type = FIC_MINISBLACK;
-	BOOL bIsGrey = TRUE;
+	FI_BOOL bIsGrey = TRUE;
 
 	switch (bpp) {
 		case 1:
@@ -235,7 +235,7 @@ FIBITMAP* CResizeEngine::scale(FIBITMAP *src, unsigned dst_width, unsigned dst_h
 	const unsigned src_bpp = FreeImage_GetBPP(src);
 
 	// determine the image's color type
-	BOOL bIsGreyscale = FALSE;
+	FI_BOOL bIsGreyscale = FALSE;
 	FREE_IMAGE_COLOR_TYPE color_type;
 	if (src_bpp <= 8) {
 		color_type = GetExtendedColorType(src, &bIsGreyscale);

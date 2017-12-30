@@ -39,9 +39,9 @@ Main available cmake flags:
 * To build the JP3D library and utilities: '-DBUILD_JP3D:bool=on' (default: 'OFF') (experimental)
 * To build the Java binding: '-DBUILD_JAVA:bool=on' (default: 'OFF') (experimental).
 ** to choose which java implementation, you can set your JAVA_HOME env var.
-* To build the wxWidgets/C++ viewer: 'BUILD_VIEWER:BOOL=ON' (default OFF) (experimental)
+* To build the wxWidgets/C++ viewer: 'BUILD_VIEWER:FI_BOOL=ON' (default OFF) (experimental)
 * To enable testing (and automatic result upload to http://my.cdash.org/index.php?project=OPENJPEG):
-    cmake . -DBUILD_TESTING:BOOL=ON -DOPJ_DATA_ROOT:PATH='path/to/the/data/directory'
+    cmake . -DBUILD_TESTING:FI_BOOL=ON -DOPJ_DATA_ROOT:PATH='path/to/the/data/directory'
     make
     make Experimental
   Note : JPEG2000 test files are available with 'svn checkout http://openjpeg.googlecode.com/svn/data' (about 70 Mo).
@@ -66,4 +66,4 @@ Type 'cmake --help' for available generators on your platform.
 
 Make sure to build the third party libs (png, zlib ...):
 
-  '-DBUILD_THIRDPARTY:BOOL=ON'
+  '-DBUILD_THIRDPARTY:FI_BOOL=ON'

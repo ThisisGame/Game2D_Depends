@@ -2,7 +2,7 @@
 // Tag manipulation functions
 //
 // Design and implementation by
-// - Hervé Drolon <drolon@infonie.fr>
+// - Hervï¿½ Drolon <drolon@infonie.fr>
 //
 // This file is part of FreeImage 3
 //
@@ -183,7 +183,7 @@ FreeImage_GetTagValue(FITAG *tag) {
 	return tag ? ((FITAGHEADER *)tag->data)->value : 0;
 }
 
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetTagKey(FITAG *tag, const char *key) {
 	if(tag && key) {
 		FITAGHEADER *tag_header = (FITAGHEADER *)tag->data;
@@ -195,7 +195,7 @@ FreeImage_SetTagKey(FITAG *tag, const char *key) {
 	return FALSE;
 }
 
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetTagDescription(FITAG *tag, const char *description) {
 	if(tag && description) {
 		FITAGHEADER *tag_header = (FITAGHEADER *)tag->data;
@@ -207,7 +207,7 @@ FreeImage_SetTagDescription(FITAG *tag, const char *description) {
 	return FALSE;
 }
 
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetTagID(FITAG *tag, WORD id) {
 	if(tag) {
 		FITAGHEADER *tag_header = (FITAGHEADER *)tag->data;
@@ -217,7 +217,7 @@ FreeImage_SetTagID(FITAG *tag, WORD id) {
 	return FALSE;
 }
 
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetTagType(FITAG *tag, FREE_IMAGE_MDTYPE type) {
 	if(tag) {
 		FITAGHEADER *tag_header = (FITAGHEADER *)tag->data;
@@ -227,7 +227,7 @@ FreeImage_SetTagType(FITAG *tag, FREE_IMAGE_MDTYPE type) {
 	return FALSE;
 }
 
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetTagCount(FITAG *tag, DWORD count) {
 	if(tag) {
 		FITAGHEADER *tag_header = (FITAGHEADER *)tag->data;
@@ -237,7 +237,7 @@ FreeImage_SetTagCount(FITAG *tag, DWORD count) {
 	return FALSE;
 }
 
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetTagLength(FITAG *tag, DWORD length) {
 	if(tag) {
 		FITAGHEADER *tag_header = (FITAGHEADER *)tag->data;
@@ -247,7 +247,7 @@ FreeImage_SetTagLength(FITAG *tag, DWORD length) {
 	return FALSE;
 }
 
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetTagValue(FITAG *tag, const void *value) {
 	if(tag && value) {
 		FITAGHEADER *tag_header = (FITAGHEADER *)tag->data;

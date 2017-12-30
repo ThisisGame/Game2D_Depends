@@ -3,7 +3,7 @@
 //
 // - Floris van den Berg (flvdberg@wxs.nl)
 // - Alexander Dymerets (sashad@te.net.ua)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Manfred Tausch (manfred.tausch@t-online.de)
 // - Riley McNiff (rmcniff@marexgroup.com)
 // - Carsten Klein (cklein05@users.sourceforge.net)
@@ -35,28 +35,28 @@
 
 // ----------------------------------------------------------
 /// 1-bit
-static BOOL Combine1(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
+static FI_BOOL Combine1(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
 /// 4-bit
-static BOOL Combine4(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
+static FI_BOOL Combine4(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
 /// 8-bit
-static BOOL Combine8(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
+static FI_BOOL Combine8(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
 /// 16-bit 555
-static BOOL Combine16_555(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
+static FI_BOOL Combine16_555(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
 /// 16-bit 565
-static BOOL Combine16_565(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
+static FI_BOOL Combine16_565(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
 /// 24-bit
-static BOOL Combine24(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
+static FI_BOOL Combine24(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
 /// 32- bit
-static BOOL Combine32(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
+static FI_BOOL Combine32(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha);
 // ----------------------------------------------------------
 
 // ----------------------------------------------------------
 //   1-bit
 // ----------------------------------------------------------
 
-static BOOL 
+static FI_BOOL 
 Combine1(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha) {
-	BOOL value;
+	FI_BOOL value;
 
 	// check the bit depth of src and dst images
 	if((FreeImage_GetBPP(dst_dib) != 1) || (FreeImage_GetBPP(src_dib) != 1)) {
@@ -91,10 +91,10 @@ Combine1(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned 
 //   4-bit
 // ----------------------------------------------------------
 
-static BOOL 
+static FI_BOOL 
 Combine4(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha) {
 	int swapTable[16];
-	BOOL bOddStart, bOddEnd;
+	FI_BOOL bOddStart, bOddEnd;
 
 	// check the bit depth of src and dst images
 	if((FreeImage_GetBPP(dst_dib) != 4) || (FreeImage_GetBPP(src_dib) != 4)) {
@@ -193,7 +193,7 @@ Combine4(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned 
 //   8-bit
 // ----------------------------------------------------------
 
-static BOOL 
+static FI_BOOL 
 Combine8(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha) {
 	// check the bit depth of src and dst images
 	if((FreeImage_GetBPP(dst_dib) != 8) || (FreeImage_GetBPP(src_dib) != 8)) {
@@ -235,7 +235,7 @@ Combine8(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned 
 //   16-bit
 // ----------------------------------------------------------
 
-static BOOL 
+static FI_BOOL 
 Combine16_555(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha) {
 	// check the bit depth of src and dst images
 	if((FreeImage_GetBPP(dst_dib) != 16) || (FreeImage_GetBPP(src_dib) != 16)) {
@@ -295,7 +295,7 @@ Combine16_555(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsi
 	return TRUE;
 }
 
-static BOOL 
+static FI_BOOL 
 Combine16_565(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha) {
 	// check the bit depth of src and dst images
 	if((FreeImage_GetBPP(dst_dib) != 16) || (FreeImage_GetBPP(src_dib) != 16)) {
@@ -359,7 +359,7 @@ Combine16_565(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsi
 //   24-bit
 // ----------------------------------------------------------
 
-static BOOL 
+static FI_BOOL 
 Combine24(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha) {
 	// check the bit depth of src and dst images
 	if((FreeImage_GetBPP(dst_dib) != 24) || (FreeImage_GetBPP(src_dib) != 24)) {
@@ -401,7 +401,7 @@ Combine24(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned
 //   32-bit
 // ----------------------------------------------------------
 
-static BOOL 
+static FI_BOOL 
 Combine32(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned alpha) {
 	// check the bit depth of src and dst images
 	if((FreeImage_GetBPP(dst_dib) != 32) || (FreeImage_GetBPP(src_dib) != 32)) {
@@ -443,7 +443,7 @@ Combine32(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y, unsigned
 //   Any type other than FIBITMAP
 // ----------------------------------------------------------
 
-static BOOL 
+static FI_BOOL 
 CombineSameType(FIBITMAP *dst_dib, FIBITMAP *src_dib, unsigned x, unsigned y) {
 	// check the bit depth of src and dst images
 	if(FreeImage_GetImageType(dst_dib) != FreeImage_GetImageType(src_dib)) {
@@ -560,7 +560,7 @@ FreeImage_Copy(FIBITMAP *src, int left, int top, int right, int bottom) {
 
 	// copy the bits
 	if(bpp == 1) {
-		BOOL value;
+		FI_BOOL value;
 		unsigned y_src, y_dst;
 
 		for(int y = 0; y < dst_height; y++) {
@@ -635,9 +635,9 @@ Upper promotion of src is done internally. Supported bit depth equals to 1, 4, 8
 alpha = 0..255. If alpha > 255, then the source image is combined to the destination image.
 @return Returns TRUE if successful, FALSE otherwise.
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_Paste(FIBITMAP *dst, FIBITMAP *src, int left, int top, int alpha) {
-	BOOL bResult = FALSE;
+	FI_BOOL bResult = FALSE;
 
 	if(!FreeImage_HasPixels(src) || !FreeImage_HasPixels(dst)) return FALSE;
 
@@ -662,7 +662,7 @@ FreeImage_Paste(FIBITMAP *dst, FIBITMAP *src, int left, int top, int alpha) {
 		// check the bit depth of src and dst images
 		unsigned bpp_src = FreeImage_GetBPP(src);
 		unsigned bpp_dst = FreeImage_GetBPP(dst);
-		BOOL isRGB565 = FALSE;
+		FI_BOOL isRGB565 = FALSE;
 
 		if ((FreeImage_GetRedMask(dst) == FI16_565_RED_MASK) && (FreeImage_GetGreenMask(dst) == FI16_565_GREEN_MASK) && (FreeImage_GetBlueMask(dst) == FI16_565_BLUE_MASK)) {
 			isRGB565 = TRUE;

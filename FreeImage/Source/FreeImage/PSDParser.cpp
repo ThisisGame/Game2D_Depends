@@ -414,7 +414,7 @@ Invert only color components, skipping Alpha/Black
 (Can be useful as public/utility function)
 */
 static
-BOOL invertColor(FIBITMAP* dib) {
+FI_BOOL invertColor(FIBITMAP* dib) {
 	FREE_IMAGE_TYPE type = FreeImage_GetImageType(dib);
 	const unsigned Bpp = FreeImage_GetBPP(dib)/8;
 	

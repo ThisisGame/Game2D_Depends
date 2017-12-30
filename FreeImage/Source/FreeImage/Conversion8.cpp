@@ -3,7 +3,7 @@
 //
 // Design and implementation by
 // - Floris van den Berg (flvdberg@wxs.nl)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Jani Kajala (janik@remedy.fi)
 // - Karl-Heinz Bussian (khbussian@moss.de)
 // - Carsten Klein (cklein05@users.sourceforge.net)
@@ -40,7 +40,7 @@ void DLL_CALLCONV
 FreeImage_ConvertLine4To8(BYTE *target, BYTE *source, int width_in_pixels) {
 	unsigned count_new = 0;
 	unsigned count_org = 0;
-	BOOL hinibble = TRUE;
+	FI_BOOL hinibble = TRUE;
 
 	while (count_new < (unsigned)width_in_pixels) {
 		if (hinibble) {

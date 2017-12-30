@@ -2,7 +2,7 @@
 // G3 Fax Loader
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Petr Pytelka (pyta@lightcomp.com)
 //
 // This file is part of FreeImage 3
@@ -90,7 +90,7 @@ G3GetFileSize(FreeImageIO *io, fi_handle handle) {
     return fileSize;
 }
 
-static BOOL 
+static FI_BOOL 
 G3ReadFile(FreeImageIO *io, fi_handle handle, uint8 *tif_rawdata, tmsize_t tif_rawdatasize) {
 	return ((tmsize_t)(io->read_proc(tif_rawdata, (unsigned)tif_rawdatasize, 1, handle) * tif_rawdatasize) == tif_rawdatasize);
 }
@@ -223,7 +223,7 @@ MimeType() {
 	return "image/fax-g3";
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportDepth(int depth) {
 	return	FALSE;
 }

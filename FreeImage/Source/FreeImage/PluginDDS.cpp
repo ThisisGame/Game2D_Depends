@@ -2,7 +2,7 @@
 // DDS Loader
 //
 // Design and implementation by
-// - Volker Gärtner (volkerg@gmx.at)
+// - Volker Gï¿½rtner (volkerg@gmx.at)
 // - Sherman Wilcox
 //
 // This file is part of FreeImage 3
@@ -554,7 +554,7 @@ MimeType() {
 	return "image/x-dds";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	DDSHEADER header;
 	memset(&header, 0, sizeof(header));
@@ -570,12 +570,12 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return TRUE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return FALSE;
 }
@@ -583,7 +583,7 @@ SupportsExportType(FREE_IMAGE_TYPE type) {
 // ----------------------------------------------------------
 
 static void * DLL_CALLCONV
-Open(FreeImageIO *io, fi_handle handle, BOOL read) {
+Open(FreeImageIO *io, fi_handle handle, FI_BOOL read) {
 	return NULL;
 }
 
@@ -623,7 +623,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 }
 
 /*
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
 	return FALSE;
 }

@@ -27,7 +27,7 @@ typedef struct fiio_mem_handle_s {
  *            unless the user wants to manually malloc a larger buffer
  */
 FIBITMAP *FreeImage_LoadFromMem(FREE_IMAGE_FORMAT fif, fiio_mem_handle *handle, int flags);
-BOOL FreeImage_SaveToMem(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, fiio_mem_handle *handle, int flags);
+FI_BOOL FreeImage_SaveToMem(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, fiio_mem_handle *handle, int flags);
 
 void SetMemIO(FreeImageIO *io);
 unsigned fiio_mem_ReadProc(void *buffer, unsigned size, unsigned count, fi_handle handle);

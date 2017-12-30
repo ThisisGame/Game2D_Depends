@@ -2,7 +2,7 @@
 // fipMetadataFind class implementation
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -21,7 +21,7 @@
 
 #include "FreeImagePlus.h"
 
-BOOL fipMetadataFind::isValid() const {
+FI_BOOL fipMetadataFind::isValid() const {
 	return (_mdhandle != NULL) ? TRUE : FALSE;
 }
 
@@ -32,7 +32,7 @@ fipMetadataFind::~fipMetadataFind() {
 	FreeImage_FindCloseMetadata(_mdhandle);
 }
 
-BOOL fipMetadataFind::findFirstMetadata(FREE_IMAGE_MDMODEL model, fipImage& image, fipTag& tag) {
+FI_BOOL fipMetadataFind::findFirstMetadata(FREE_IMAGE_MDMODEL model, fipImage& image, fipTag& tag) {
 	FITAG *firstTag = NULL;
 	if(_mdhandle) FreeImage_FindCloseMetadata(_mdhandle);
 	_mdhandle = FreeImage_FindFirstMetadata(model, image, &firstTag);
@@ -43,7 +43,7 @@ BOOL fipMetadataFind::findFirstMetadata(FREE_IMAGE_MDMODEL model, fipImage& imag
 	return FALSE;
 } 
 
-BOOL fipMetadataFind::findNextMetadata(fipTag& tag) {
+FI_BOOL fipMetadataFind::findNextMetadata(fipTag& tag) {
 	FITAG *nextTag = NULL;
 	if( FreeImage_FindNextMetadata(_mdhandle, &nextTag) ) {
 		tag = FreeImage_CloneTag(nextTag);

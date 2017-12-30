@@ -2,7 +2,7 @@
 // FreeImage 3 Test Script
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -39,7 +39,7 @@ void testSupportsNoPixels() {
 /**
 Test header only bitmap allocation
 */
-BOOL testHeader(const char *lpszPathName) {
+FI_BOOL testHeader(const char *lpszPathName) {
 	int flags = FIF_LOAD_NOPIXELS;
 
 	FIBITMAP *dib1 = NULL, *dib2 = NULL;
@@ -100,7 +100,7 @@ static void ParseMetadata(FIBITMAP *dib, FREE_IMAGE_MDMODEL model) {
 /**
 Load the header of a bitmap (without pixel data)
 */
-BOOL testHeaderData(const char *lpszPathName) {
+FI_BOOL testHeaderData(const char *lpszPathName) {
 	int flags = FIF_LOAD_NOPIXELS;
 
 	FIBITMAP *dib = NULL;
@@ -114,7 +114,7 @@ BOOL testHeaderData(const char *lpszPathName) {
 		if(!dib) throw(1);
 
 		// check that dib does not contains pixels
-		BOOL bHasPixel = FreeImage_HasPixels(dib);
+		FI_BOOL bHasPixel = FreeImage_HasPixels(dib);
 		assert(bHasPixel == FALSE);
 
 		// use accessors
@@ -149,7 +149,7 @@ BOOL testHeaderData(const char *lpszPathName) {
 /**
 Test loading and saving of Exif raw data
 */
-static BOOL 
+static FI_BOOL 
 testExifRawFile(const char *lpszPathName, int load_flags, int save_flags) {
 	const char *lpszDstPathName = "raw_exif.jpg";
 
@@ -164,7 +164,7 @@ testExifRawFile(const char *lpszPathName, int load_flags, int save_flags) {
 
 		// check access to raw Exif data
 		FITAG *tag = NULL;
-		BOOL bResult = FreeImage_GetMetadata(FIMD_EXIF_RAW, dib, "ExifRaw", &tag);
+		FI_BOOL bResult = FreeImage_GetMetadata(FIMD_EXIF_RAW, dib, "ExifRaw", &tag);
 		if(tag) {
 			const char *key = FreeImage_GetTagKey(tag);
 			WORD id = FreeImage_GetTagID(tag);
@@ -183,7 +183,7 @@ testExifRawFile(const char *lpszPathName, int load_flags, int save_flags) {
 			if(!dst) throw(1);
 
 			FITAG *dst_tag = NULL;
-			BOOL bResult = FreeImage_GetMetadata(FIMD_EXIF_RAW, dib, "ExifRaw", &dst_tag);
+			FI_BOOL bResult = FreeImage_GetMetadata(FIMD_EXIF_RAW, dib, "ExifRaw", &dst_tag);
 			if(dst_tag) {
 				const char *key = FreeImage_GetTagKey(dst_tag);
 				WORD dst_id = FreeImage_GetTagID(dst_tag);
@@ -216,7 +216,7 @@ void testHeaderOnly() {
 	const char *src_file_jpg = "exif.jpg";
 	const char *src_file_png = "sample.png";
 
-	BOOL bResult = TRUE;
+	FI_BOOL bResult = TRUE;
 
 	printf("testHeaderOnly ...\n");
 
@@ -244,7 +244,7 @@ void testHeaderOnly() {
 void testExifRaw() {
 	const char *src_file_jpg = "exif.jpg";
 
-	BOOL bResult = TRUE;
+	FI_BOOL bResult = TRUE;
 
 	printf("testExifRaw ...\n");
 

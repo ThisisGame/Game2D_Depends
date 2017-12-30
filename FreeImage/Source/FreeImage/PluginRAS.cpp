@@ -2,7 +2,7 @@
 // Sun rasterfile Loader
 //
 // Design and implementation by 
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -91,7 +91,7 @@ typedef struct tagSUNHEADER {
 // ==========================================================
 
 static void
-ReadData(FreeImageIO *io, fi_handle handle, BYTE *buf, DWORD length, BOOL rle) {
+ReadData(FreeImageIO *io, fi_handle handle, BYTE *buf, DWORD length, FI_BOOL rle) {
 	// Read either Run-Length Encoded or normal image data
 
 	static BYTE repchar, remaining= 0;
@@ -163,7 +163,7 @@ MimeType() {
 	return "image/x-cmu-raster";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	BYTE ras_signature[] = { 0x59, 0xA6, 0x6A, 0x95 };
 	BYTE signature[4] = { 0, 0, 0, 0 };
@@ -173,17 +173,17 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return (memcmp(ras_signature, signature, sizeof(ras_signature)) == 0);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -195,8 +195,8 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	SUNHEADER header;	// Sun file header
 	WORD linelength;	// Length of raster line in bytes
 	WORD fill;			// Number of fill bytes per raster line
-	BOOL rle;			// TRUE if RLE file
-	BOOL isRGB;			// TRUE if file type is RT_FORMAT_RGB
+	FI_BOOL rle;			// TRUE if RLE file
+	FI_BOOL isRGB;			// TRUE if file type is RT_FORMAT_RGB
 	BYTE fillchar;
 
 	FIBITMAP *dib = NULL;
@@ -207,7 +207,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 		return NULL;
 	}
 
-	BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+	FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 
 	try {
 		// Read SUN raster header

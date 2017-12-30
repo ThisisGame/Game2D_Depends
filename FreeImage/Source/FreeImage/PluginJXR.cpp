@@ -318,7 +318,7 @@ Scan input dib format and return the equivalent PKPixelFormatGUID format for sav
 @return Returns TRUE if successful, returns FALSE otherwise
 */
 static ERR
-GetOutputPixelFormat(FIBITMAP *dib, PKPixelFormatGUID *guid_format, BOOL *bHasAlpha) {
+GetOutputPixelFormat(FIBITMAP *dib, PKPixelFormatGUID *guid_format, FI_BOOL *bHasAlpha) {
 	const FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(dib);
 	const unsigned bpp = FreeImage_GetBPP(dib);
 	const FREE_IMAGE_COLOR_TYPE color_type = FreeImage_GetColorType(dib);
@@ -437,7 +437,7 @@ ReadProfile(WMPStream* pStream, unsigned cbByteCount, unsigned uOffset, BYTE **p
 Convert a DPKPROPVARIANT to a FITAG, then store the tag as FIMD_EXIF_MAIN
 @see ReadDescriptiveMetadata
 */
-static BOOL
+static FI_BOOL
 ReadPropVariant(WORD tag_id, const DPKPROPVARIANT & varSrc, FIBITMAP *dib) {
 	DWORD dwSize;
 
@@ -639,7 +639,7 @@ Convert a FITAG (coming from FIMD_EXIF_MAIN) to a DPKPROPVARIANT.
 No allocation is needed here, the function just copy pointers when needed. 
 @see WriteDescriptiveMetadata
 */
-static BOOL
+static FI_BOOL
 WritePropVariant(FIBITMAP *dib, WORD tag_id, DPKPROPVARIANT & varDst) {
 	FITAG *tag = NULL;
 
@@ -897,7 +897,7 @@ MimeType() {
 	return "image/vnd.ms-photo";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	BYTE jxr_signature[3] = { 0x49, 0x49, 0xBC };
 	BYTE signature[3] = { 0, 0, 0 };
@@ -907,7 +907,7 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return (memcmp(jxr_signature, signature, 3) == 0);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return (
 		(depth == 1)  ||
@@ -918,7 +918,7 @@ SupportsExportDepth(int depth) {
 		);
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return (
 		(type == FIT_BITMAP) ||
@@ -931,12 +931,12 @@ SupportsExportType(FREE_IMAGE_TYPE type) {
 	);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsICCProfiles() {
 	return TRUE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -946,7 +946,7 @@ SupportsNoPixels() {
 // ==========================================================
 
 static void * DLL_CALLCONV
-Open(FreeImageIO *io, fi_handle handle, BOOL read) {
+Open(FreeImageIO *io, fi_handle handle, FI_BOOL read) {
 	WMPStream *pStream = NULL;	// stream interface
 	if(io && handle) {
 		// allocate the FreeImageIO stream wrapper
@@ -1134,7 +1134,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 		return NULL;
 	}
 
-	BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+	FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 
 	try {
 		int width, height;	// image dimensions (in pixels)
@@ -1297,7 +1297,7 @@ Set encoder parameters
 @param bHasAlpha TRUE if an alpha layer is present
 */
 static void 
-SetEncoderParameters(CWMIStrCodecParam *wmiSCP, const PKPixelInfo *pixelInfo, int flags, BOOL bHasAlpha) {
+SetEncoderParameters(CWMIStrCodecParam *wmiSCP, const PKPixelInfo *pixelInfo, int flags, FI_BOOL bHasAlpha) {
 	float fltImageQuality = 1.0F;
 
 	// all values have been set to zero by the API
@@ -1344,12 +1344,12 @@ SetEncoderParameters(CWMIStrCodecParam *wmiSCP, const PKPixelInfo *pixelInfo, in
 
 // --------------------------------------------------------------------------
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
-	BOOL bIsFlipped = FALSE;		// FreeImage DIB are upside-down relative to usual graphic conventions
+	FI_BOOL bIsFlipped = FALSE;		// FreeImage DIB are upside-down relative to usual graphic conventions
 	PKPixelFormatGUID guid_format;	// image format
 	PKPixelInfo pixelInfo;			// image specifications
-	BOOL bHasAlpha = FALSE;			// is alpha layer present ?
+	FI_BOOL bHasAlpha = FALSE;			// is alpha layer present ?
 
 	PKImageEncode *pEncoder = NULL;		// encoder interface
 	ERR error_code = 0;					// error code as returned by the interface

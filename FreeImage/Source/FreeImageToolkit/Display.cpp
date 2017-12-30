@@ -2,7 +2,7 @@
 // Display routines
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -39,7 +39,7 @@ For colour images, the computation is done separately for R, G, and B samples.
 @see FreeImage_IsTransparent, FreeImage_HasBackgroundColor
 */
 FIBITMAP * DLL_CALLCONV
-FreeImage_Composite(FIBITMAP *fg, BOOL useFileBkg, RGBQUAD *appBkColor, FIBITMAP *bg) {
+FreeImage_Composite(FIBITMAP *fg, FI_BOOL useFileBkg, RGBQUAD *appBkColor, FIBITMAP *bg) {
 	if(!FreeImage_HasPixels(fg)) return NULL;
 
 	int width  = FreeImage_GetWidth(fg);
@@ -77,11 +77,11 @@ FreeImage_Composite(FIBITMAP *fg, BOOL useFileBkg, RGBQUAD *appBkColor, FIBITMAP
 	RGBQUAD *pal = FreeImage_GetPalette(fg);
 
 	// retrieve the alpha table from the foreground image
-	BOOL bIsTransparent = FreeImage_IsTransparent(fg);
+	FI_BOOL bIsTransparent = FreeImage_IsTransparent(fg);
 	BYTE *trns = FreeImage_GetTransparencyTable(fg);
 
 	// retrieve the background color from the foreground image
-	BOOL bHasBkColor = FALSE;
+	FI_BOOL bHasBkColor = FALSE;
 
 	if(useFileBkg && FreeImage_HasBackgroundColor(fg)) {
 		FreeImage_GetBackgroundColor(fg, &bkc);
@@ -192,7 +192,7 @@ channel(x, y) = channel(x, y) * alpha_channel(x, y) / 255
 @param dib Input/Output dib to be premultiplied
 @return Returns TRUE on success, FALSE otherwise (e.g. when the bitdepth of the source dib cannot be handled). 
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_PreMultiplyWithAlpha(FIBITMAP *dib) {
 	if (!FreeImage_HasPixels(dib)) return FALSE;
 	

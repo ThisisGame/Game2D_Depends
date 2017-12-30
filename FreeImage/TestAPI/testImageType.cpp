@@ -2,7 +2,7 @@
 // FreeImage 3 Test Script
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -25,7 +25,7 @@
 // Local test functions
 // ----------------------------------------------------------
 
-BOOL testClone(const char *lpszPathName) {
+FI_BOOL testClone(const char *lpszPathName) {
 	FIBITMAP *dib1 = NULL, *dib2 = NULL; 
 
 	try {
@@ -53,11 +53,11 @@ BOOL testClone(const char *lpszPathName) {
 void testAllocateCloneUnload(const char *lpszPathName) {
 	printf("testAllocateCloneUnload ...\n");
 
-	BOOL bResult = testClone(lpszPathName);
+	FI_BOOL bResult = testClone(lpszPathName);
 	assert(bResult);
 }
 
-BOOL testAllocateCloneUnloadType(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height) {
+FI_BOOL testAllocateCloneUnloadType(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height) {
 	FIBITMAP *image = NULL;
 	FIBITMAP *clone = NULL;
 
@@ -319,10 +319,10 @@ BOOL testAllocateCloneUnloadType(FREE_IMAGE_TYPE image_type, unsigned width, uns
 	return TRUE;
 }
 
-BOOL testLoadSaveConvertImageType(FIBITMAP *src, FREE_IMAGE_TYPE image_type) {
+FI_BOOL testLoadSaveConvertImageType(FIBITMAP *src, FREE_IMAGE_TYPE image_type) {
 	FIBITMAP *dst = NULL;
 	FIBITMAP *chk = NULL;
-	BOOL bResult = TRUE;
+	FI_BOOL bResult = TRUE;
 
 	try {
 		// convert to type image_type
@@ -363,11 +363,11 @@ BOOL testLoadSaveConvertImageType(FIBITMAP *src, FREE_IMAGE_TYPE image_type) {
 	return TRUE;
 }
 
-BOOL testLoadSaveConvertComplexType(FIBITMAP *src, FREE_IMAGE_COLOR_CHANNEL channel) {
+FI_BOOL testLoadSaveConvertComplexType(FIBITMAP *src, FREE_IMAGE_COLOR_CHANNEL channel) {
 	FIBITMAP *dst = NULL;
 	FIBITMAP *chk_double = NULL;
 	FIBITMAP *chk = NULL;
-	BOOL bResult = TRUE;
+	FI_BOOL bResult = TRUE;
 
 	try {
 		// convert to type FICOMPLEX
@@ -420,7 +420,7 @@ BOOL testLoadSaveConvertComplexType(FIBITMAP *src, FREE_IMAGE_COLOR_CHANNEL chan
 // ----------------------------------------------------------
 
 void testImageType(unsigned width, unsigned height) {
-	BOOL bResult = FALSE;
+	FI_BOOL bResult = FALSE;
 
 	printf("testImageType ...\n");
 
@@ -452,7 +452,7 @@ void testImageType(unsigned width, unsigned height) {
 
 
 void testImageTypeTIFF(unsigned width, unsigned height) {
-	BOOL bResult = FALSE;
+	FI_BOOL bResult = FALSE;
 
 	printf("testImageTypeTIFF ...\n");
 

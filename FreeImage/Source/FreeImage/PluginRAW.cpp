@@ -2,7 +2,7 @@
 // RAW camera image loader
 //
 // Design and implementation by 
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -554,7 +554,7 @@ MimeType() {
 	return "image/x-dcraw";
 }
 
-static BOOL 
+static FI_BOOL 
 HasMagicHeader(FreeImageIO *io, fi_handle handle) {
 	const unsigned signature_size = 32;
 	BYTE signature[signature_size] = { 0 };
@@ -610,7 +610,7 @@ HasMagicHeader(FreeImageIO *io, fi_handle handle) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	// some RAW files have a magic signature (most of them have a TIFF signature)
 	// try to check this in order to speed up the file identification
@@ -629,7 +629,7 @@ Validate(FreeImageIO *io, fi_handle handle) {
 		LibRaw *RawProcessor = new(std::nothrow) LibRaw;
 
 		if(RawProcessor) {
-			BOOL bSuccess = TRUE;
+			FI_BOOL bSuccess = TRUE;
 
 			// wrap the input datastream
 			LibRaw_freeimage_datastream datastream(io, handle);
@@ -650,22 +650,22 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsICCProfiles() {
 	return TRUE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -677,7 +677,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
 	FIBITMAP *dib = NULL;
 	LibRaw *RawProcessor = NULL;
 
-	BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+	FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 
 	try {
 		// do not declare RawProcessor on the stack as it may be huge (300 KB)

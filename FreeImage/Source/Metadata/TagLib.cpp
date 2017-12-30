@@ -2,7 +2,7 @@
 // Tag library
 //
 // Design and implementation by
-// - Hervé Drolon <drolon@infonie.fr>
+// - Hervï¿½ Drolon <drolon@infonie.fr>
 //
 // This file is part of FreeImage 3
 //
@@ -1477,7 +1477,7 @@ TagLib::TagLib() {
 	addMetadataModel(TagLib::ANIMATION, animation_tag_table);
 }
 
-BOOL TagLib::addMetadataModel(MDMODEL md_model, TagInfo *tag_table) {
+FI_BOOL TagLib::addMetadataModel(MDMODEL md_model, TagInfo *tag_table) {
 	// check that the model doesn't already exist
 	if((_table_map.find(md_model) == _table_map.end()) && (tag_table != NULL)) {
 

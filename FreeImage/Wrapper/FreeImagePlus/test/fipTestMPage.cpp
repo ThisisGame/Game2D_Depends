@@ -2,7 +2,7 @@
 // FreeImagePlus Test Script
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -27,9 +27,9 @@ using namespace std;
 // --------------------------------------------------------------------------
 // Multipage test scripts
 
-BOOL testCloneMultiPage(const char *input, const char *output, int output_flag) {
-	BOOL bSuccess = FALSE;
-	BOOL bMemoryCache = TRUE;
+FI_BOOL testCloneMultiPage(const char *input, const char *output, int output_flag) {
+	FI_BOOL bSuccess = FALSE;
+	FI_BOOL bMemoryCache = TRUE;
 
 	fipMultiPage src(bMemoryCache);
 	fipMultiPage dst(bMemoryCache);

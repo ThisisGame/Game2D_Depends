@@ -2,7 +2,7 @@
 // fipMemoryIO class implementation
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -44,7 +44,7 @@ void fipMemoryIO::close() {
 	}
 }
 
-BOOL fipMemoryIO::isValid() const {
+FI_BOOL fipMemoryIO::isValid() const {
 	return (_hmem != NULL);
 }
 
@@ -64,11 +64,11 @@ FIMULTIBITMAP* fipMemoryIO::loadMultiPage(FREE_IMAGE_FORMAT fif, int flags) cons
 	return FreeImage_LoadMultiBitmapFromMemory(fif, _hmem, flags);
 }
 
-BOOL fipMemoryIO::save(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, int flags) {
+FI_BOOL fipMemoryIO::save(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, int flags) {
 	return FreeImage_SaveToMemory(fif, dib, _hmem, flags);
 }
 
-BOOL fipMemoryIO::saveMultiPage(FREE_IMAGE_FORMAT fif, FIMULTIBITMAP *bitmap, int flags) {
+FI_BOOL fipMemoryIO::saveMultiPage(FREE_IMAGE_FORMAT fif, FIMULTIBITMAP *bitmap, int flags) {
 	return FreeImage_SaveMultiBitmapToMemory(fif, bitmap, _hmem, flags);
 }
 
@@ -84,11 +84,11 @@ long fipMemoryIO::tell() const {
 	return FreeImage_TellMemory(_hmem);
 }
 
-BOOL fipMemoryIO::seek(long offset, int origin) {
+FI_BOOL fipMemoryIO::seek(long offset, int origin) {
 	return FreeImage_SeekMemory(_hmem, offset, origin);
 }
 
-BOOL fipMemoryIO::acquire(BYTE **data, DWORD *size_in_bytes) {
+FI_BOOL fipMemoryIO::acquire(BYTE **data, DWORD *size_in_bytes) {
 	return FreeImage_AcquireMemory(_hmem, data, size_in_bytes);
 }
 

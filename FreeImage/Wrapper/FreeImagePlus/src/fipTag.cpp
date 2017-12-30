@@ -2,7 +2,7 @@
 // fipTag class implementation
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -30,7 +30,7 @@ fipTag::~fipTag() {
 	FreeImage_DeleteTag(_tag);
 }
 
-BOOL fipTag::setKeyValue(const char *key, const char *value) {
+FI_BOOL fipTag::setKeyValue(const char *key, const char *value) {
 	if(_tag) {
 		FreeImage_DeleteTag(_tag);
 		_tag = NULL;
@@ -38,7 +38,7 @@ BOOL fipTag::setKeyValue(const char *key, const char *value) {
 	// create a tag
 	_tag = FreeImage_CreateTag();
 	if(_tag) {
-		BOOL bSuccess = TRUE;
+		FI_BOOL bSuccess = TRUE;
 		// fill the tag
 		DWORD tag_length = (DWORD)(strlen(value) + 1);
 		bSuccess &= FreeImage_SetTagKey(_tag, key);
@@ -69,7 +69,7 @@ fipTag& fipTag::operator=(FITAG *tag) {
 	return *this;
 }
 
-BOOL fipTag::isValid() const {
+FI_BOOL fipTag::isValid() const {
 	return (_tag != NULL) ? TRUE : FALSE;
 }
 
@@ -101,31 +101,31 @@ const void* fipTag::getValue() const {
 	return FreeImage_GetTagValue(_tag);
 }
 
-BOOL fipTag::setKey(const char *key) {
+FI_BOOL fipTag::setKey(const char *key) {
 	return FreeImage_SetTagKey(_tag, key);
 }
 
-BOOL fipTag::setDescription(const char *description) {
+FI_BOOL fipTag::setDescription(const char *description) {
 	return FreeImage_SetTagDescription(_tag, description);
 }
 
-BOOL fipTag::setID(WORD id) {
+FI_BOOL fipTag::setID(WORD id) {
 	return FreeImage_SetTagID(_tag, id);
 }
 
-BOOL fipTag::setType(FREE_IMAGE_MDTYPE type) {
+FI_BOOL fipTag::setType(FREE_IMAGE_MDTYPE type) {
 	return FreeImage_SetTagType(_tag, type);
 }
 
-BOOL fipTag::setCount(DWORD count) {
+FI_BOOL fipTag::setCount(DWORD count) {
 	return FreeImage_SetTagCount(_tag, count);
 }
 
-BOOL fipTag::setLength(DWORD length) {
+FI_BOOL fipTag::setLength(DWORD length) {
 	return FreeImage_SetTagLength(_tag, length);
 }
 
-BOOL fipTag::setValue(const void *value) {
+FI_BOOL fipTag::setValue(const void *value) {
 	return FreeImage_SetTagValue(_tag, value);
 }
 

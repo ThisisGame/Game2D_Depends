@@ -2,7 +2,7 @@
 // Channel processing support
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -195,7 +195,7 @@ Both src and dst must have the same width and height.
 @param channel Color channel to modify
 @return Returns TRUE if successful, FALSE otherwise.
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetChannel(FIBITMAP *dst, FIBITMAP *src, FREE_IMAGE_COLOR_CHANNEL channel) {
 	int c;
 
@@ -440,7 +440,7 @@ Both src and dst must have the same width and height.
 @param channel Channel to modify
 @return Returns TRUE if successful, FALSE otherwise.
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_SetComplexChannel(FIBITMAP *dst, FIBITMAP *src, FREE_IMAGE_COLOR_CHANNEL channel) {
 	unsigned x, y;
 	double *src_bits = NULL;

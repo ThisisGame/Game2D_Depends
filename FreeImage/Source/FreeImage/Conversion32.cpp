@@ -3,7 +3,7 @@
 //
 // Design and implementation by
 // - Floris van den Berg (flvdberg@wxs.nl)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Jani Kajala (janik@remedy.fi)
 // - Detlev Vendt (detlev.vendt@brillit.de)
 //
@@ -44,7 +44,7 @@ FreeImage_ConvertLine1To32(BYTE *target, BYTE *source, int width_in_pixels, RGBQ
 
 void DLL_CALLCONV
 FreeImage_ConvertLine4To32(BYTE *target, BYTE *source, int width_in_pixels, RGBQUAD *palette) {
-	BOOL low_nibble = FALSE;
+	FI_BOOL low_nibble = FALSE;
 	int x = 0;
 
 	for (int cols = 0 ; cols < width_in_pixels ; ++cols) {
@@ -147,7 +147,7 @@ FreeImage_ConvertLine1To32MapTransparency(BYTE *target, BYTE *source, int width_
 
 inline void 
 FreeImage_ConvertLine4To32MapTransparency(BYTE *target, BYTE *source, int width_in_pixels, RGBQUAD *palette, BYTE *table, int transparent_pixels) {
-	BOOL low_nibble = FALSE;
+	FI_BOOL low_nibble = FALSE;
 	int x = 0;
 
 	for (int cols = 0 ; cols < width_in_pixels ; ++cols) {
@@ -212,7 +212,7 @@ FreeImage_ConvertTo32Bits(FIBITMAP *dib) {
 		// copy metadata from src to dst
 		FreeImage_CloneMetadata(new_dib, dib);
 
-		BOOL bIsTransparent = FreeImage_IsTransparent(dib);
+		FI_BOOL bIsTransparent = FreeImage_IsTransparent(dib);
 
 		switch(bpp) {
 			case 1:

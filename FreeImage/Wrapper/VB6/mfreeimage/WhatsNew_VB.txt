@@ -34,7 +34,7 @@ October 10, 2013 - 2.20 (3.16.0)
 - [Carsten Klein] removed block 'General notes' form source file MFreeImage.bas
 
 March 14, 2013 - 2.19 (3.15.4)
-* [Jørgen Hartmann] fixed coordinate calculation in FreeImage_PaintDCEx applied for horizontal and/or vertical mirroring, which now works correctly for all XDst and YDst coordinates.
+* [Jï¿½rgen Hartmann] fixed coordinate calculation in FreeImage_PaintDCEx applied for horizontal and/or vertical mirroring, which now works correctly for all XDst and YDst coordinates.
 
 November 13, 2012 - 2.18 (3.15.4)
 + [Carsten Klein] added function declaration FreeImage_HasRGBMasksInt and a real VB Boolean returning function FreeImage_HasRGBMasks.
@@ -143,7 +143,7 @@ September 08, 2009 - 2.5 (3.13.0)
 + [Carsten Klein] added support for the PICT and RAW image formats.
 + [Carsten Klein] added UNICODE functions FreeImage_JPEGTransformU and FreeImage_JPEGCropU.
 + [Carsten Klein] added enumeration FREE_IMAGE_COLOR_OPTIONS, which contains options to specify colors, used with FreeImage_FillBackground and FreeImage_EnlargeCanvas.
-+ [Carsten Klein] added function FreeImage_FillBackground: although this returns BOOL in C/C++, the VB version only returns a Long.
++ [Carsten Klein] added function FreeImage_FillBackground: although this returns FI_BOOL in C/C++, the VB version only returns a Long.
 + [Carsten Klein] added wrapper functions FreeImage_FillBackgroundEx and FreeImage_FillBackgroundByLong, taking an RGBQUAD and a Long 'Color' argument respectively and return a true VB Boolean.
 + [Carsten Klein] added function FreeImage_EnlargeCanvas.
 + [Carsten Klein] added functions FreeImage_AllocateEx and FreeImage_AllocateExT.
@@ -320,7 +320,7 @@ October 10, 2006 - 1.7.1 (3.9.1)
 ! [Carsten Klein] changed parameter name 'Page' into 'hPageDib' in declared function FreeImage_UnlockPage(). 'hPageDib' must be the (dib-)handle obtained from FreeImage_LockPage() and not the page number. Now, the declaration is less confusing. Thanks to Ender Wiggin.
 
 August 4, 2006 - 1.7 (3.9.1)
-* [Carsten Klein] fixed a bug in pGetTagFromTagPtr(): removed overflow error when converting unsigned short tags (FIDT_SHORT) with values between 32768 and 65535. Thanks to André Hendriks.
+* [Carsten Klein] fixed a bug in pGetTagFromTagPtr(): removed overflow error when converting unsigned short tags (FIDT_SHORT) with values between 32768 and 65535. Thanks to Andrï¿½ Hendriks.
 ! [Carsten Klein] changed constant FREEIMAGE_RELEASE_SERIAL: set to 1 to match current version 3.9.1
 
 July 17, 2006 - 1.6 (3.9.0)
@@ -451,9 +451,9 @@ February 27, 2006 - 1.4.8 (3.8.0)
 +                 documented function FreeImage_CompareColorsRGBQUADLong()
 +                 documented function FreeImage_SearchPalette()
 ! [Carsten Klein] changed and updated general remarks in section "General notes on implementation and design"
-! [Carsten Klein] changed all function declarations of FreeImage functions that return a BOOL in C/C++: see "Functions returning Booleans" in section "General notes on implementation and design"
-! [Carsten Klein] changed all function signatures of functions that are derived from or extend FreeImage BOOL functions: see "Functions returning Booleans" in section "General notes on implementation and design"
-+ [Carsten Klein] added wrapper functions for all FreeImage functions that return a BOOL in C/C++: see "Functions returning Booleans" in section "General notes on implementation and design"
+! [Carsten Klein] changed all function declarations of FreeImage functions that return a FI_BOOL in C/C++: see "Functions returning Booleans" in section "General notes on implementation and design"
+! [Carsten Klein] changed all function signatures of functions that are derived from or extend FreeImage FI_BOOL functions: see "Functions returning Booleans" in section "General notes on implementation and design"
++ [Carsten Klein] added wrapper functions for all FreeImage functions that return a FI_BOOL in C/C++: see "Functions returning Booleans" in section "General notes on implementation and design"
 + [Carsten Klein] added wrapper function FreeImage_CreateFromDC(): creates an DIB from a DC. Thanks to Evan (wxforecaster) for this suggestion.
 + [Carsten Klein] added declaration of GDI function GetCurrentObject() and constant OBJ_BITMAP
 + [Carsten Klein] added wrapper function FreeImage_IsAvailable(): used to test for existence of FreeImage Library (FreeImage.dll)

@@ -2,7 +2,7 @@
 // Helper class for rational numbers
 //
 // Design and implementation by
-// - Hervé Drolon <drolon@infonie.fr>
+// - Hervï¿½ Drolon <drolon@infonie.fr>
 //
 // This file is part of FreeImage 3
 //
@@ -156,7 +156,7 @@ void FIRational::normalize() {
 }
 
 /// Checks if this rational number is an Integer, either positive or negative
-BOOL FIRational::isInteger() {
+FI_BOOL FIRational::isInteger() {
 	if(_denominator == 1 || (_denominator != 0 && (_numerator % _denominator == 0)) || (_denominator == 0 && _numerator == 0))
 		return TRUE;
 	return FALSE;

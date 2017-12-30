@@ -2,7 +2,7 @@
 // Color manipulation routines
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Carsten Klein (c.klein@datagis.com)
 // - Mihail Naydenov (mnaydenov@users.sourceforge.net)
 //
@@ -43,7 +43,7 @@
 @param src Input image to be processed.
 @return Returns TRUE if successful, FALSE otherwise.
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_Invert(FIBITMAP *src) {
 
 	if (!FreeImage_HasPixels(src)) return FALSE;
@@ -144,7 +144,7 @@ plane (R,G, and B). Otherwise, the LUT is applied to the specified channel only.
 @return Returns TRUE if successful, FALSE otherwise.
 @see FREE_IMAGE_COLOR_CHANNEL
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_AdjustCurve(FIBITMAP *src, BYTE *LUT, FREE_IMAGE_COLOR_CHANNEL channel) {
 	unsigned x, y;
 	BYTE *bits = NULL;
@@ -267,7 +267,7 @@ FreeImage_AdjustCurve(FIBITMAP *src, BYTE *LUT, FREE_IMAGE_COLOR_CHANNEL channel
 less than one darkens it, and greater than one lightens it.
 @return Returns TRUE if successful, FALSE otherwise.
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_AdjustGamma(FIBITMAP *src, double gamma) {
 	BYTE LUT[256];		// Lookup table
 
@@ -297,7 +297,7 @@ A value 0 means no change, less than 0 will make the image darker
 and greater than 0 will make the image brighter.
 @return Returns TRUE if successful, FALSE otherwise.
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_AdjustBrightness(FIBITMAP *src, double percentage) {
 	BYTE LUT[256];		// Lookup table
 	double value;
@@ -323,7 +323,7 @@ A value 0 means no change, less than 0 will decrease the contrast
 and greater than 0 will increase the contrast of the image.
 @return Returns TRUE if successful, FALSE otherwise.
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_AdjustContrast(FIBITMAP *src, double percentage) {
 	BYTE LUT[256];		// Lookup table
 	double value;
@@ -351,7 +351,7 @@ bit depth is not supported (nothing is done).
 @param channel Color channel to use
 @return Returns TRUE if succesful, returns FALSE if the image bit depth isn't supported.
 */
-BOOL DLL_CALLCONV 
+FI_BOOL DLL_CALLCONV 
 FreeImage_GetHistogram(FIBITMAP *src, DWORD *histo, FREE_IMAGE_COLOR_CHANNEL channel) {
 	BYTE pixel;
 	BYTE *bits = NULL;
@@ -500,7 +500,7 @@ FreeImage_GetHistogram(FIBITMAP *src, DWORD *histo, FREE_IMAGE_COLOR_CHANNEL cha
  compared to a blind lookup table.
  */
 int DLL_CALLCONV
-FreeImage_GetAdjustColorsLookupTable(BYTE *LUT, double brightness, double contrast, double gamma, BOOL invert) {
+FreeImage_GetAdjustColorsLookupTable(BYTE *LUT, double brightness, double contrast, double gamma, FI_BOOL invert) {
 	double dblLUT[256];
 	double value;
 	int result = 0;
@@ -610,8 +610,8 @@ FreeImage_GetAdjustColorsLookupTable(BYTE *LUT, double brightness, double contra
  @return Returns TRUE on success, FALSE otherwise (e.g. when the bitdeph of the
  source dib cannot be handled).
  */
-BOOL DLL_CALLCONV
-FreeImage_AdjustColors(FIBITMAP *dib, double brightness, double contrast, double gamma, BOOL invert) {
+FI_BOOL DLL_CALLCONV
+FreeImage_AdjustColors(FIBITMAP *dib, double brightness, double contrast, double gamma, FI_BOOL invert) {
 	BYTE LUT[256];
 
 	if (!FreeImage_HasPixels(dib) || (FreeImage_GetImageType(dib) != FIT_BITMAP)) {
@@ -664,7 +664,7 @@ FreeImage_AdjustColors(FIBITMAP *dib, double brightness, double contrast, double
  @return Returns the total number of pixels changed. 
  */
 unsigned DLL_CALLCONV
-FreeImage_ApplyColorMapping(FIBITMAP *dib, RGBQUAD *srccolors, RGBQUAD *dstcolors, unsigned count, BOOL ignore_alpha, BOOL swap) {
+FreeImage_ApplyColorMapping(FIBITMAP *dib, RGBQUAD *srccolors, RGBQUAD *dstcolors, unsigned count, FI_BOOL ignore_alpha, FI_BOOL swap) {
 	unsigned result = 0;
 
 	if (!FreeImage_HasPixels(dib) || (FreeImage_GetImageType(dib) != FIT_BITMAP)) {
@@ -832,7 +832,7 @@ FreeImage_ApplyColorMapping(FIBITMAP *dib, RGBQUAD *srccolors, RGBQUAD *dstcolor
  @return Returns the total number of pixels changed. 
  */
 unsigned DLL_CALLCONV
-FreeImage_SwapColors(FIBITMAP *dib, RGBQUAD *color_a, RGBQUAD *color_b, BOOL ignore_alpha) {
+FreeImage_SwapColors(FIBITMAP *dib, RGBQUAD *color_a, RGBQUAD *color_b, FI_BOOL ignore_alpha) {
 	return FreeImage_ApplyColorMapping(dib, color_a, color_b, 1, ignore_alpha, TRUE);
 }
 
@@ -865,7 +865,7 @@ FreeImage_SwapColors(FIBITMAP *dib, RGBQUAD *color_a, RGBQUAD *color_b, BOOL ign
  @return Returns the total number of pixels changed. 
  */
 unsigned DLL_CALLCONV
-FreeImage_ApplyPaletteIndexMapping(FIBITMAP *dib, BYTE *srcindices,	BYTE *dstindices, unsigned count, BOOL swap) {
+FreeImage_ApplyPaletteIndexMapping(FIBITMAP *dib, BYTE *srcindices,	BYTE *dstindices, unsigned count, FI_BOOL swap) {
 	unsigned result = 0;
 
 	if (!FreeImage_HasPixels(dib) || (FreeImage_GetImageType(dib) != FIT_BITMAP)) {

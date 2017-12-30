@@ -554,7 +554,7 @@ static NamedColor X11ColorMap[] = {
 };
 
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_LookupX11Color(const char *szColor, BYTE *nRed, BYTE *nGreen, BYTE *nBlue) {
     int i;
 
@@ -748,7 +748,7 @@ static NamedColor SVGColorMap[] = {
 };
 
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_LookupSVGColor(const char *szColor, BYTE *nRed, BYTE *nGreen, BYTE *nBlue) {
     int i;
 

@@ -2,7 +2,7 @@
 // FreeImage 3 Test Script
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -61,7 +61,7 @@ testBuildMPage(const char *src_filename, const char *dst_filename, FREE_IMAGE_FO
 
 void testMPageCache(const char *src_filename, const char *dst_filename) {
 
-	BOOL keep_cache_in_memory = FALSE;
+	FI_BOOL keep_cache_in_memory = FALSE;
 
 	// get the file type
 	FREE_IMAGE_FORMAT src_fif = FreeImage_GetFileType(src_filename);
@@ -93,9 +93,9 @@ void testMPageCache(const char *src_filename, const char *dst_filename) {
 
 // --------------------------------------------------------------------------
 
-BOOL testCloneMultiPage(FREE_IMAGE_FORMAT fif, const char *input, const char *output, int output_flag) {
+FI_BOOL testCloneMultiPage(FREE_IMAGE_FORMAT fif, const char *input, const char *output, int output_flag) {
 
-	BOOL bMemoryCache = TRUE;
+	FI_BOOL bMemoryCache = TRUE;
 
 	// Open src file (read-only, use memory cache)
 	FIMULTIBITMAP *src = FreeImage_OpenMultiBitmap(fif, input, FALSE, TRUE, bMemoryCache);
@@ -134,9 +134,9 @@ BOOL testCloneMultiPage(FREE_IMAGE_FORMAT fif, const char *input, const char *ou
 
 void testLockDeleteMultiPage(const char *input) {
 
-	BOOL bCreateNew = FALSE;
-	BOOL bReadOnly = FALSE;
-	BOOL bMemoryCache = TRUE;
+	FI_BOOL bCreateNew = FALSE;
+	FI_BOOL bReadOnly = FALSE;
+	FI_BOOL bMemoryCache = TRUE;
 
 	// Open src file (read/write, use memory cache)
 	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(input);

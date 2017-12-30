@@ -2,7 +2,7 @@
 // fipImage class implementation
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -24,7 +24,7 @@
 ///////////////////////////////////////////////////////////////////   
 // Protected functions
 
-BOOL fipImage::replace(FIBITMAP *new_dib) {
+FI_BOOL fipImage::replace(FIBITMAP *new_dib) {
 	if(new_dib == NULL) 
 		return FALSE;
 	if(_dib)
@@ -51,7 +51,7 @@ fipImage::~fipImage() {
 	}
 }
 
-BOOL fipImage::setSize(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height, unsigned bpp, unsigned red_mask, unsigned green_mask, unsigned blue_mask) {
+FI_BOOL fipImage::setSize(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height, unsigned bpp, unsigned red_mask, unsigned green_mask, unsigned blue_mask) {
 	if(_dib) {
 		FreeImage_Unload(_dib);
 	}
@@ -112,7 +112,7 @@ fipImage& fipImage::operator=(FIBITMAP *dib) {
 	return *this;
 }
 
-BOOL fipImage::copySubImage(fipImage& dst, int left, int top, int right, int bottom) const {
+FI_BOOL fipImage::copySubImage(fipImage& dst, int left, int top, int right, int bottom) const {
 	if(_dib) {
 		dst = FreeImage_Copy(_dib, left, top, right, bottom);
 		return dst.isValid();
@@ -120,16 +120,16 @@ BOOL fipImage::copySubImage(fipImage& dst, int left, int top, int right, int bot
 	return FALSE;
 }
 
-BOOL fipImage::pasteSubImage(fipImage& src, int left, int top, int alpha) {
+FI_BOOL fipImage::pasteSubImage(fipImage& src, int left, int top, int alpha) {
 	if(_dib) {
-		BOOL bResult = FreeImage_Paste(_dib, src._dib, left, top, alpha);
+		FI_BOOL bResult = FreeImage_Paste(_dib, src._dib, left, top, alpha);
 		_bHasChanged = TRUE;
 		return bResult;
 	}
 	return FALSE;
 }
 
-BOOL fipImage::crop(int left, int top, int right, int bottom) {
+FI_BOOL fipImage::crop(int left, int top, int right, int bottom) {
 	if(_dib) {
 		FIBITMAP *dst = FreeImage_Copy(_dib, left, top, right, bottom);
 		return replace(dst);
@@ -157,7 +157,7 @@ unsigned fipImage::getScanWidth() const {
 	return FreeImage_GetPitch(_dib);
 }
 
-BOOL fipImage::isValid() const {
+FI_BOOL fipImage::isValid() const {
 	return (_dib != NULL) ? TRUE:FALSE;
 }
 
@@ -221,27 +221,27 @@ FREE_IMAGE_COLOR_TYPE fipImage::getColorType() const {
 	return FreeImage_GetColorType(_dib);
 }
 
-BOOL fipImage::isGrayscale() const {
+FI_BOOL fipImage::isGrayscale() const {
 	return ((FreeImage_GetBPP(_dib) == 8) && (FreeImage_GetColorType(_dib) != FIC_PALETTE)); 
 }
 
 ///////////////////////////////////////////////////////////////////
 // Thumbnail access
 
-BOOL fipImage::getThumbnail(fipImage& image) const {
+FI_BOOL fipImage::getThumbnail(fipImage& image) const {
 	image = FreeImage_Clone( FreeImage_GetThumbnail(_dib) );
 	return image.isValid();
 }
 
-BOOL fipImage::setThumbnail(const fipImage& image) {
+FI_BOOL fipImage::setThumbnail(const fipImage& image) {
 	return FreeImage_SetThumbnail(_dib, (FIBITMAP*)image._dib);
 }
 
-BOOL fipImage::hasThumbnail() const {
+FI_BOOL fipImage::hasThumbnail() const {
 	return (FreeImage_GetThumbnail(_dib) != NULL);
 }
 
-BOOL fipImage::clearThumbnail() {
+FI_BOOL fipImage::clearThumbnail() {
 	return FreeImage_SetThumbnail(_dib, NULL);
 }
 
@@ -260,20 +260,20 @@ BYTE* fipImage::getScanLine(unsigned scanline) const {
 	return NULL;
 }
 
-BOOL fipImage::getPixelIndex(unsigned x, unsigned y, BYTE *value) const {
+FI_BOOL fipImage::getPixelIndex(unsigned x, unsigned y, BYTE *value) const {
 	return FreeImage_GetPixelIndex(_dib, x, y, value);
 }
 
-BOOL fipImage::getPixelColor(unsigned x, unsigned y, RGBQUAD *value) const {
+FI_BOOL fipImage::getPixelColor(unsigned x, unsigned y, RGBQUAD *value) const {
 	return FreeImage_GetPixelColor(_dib, x, y, value);
 }
 
-BOOL fipImage::setPixelIndex(unsigned x, unsigned y, BYTE *value) {
+FI_BOOL fipImage::setPixelIndex(unsigned x, unsigned y, BYTE *value) {
 	_bHasChanged = TRUE;
 	return FreeImage_SetPixelIndex(_dib, x, y, value);
 }
 
-BOOL fipImage::setPixelColor(unsigned x, unsigned y, RGBQUAD *value) {
+FI_BOOL fipImage::setPixelColor(unsigned x, unsigned y, RGBQUAD *value) {
 	_bHasChanged = TRUE;
 	return FreeImage_SetPixelColor(_dib, x, y, value);
 }
@@ -330,7 +330,7 @@ FREE_IMAGE_FORMAT fipImage::identifyFIFFromMemory(FIMEMORY *hmem) {
 ///////////////////////////////////////////////////////////////////
 // Loading & Saving
 
-BOOL fipImage::load(const char* lpszPathName, int flag) {
+FI_BOOL fipImage::load(const char* lpszPathName, int flag) {
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 
 	// check the file signature and get its format
@@ -357,7 +357,7 @@ BOOL fipImage::load(const char* lpszPathName, int flag) {
 	return FALSE;
 }
 
-BOOL fipImage::loadU(const wchar_t* lpszPathName, int flag) {
+FI_BOOL fipImage::loadU(const wchar_t* lpszPathName, int flag) {
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 
 	// check the file signature and get its format
@@ -384,7 +384,7 @@ BOOL fipImage::loadU(const wchar_t* lpszPathName, int flag) {
 	return FALSE;
 }
 
-BOOL fipImage::loadFromHandle(FreeImageIO *io, fi_handle handle, int flag) {
+FI_BOOL fipImage::loadFromHandle(FreeImageIO *io, fi_handle handle, int flag) {
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 
 	// check the file signature and get its format
@@ -404,7 +404,7 @@ BOOL fipImage::loadFromHandle(FreeImageIO *io, fi_handle handle, int flag) {
 	return FALSE;
 }
 
-BOOL fipImage::loadFromMemory(fipMemoryIO& memIO, int flag) {
+FI_BOOL fipImage::loadFromMemory(fipMemoryIO& memIO, int flag) {
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 
 	// check the file signature and get its format
@@ -424,15 +424,15 @@ BOOL fipImage::loadFromMemory(fipMemoryIO& memIO, int flag) {
 	return FALSE;
 }
 
-BOOL fipImage::save(const char* lpszPathName, int flag) const {
+FI_BOOL fipImage::save(const char* lpszPathName, int flag) const {
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
-	BOOL bSuccess = FALSE;
+	FI_BOOL bSuccess = FALSE;
 
 	// Try to guess the file format from the file extension
 	fif = FreeImage_GetFIFFromFilename(lpszPathName);
 	if(fif != FIF_UNKNOWN ) {
 		// Check that the dib can be saved in this format
-		BOOL bCanSave;
+		FI_BOOL bCanSave;
 
 		FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(_dib);
 		if(image_type == FIT_BITMAP) {
@@ -452,15 +452,15 @@ BOOL fipImage::save(const char* lpszPathName, int flag) const {
 	return bSuccess;
 }
 
-BOOL fipImage::saveU(const wchar_t* lpszPathName, int flag) const {
+FI_BOOL fipImage::saveU(const wchar_t* lpszPathName, int flag) const {
 	FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
-	BOOL bSuccess = FALSE;
+	FI_BOOL bSuccess = FALSE;
 
 	// Try to guess the file format from the file extension
 	fif = FreeImage_GetFIFFromFilenameU(lpszPathName);
 	if(fif != FIF_UNKNOWN ) {
 		// Check that the dib can be saved in this format
-		BOOL bCanSave;
+		FI_BOOL bCanSave;
 
 		FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(_dib);
 		if(image_type == FIT_BITMAP) {
@@ -480,12 +480,12 @@ BOOL fipImage::saveU(const wchar_t* lpszPathName, int flag) const {
 	return bSuccess;
 }
 
-BOOL fipImage::saveToHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int flag) const {
-	BOOL bSuccess = FALSE;
+FI_BOOL fipImage::saveToHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int flag) const {
+	FI_BOOL bSuccess = FALSE;
 
 	if(fif != FIF_UNKNOWN ) {
 		// Check that the dib can be saved in this format
-		BOOL bCanSave;
+		FI_BOOL bCanSave;
 
 		FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(_dib);
 		if(image_type == FIT_BITMAP) {
@@ -505,12 +505,12 @@ BOOL fipImage::saveToHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle ha
 	return bSuccess;
 }
 
-BOOL fipImage::saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flag) const {
-	BOOL bSuccess = FALSE;
+FI_BOOL fipImage::saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flag) const {
+	FI_BOOL bSuccess = FALSE;
 
 	if(fif != FIF_UNKNOWN ) {
 		// Check that the dib can be saved in this format
-		BOOL bCanSave;
+		FI_BOOL bCanSave;
 
 		FREE_IMAGE_TYPE image_type = FreeImage_GetImageType(_dib);
 		if(image_type == FIT_BITMAP) {
@@ -533,7 +533,7 @@ BOOL fipImage::saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flag)
 ///////////////////////////////////////////////////////////////////   
 // Conversion routines
 
-BOOL fipImage::convertToType(FREE_IMAGE_TYPE image_type, BOOL scale_linear) {
+FI_BOOL fipImage::convertToType(FREE_IMAGE_TYPE image_type, FI_BOOL scale_linear) {
 	if(_dib) {
 		FIBITMAP *dib = FreeImage_ConvertToType(_dib, image_type, scale_linear);
 		return replace(dib);
@@ -541,7 +541,7 @@ BOOL fipImage::convertToType(FREE_IMAGE_TYPE image_type, BOOL scale_linear) {
 	return FALSE;
 }
 
-BOOL fipImage::threshold(BYTE T) {
+FI_BOOL fipImage::threshold(BYTE T) {
 	if(_dib) {
 		FIBITMAP *dib1 = FreeImage_Threshold(_dib, T);
 		return replace(dib1);
@@ -549,7 +549,7 @@ BOOL fipImage::threshold(BYTE T) {
 	return FALSE;
 }
 
-BOOL fipImage::convertTo4Bits() {
+FI_BOOL fipImage::convertTo4Bits() {
 	if(_dib) {
 		FIBITMAP *dib4 = FreeImage_ConvertTo4Bits(_dib);
 		return replace(dib4);
@@ -557,7 +557,7 @@ BOOL fipImage::convertTo4Bits() {
 	return FALSE;
 }
 
-BOOL fipImage::convertTo8Bits() {
+FI_BOOL fipImage::convertTo8Bits() {
 	if(_dib) {
 		FIBITMAP *dib8 = FreeImage_ConvertTo8Bits(_dib);
 		return replace(dib8);
@@ -565,7 +565,7 @@ BOOL fipImage::convertTo8Bits() {
 	return FALSE;
 }
 
-BOOL fipImage::convertTo16Bits555() {
+FI_BOOL fipImage::convertTo16Bits555() {
 	if(_dib) {
 		FIBITMAP *dib16_555 = FreeImage_ConvertTo16Bits555(_dib);
 		return replace(dib16_555);
@@ -573,7 +573,7 @@ BOOL fipImage::convertTo16Bits555() {
 	return FALSE;
 }
 
-BOOL fipImage::convertTo16Bits565() {
+FI_BOOL fipImage::convertTo16Bits565() {
 	if(_dib) {
 		FIBITMAP *dib16_565 = FreeImage_ConvertTo16Bits565(_dib);
 		return replace(dib16_565);
@@ -581,7 +581,7 @@ BOOL fipImage::convertTo16Bits565() {
 	return FALSE;
 }
 
-BOOL fipImage::convertTo24Bits() {
+FI_BOOL fipImage::convertTo24Bits() {
 	if(_dib) {
 		FIBITMAP *dibRGB = FreeImage_ConvertTo24Bits(_dib);
 		return replace(dibRGB);
@@ -589,7 +589,7 @@ BOOL fipImage::convertTo24Bits() {
 	return FALSE;
 }
 
-BOOL fipImage::convertTo32Bits() {
+FI_BOOL fipImage::convertTo32Bits() {
 	if(_dib) {
 		FIBITMAP *dib32 = FreeImage_ConvertTo32Bits(_dib);
 		return replace(dib32);
@@ -597,7 +597,7 @@ BOOL fipImage::convertTo32Bits() {
 	return FALSE;
 }
 
-BOOL fipImage::convertToGrayscale() {
+FI_BOOL fipImage::convertToGrayscale() {
 	if(_dib) {
 		FIBITMAP *dib8 = FreeImage_ConvertToGreyscale(_dib);
 		return replace(dib8);
@@ -605,7 +605,7 @@ BOOL fipImage::convertToGrayscale() {
 	return FALSE;
 }
 
-BOOL fipImage::colorQuantize(FREE_IMAGE_QUANTIZE algorithm) {
+FI_BOOL fipImage::colorQuantize(FREE_IMAGE_QUANTIZE algorithm) {
 	if(_dib) {
 		FIBITMAP *dib8 = FreeImage_ColorQuantize(_dib, algorithm);
 		return replace(dib8);
@@ -613,7 +613,7 @@ BOOL fipImage::colorQuantize(FREE_IMAGE_QUANTIZE algorithm) {
 	return FALSE;
 }
 
-BOOL fipImage::dither(FREE_IMAGE_DITHER algorithm) {
+FI_BOOL fipImage::dither(FREE_IMAGE_DITHER algorithm) {
 	if(_dib) {
 		FIBITMAP *dib = FreeImage_Dither(_dib, algorithm);
 		return replace(dib);
@@ -621,7 +621,7 @@ BOOL fipImage::dither(FREE_IMAGE_DITHER algorithm) {
 	return FALSE;
 }
 
-BOOL fipImage::convertToFloat() {
+FI_BOOL fipImage::convertToFloat() {
 	if(_dib) {
 		FIBITMAP *dib = FreeImage_ConvertToFloat(_dib);
 		return replace(dib);
@@ -629,7 +629,7 @@ BOOL fipImage::convertToFloat() {
 	return FALSE;
 }
 
-BOOL fipImage::convertToRGBF() {
+FI_BOOL fipImage::convertToRGBF() {
 	if(_dib) {
 		FIBITMAP *dib = FreeImage_ConvertToRGBF(_dib);
 		return replace(dib);
@@ -637,7 +637,7 @@ BOOL fipImage::convertToRGBF() {
 	return FALSE;
 }
 
-BOOL fipImage::convertToRGBAF() {
+FI_BOOL fipImage::convertToRGBAF() {
 	if(_dib) {
 		FIBITMAP *dib = FreeImage_ConvertToRGBAF(_dib);
 		return replace(dib);
@@ -645,7 +645,7 @@ BOOL fipImage::convertToRGBAF() {
 	return FALSE;
 }
 
-BOOL fipImage::convertToUINT16() {
+FI_BOOL fipImage::convertToUINT16() {
 	if(_dib) {
 		FIBITMAP *dib = FreeImage_ConvertToUINT16(_dib);
 		return replace(dib);
@@ -653,7 +653,7 @@ BOOL fipImage::convertToUINT16() {
 	return FALSE;
 }
 
-BOOL fipImage::convertToRGB16() {
+FI_BOOL fipImage::convertToRGB16() {
 	if(_dib) {
 		FIBITMAP *dib = FreeImage_ConvertToRGB16(_dib);
 		return replace(dib);
@@ -661,7 +661,7 @@ BOOL fipImage::convertToRGB16() {
 	return FALSE;
 }
 
-BOOL fipImage::convertToRGBA16() {
+FI_BOOL fipImage::convertToRGBA16() {
 	if(_dib) {
 		FIBITMAP *dib = FreeImage_ConvertToRGBA16(_dib);
 		return replace(dib);
@@ -669,7 +669,7 @@ BOOL fipImage::convertToRGBA16() {
 	return FALSE;
 }
 
-BOOL fipImage::toneMapping(FREE_IMAGE_TMO tmo, double first_param, double second_param, double third_param, double fourth_param) {
+FI_BOOL fipImage::toneMapping(FREE_IMAGE_TMO tmo, double first_param, double second_param, double third_param, double fourth_param) {
 	if(_dib) {
 		FIBITMAP *dst = NULL;
 		// Apply a tone mapping algorithm and convert to 24-bit 
@@ -690,7 +690,7 @@ BOOL fipImage::toneMapping(FREE_IMAGE_TMO tmo, double first_param, double second
 ///////////////////////////////////////////////////////////////////   
 // Transparency support: background colour and alpha channel
 
-BOOL fipImage::isTransparent() const {
+FI_BOOL fipImage::isTransparent() const {
 	return FreeImage_IsTransparent(_dib);
 }
 
@@ -707,15 +707,15 @@ void fipImage::setTransparencyTable(BYTE *table, int count) {
 	_bHasChanged = TRUE;
 }
 
-BOOL fipImage::hasFileBkColor() const {
+FI_BOOL fipImage::hasFileBkColor() const {
 	return FreeImage_HasBackgroundColor(_dib);
 }
 
-BOOL fipImage::getFileBkColor(RGBQUAD *bkcolor) const {
+FI_BOOL fipImage::getFileBkColor(RGBQUAD *bkcolor) const {
 	return FreeImage_GetBackgroundColor(_dib, bkcolor);
 }
 
-BOOL fipImage::setFileBkColor(RGBQUAD *bkcolor) {
+FI_BOOL fipImage::setFileBkColor(RGBQUAD *bkcolor) {
 	_bHasChanged = TRUE;
 	return FreeImage_SetBackgroundColor(_dib, bkcolor);
 }
@@ -723,7 +723,7 @@ BOOL fipImage::setFileBkColor(RGBQUAD *bkcolor) {
 ///////////////////////////////////////////////////////////////////   
 // Channel processing support
 
-BOOL fipImage::getChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel) const {
+FI_BOOL fipImage::getChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel) const {
 	if(_dib) {
 		image = FreeImage_GetChannel(_dib, channel);
 		return image.isValid();
@@ -731,7 +731,7 @@ BOOL fipImage::getChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel) con
 	return FALSE;
 }
 
-BOOL fipImage::setChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel) {
+FI_BOOL fipImage::setChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel) {
 	if(_dib) {
 		_bHasChanged = TRUE;
 		return FreeImage_SetChannel(_dib, image._dib, channel);
@@ -739,7 +739,7 @@ BOOL fipImage::setChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel) {
 	return FALSE;
 }
 
-BOOL fipImage::splitChannels(fipImage& RedChannel, fipImage& GreenChannel, fipImage& BlueChannel) {
+FI_BOOL fipImage::splitChannels(fipImage& RedChannel, fipImage& GreenChannel, fipImage& BlueChannel) {
 	if(_dib) {
 		RedChannel = FreeImage_GetChannel(_dib, FICC_RED);
 		GreenChannel = FreeImage_GetChannel(_dib, FICC_GREEN);
@@ -750,7 +750,7 @@ BOOL fipImage::splitChannels(fipImage& RedChannel, fipImage& GreenChannel, fipIm
 	return FALSE;
 }
 
-BOOL fipImage::combineChannels(fipImage& red, fipImage& green, fipImage& blue) {
+FI_BOOL fipImage::combineChannels(fipImage& red, fipImage& green, fipImage& blue) {
 	if(!_dib) {
 		int width = red.getWidth();
 		int height = red.getHeight();
@@ -758,7 +758,7 @@ BOOL fipImage::combineChannels(fipImage& red, fipImage& green, fipImage& blue) {
 	}
 
 	if(_dib) {
-		BOOL bResult = TRUE;
+		FI_BOOL bResult = TRUE;
 		bResult &= FreeImage_SetChannel(_dib, red._dib, FICC_RED);
 		bResult &= FreeImage_SetChannel(_dib, green._dib, FICC_GREEN);
 		bResult &= FreeImage_SetChannel(_dib, blue._dib, FICC_BLUE);
@@ -773,7 +773,7 @@ BOOL fipImage::combineChannels(fipImage& red, fipImage& green, fipImage& blue) {
 ///////////////////////////////////////////////////////////////////   
 // Rotation and flipping
 
-BOOL fipImage::rotateEx(double angle, double x_shift, double y_shift, double x_origin, double y_origin, BOOL use_mask) {
+FI_BOOL fipImage::rotateEx(double angle, double x_shift, double y_shift, double x_origin, double y_origin, FI_BOOL use_mask) {
 	if(_dib) {
 		if(FreeImage_GetBPP(_dib) >= 8) {
 			FIBITMAP *rotated = FreeImage_RotateEx(_dib, angle, x_shift, y_shift, x_origin, y_origin, use_mask);
@@ -783,7 +783,7 @@ BOOL fipImage::rotateEx(double angle, double x_shift, double y_shift, double x_o
 	return FALSE;
 }
 
-BOOL fipImage::rotate(double angle, const void *bkcolor) {
+FI_BOOL fipImage::rotate(double angle, const void *bkcolor) {
 	if(_dib) {
 		switch(FreeImage_GetImageType(_dib)) {
 			case FIT_BITMAP:
@@ -817,7 +817,7 @@ BOOL fipImage::rotate(double angle, const void *bkcolor) {
 	return FALSE;
 }
 
-BOOL fipImage::flipVertical() {
+FI_BOOL fipImage::flipVertical() {
 	if(_dib) {
 		_bHasChanged = TRUE;
 
@@ -826,7 +826,7 @@ BOOL fipImage::flipVertical() {
 	return FALSE;
 }
 
-BOOL fipImage::flipHorizontal() {
+FI_BOOL fipImage::flipHorizontal() {
 	if(_dib) {
 		_bHasChanged = TRUE;
 
@@ -838,7 +838,7 @@ BOOL fipImage::flipHorizontal() {
 ///////////////////////////////////////////////////////////////////   
 // Color manipulation routines
 
-BOOL fipImage::invert() {
+FI_BOOL fipImage::invert() {
 	if(_dib) {
 		_bHasChanged = TRUE;
 
@@ -847,7 +847,7 @@ BOOL fipImage::invert() {
 	return FALSE;
 }
 
-BOOL fipImage::adjustCurve(BYTE *LUT, FREE_IMAGE_COLOR_CHANNEL channel) {
+FI_BOOL fipImage::adjustCurve(BYTE *LUT, FREE_IMAGE_COLOR_CHANNEL channel) {
 	if(_dib) {
 		_bHasChanged = TRUE;
 
@@ -856,7 +856,7 @@ BOOL fipImage::adjustCurve(BYTE *LUT, FREE_IMAGE_COLOR_CHANNEL channel) {
 	return FALSE;
 }
 
-BOOL fipImage::adjustGamma(double gamma) {
+FI_BOOL fipImage::adjustGamma(double gamma) {
 	if(_dib) {
 		_bHasChanged = TRUE;
 
@@ -865,7 +865,7 @@ BOOL fipImage::adjustGamma(double gamma) {
 	return FALSE;
 }
 
-BOOL fipImage::adjustBrightness(double percentage) {
+FI_BOOL fipImage::adjustBrightness(double percentage) {
 	if(_dib) {
 		_bHasChanged = TRUE;
 
@@ -874,7 +874,7 @@ BOOL fipImage::adjustBrightness(double percentage) {
 	return FALSE;
 }
 
-BOOL fipImage::adjustContrast(double percentage) {
+FI_BOOL fipImage::adjustContrast(double percentage) {
 	if(_dib) {
 		_bHasChanged = TRUE;
 
@@ -883,7 +883,7 @@ BOOL fipImage::adjustContrast(double percentage) {
 	return FALSE;
 }
 
-BOOL fipImage::adjustBrightnessContrastGamma(double brightness, double contrast, double gamma) {
+FI_BOOL fipImage::adjustBrightnessContrastGamma(double brightness, double contrast, double gamma) {
 	if(_dib) {
 		_bHasChanged = TRUE;
 
@@ -892,7 +892,7 @@ BOOL fipImage::adjustBrightnessContrastGamma(double brightness, double contrast,
 	return FALSE;
 }
 
-BOOL fipImage::getHistogram(DWORD *histo, FREE_IMAGE_COLOR_CHANNEL channel) const {
+FI_BOOL fipImage::getHistogram(DWORD *histo, FREE_IMAGE_COLOR_CHANNEL channel) const {
 	if(_dib) {
 		return FreeImage_GetHistogram(_dib, histo, channel);
 	}
@@ -902,7 +902,7 @@ BOOL fipImage::getHistogram(DWORD *histo, FREE_IMAGE_COLOR_CHANNEL channel) cons
 ///////////////////////////////////////////////////////////////////
 // Upsampling / downsampling routine
 
-BOOL fipImage::rescale(unsigned new_width, unsigned new_height, FREE_IMAGE_FILTER filter) {
+FI_BOOL fipImage::rescale(unsigned new_width, unsigned new_height, FREE_IMAGE_FILTER filter) {
 	if(_dib) {
 		switch(FreeImage_GetImageType(_dib)) {
 			case FIT_BITMAP:
@@ -925,7 +925,7 @@ BOOL fipImage::rescale(unsigned new_width, unsigned new_height, FREE_IMAGE_FILTE
 	return FALSE;
 }
 
-BOOL fipImage::makeThumbnail(unsigned max_size, BOOL convert) {
+FI_BOOL fipImage::makeThumbnail(unsigned max_size, FI_BOOL convert) {
 	if(_dib) {
 		switch(FreeImage_GetImageType(_dib)) {
 			case FIT_BITMAP:
@@ -955,7 +955,7 @@ unsigned fipImage::getMetadataCount(FREE_IMAGE_MDMODEL model) const {
 	return FreeImage_GetMetadataCount(model, _dib);
 }
 
-BOOL fipImage::getMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& tag) const {
+FI_BOOL fipImage::getMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& tag) const {
 	FITAG *searchedTag = NULL;
 	FreeImage_GetMetadata(model, _dib, key, &searchedTag);
 	if(searchedTag != NULL) {
@@ -968,7 +968,7 @@ BOOL fipImage::getMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& ta
 	return FALSE;
 }
 
-BOOL fipImage::setMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& tag) {
+FI_BOOL fipImage::setMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& tag) {
 	return FreeImage_SetMetadata(model, _dib, key, tag);
 }
 

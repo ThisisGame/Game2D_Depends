@@ -112,7 +112,7 @@ MimeType() {
 	return "image/x-koala";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	BYTE koala_signature[] = { 0x00, 0x60 };
 	BYTE signature[2] = { 0, 0 };
@@ -122,12 +122,12 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return (memcmp(koala_signature, signature, sizeof(koala_signature)) == 0);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return FALSE;
 }

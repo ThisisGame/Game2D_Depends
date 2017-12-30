@@ -70,7 +70,7 @@ function vbpasstypesize(t,pts,   a)
 		t = "ByVal,Long,4";
 	} else if(t=="BYTE") {
 		t = "ByVal,Byte,4";
-	} else if(t=="BOOL"||t=="DWORD") {
+	} else if(t=="FI_BOOL"||t=="DWORD") {
 		t = "ByVal,Long,4";
 	} else if(t=="BYTE *"||t=="DWORD *") {
 		t = "ByRef,Long,4";

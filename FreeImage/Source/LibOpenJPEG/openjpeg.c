@@ -126,7 +126,7 @@ static OPJ_BOOL opj_seek_from_file (OPJ_OFF_T p_nb_bytes, FILE * p_user_data)
 /* ---------------------------------------------------------------------- */
 #ifdef _WIN32
 #ifndef OPJ_STATIC
-BOOL APIENTRY
+FI_BOOL APIENTRY
 DllMain(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserved) {
 
 	OPJ_ARG_NOT_USED(lpReserved);

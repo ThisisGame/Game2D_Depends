@@ -2,7 +2,7 @@
 // FreeImagePlus 3
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -70,7 +70,7 @@
 
 /** Abstract base class for all objects used by the library.
 	@version FreeImage 3
-	@author Hervé Drolon
+	@author Hervï¿½ Drolon
 */
 
 class FIP_API fipObject
@@ -82,7 +82,7 @@ public:
 	/**@name Information functions */
 	//@{
 	/// Returns TRUE if the object is allocated, FALSE otherwise
-	virtual BOOL isValid() const = 0;
+	virtual FI_BOOL isValid() const = 0;
 	//@}
 };
 
@@ -97,7 +97,7 @@ class fipTag;
 	fipImage encapsulates the FIBITMAP format. It relies on the FreeImage library, especially for 
 	loading / saving images and for bit depth conversion.
 	@version FreeImage 3
-	@author Hervé Drolon
+	@author Hervï¿½ Drolon
 */
 
 class FIP_API fipImage : public fipObject
@@ -108,7 +108,7 @@ protected:
 	/// Original (or last saved) fif format if available, FIF_UNKNOWN otherwise
 	FREE_IMAGE_FORMAT _fif;
 	/// TRUE whenever the display need to be refreshed
-	mutable BOOL _bHasChanged;
+	mutable FI_BOOL _bHasChanged;
 
 public:
 	friend class fipMultiPage;
@@ -128,7 +128,7 @@ public:
 	Image allocator
 	@see FreeImage_AllocateT
 	*/
-	BOOL setSize(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height, unsigned bpp, unsigned red_mask = 0, unsigned green_mask = 0, unsigned blue_mask = 0);
+	FI_BOOL setSize(FREE_IMAGE_TYPE image_type, unsigned width, unsigned height, unsigned bpp, unsigned red_mask = 0, unsigned green_mask = 0, unsigned blue_mask = 0);
 	/// Destroy image data
 	virtual void clear();
 	//@}
@@ -165,7 +165,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_Copy
 	*/
-	BOOL copySubImage(fipImage& dst, int left, int top, int right, int bottom) const;
+	FI_BOOL copySubImage(fipImage& dst, int left, int top, int right, int bottom) const;
 
 	/**
 	@brief Alpha blend or combine a sub part image with the current image.
@@ -180,7 +180,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_Paste
 	*/
-	BOOL pasteSubImage(fipImage& src, int left, int top, int alpha = 256);
+	FI_BOOL pasteSubImage(fipImage& src, int left, int top, int alpha = 256);
 
 	/**
 	@brief Crop a sub part of the current image and update it accordingly.
@@ -192,7 +192,7 @@ public:
 	@param bottom Specifies the bottom position of the cropped rectangle. 
 	@return Returns TRUE if successful, FALSE otherwise.
 	*/
-	BOOL crop(int left, int top, int right, int bottom);
+	FI_BOOL crop(int left, int top, int right, int bottom);
 
 	//@}
 
@@ -244,13 +244,13 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_Load, FreeImage documentation
 	*/
-	BOOL load(const char* lpszPathName, int flag = 0);
+	FI_BOOL load(const char* lpszPathName, int flag = 0);
 
 	/**
 	UNICODE version of load (this function only works under WIN32 and does nothing on other OS)
 	@see load
 	*/
-	BOOL loadU(const wchar_t* lpszPathName, int flag = 0);
+	FI_BOOL loadU(const wchar_t* lpszPathName, int flag = 0);
 
 	/**
 	@brief Loads an image using the specified FreeImageIO struct and fi_handle, and an optional flag.
@@ -260,7 +260,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_LoadFromHandle, FreeImage documentation
 	*/
-	BOOL loadFromHandle(FreeImageIO *io, fi_handle handle, int flag = 0);
+	FI_BOOL loadFromHandle(FreeImageIO *io, fi_handle handle, int flag = 0);
 
 	/**
 	@brief Loads an image using the specified memory stream and an optional flag.
@@ -269,7 +269,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_LoadFromMemory, FreeImage documentation
 	*/
-	BOOL loadFromMemory(fipMemoryIO& memIO, int flag = 0);
+	FI_BOOL loadFromMemory(fipMemoryIO& memIO, int flag = 0);
 
 	/**
 	@brief Saves an image to disk, given its file name and an optional flag.
@@ -278,13 +278,13 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_Save, FreeImage documentation
 	*/
-	BOOL save(const char* lpszPathName, int flag = 0) const;
+	FI_BOOL save(const char* lpszPathName, int flag = 0) const;
 
 	/**
 	UNICODE version of save (this function only works under WIN32 and does nothing on other OS)
 	@see save
 	*/
-	BOOL saveU(const wchar_t* lpszPathName, int flag = 0) const;
+	FI_BOOL saveU(const wchar_t* lpszPathName, int flag = 0) const;
 
 	/**
 	@brief Saves an image using the specified FreeImageIO struct and fi_handle, and an optional flag.
@@ -295,7 +295,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_SaveToHandle, FreeImage documentation
 	*/
-	BOOL saveToHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int flag = 0) const;
+	FI_BOOL saveToHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int flag = 0) const;
 
 	/**
 	@brief Saves an image using the specified memory stream and an optional flag.
@@ -305,7 +305,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_SaveToMemory, FreeImage documentation
 	*/
-	BOOL saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flag = 0) const;
+	FI_BOOL saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flag = 0) const;
 
 	//@}
 
@@ -355,7 +355,7 @@ public:
 	}
 
 	/// Returns TRUE if the image is allocated, FALSE otherwise
-	BOOL isValid() const;
+	FI_BOOL isValid() const;
 
 	/**
 	Returns a pointer to the bitmap's BITMAPINFO header. 
@@ -452,7 +452,7 @@ public:
 	Returns TRUE if the bitmap is a 8-bit bitmap with a greyscale palette, FALSE otherwise
 	@see FreeImage_GetBPP, FreeImage_GetColorType
 	*/
-	BOOL isGrayscale() const;
+	FI_BOOL isGrayscale() const;
 	//@}
 
 	/**@name Thumbnail access */
@@ -463,28 +463,28 @@ public:
 	@return Returns TRUE if the thumbnail is present in the bitmap and successfuly retrieved, returns FALSE otherwise
 	@see FreeImage_GetThumbnail
 	*/
-	BOOL getThumbnail(fipImage& image) const;
+	FI_BOOL getThumbnail(fipImage& image) const;
 
 	/**
 	Attach a thumbnail to the bitmap
 	@return Returns TRUE if the thumbnail was successfuly set, returns FALSE otherwise
 	@see FreeImage_SetThumbnail
 	*/
-	BOOL setThumbnail(const fipImage& image);
+	FI_BOOL setThumbnail(const fipImage& image);
 
 	/**
 	Check if the image has an embedded thumbnail
 	@return Returns TRUE if a thumbnail is present in the bitmap, returns FALSE otherwise
 	@see FreeImage_GetThumbnail
 	*/
-	BOOL hasThumbnail() const;
+	FI_BOOL hasThumbnail() const;
 
 	/**
 	Clear the thumbnail possibly attached to the bitmap
 	@return Returns TRUE if successful, returns FALSe otherwise
 	@see FreeImage_SetThumbnail
 	*/
-	BOOL clearThumbnail();
+	FI_BOOL clearThumbnail();
 
 	//@}
 
@@ -501,7 +501,7 @@ public:
 	*/
 	BYTE* accessPixels() const;
 
-	/** @brief Returns a pointer to the start of the given scanline in the bitmap’s data-bits.
+	/** @brief Returns a pointer to the start of the given scanline in the bitmapï¿½s data-bits.
 		This pointer can be cast according to the result returned by getImageType.<br>
 		Use this function with getScanWidth to iterates through the pixels. 
 		@see FreeImage_GetScanLine, FreeImage documentation
@@ -516,7 +516,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_GetPixelIndex
 	*/
-	BOOL getPixelIndex(unsigned x, unsigned y, BYTE *value) const;
+	FI_BOOL getPixelIndex(unsigned x, unsigned y, BYTE *value) const;
 
 	/** 
 	Get the pixel color of a 16-, 24- or 32-bit image at position (x, y), including range check (slow access). 
@@ -526,7 +526,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_GetPixelColor
 	*/
-	BOOL getPixelColor(unsigned x, unsigned y, RGBQUAD *value) const;
+	FI_BOOL getPixelColor(unsigned x, unsigned y, RGBQUAD *value) const;
 
 	/** 
 	Set the pixel index of a 1-, 4- or 8-bit palettized image at position (x, y), including range check (slow access). 
@@ -536,7 +536,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_SetPixelIndex
 	*/
-	BOOL setPixelIndex(unsigned x, unsigned y, BYTE *value);
+	FI_BOOL setPixelIndex(unsigned x, unsigned y, BYTE *value);
 
 	/** 
 	Set the pixel color of a 16-, 24- or 32-bit image at position (x, y), including range check (slow access). 
@@ -546,7 +546,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_SetPixelColor
 	*/
-	BOOL setPixelColor(unsigned x, unsigned y, RGBQUAD *value);
+	FI_BOOL setPixelColor(unsigned x, unsigned y, RGBQUAD *value);
 
 	//@}
 
@@ -561,7 +561,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertToType, FreeImage_ConvertToStandardType
 	*/
-	BOOL convertToType(FREE_IMAGE_TYPE image_type, BOOL scale_linear = TRUE);
+	FI_BOOL convertToType(FREE_IMAGE_TYPE image_type, FI_BOOL scale_linear = TRUE);
 
 	/** 
 	Converts the bitmap to 1 bit using a threshold T.
@@ -569,7 +569,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_Threshold
 	*/
-	BOOL threshold(BYTE T);
+	FI_BOOL threshold(BYTE T);
 	
 	/** 
 	Converts a 8-bit image to a monochrome 1-bit image using a dithering algorithm.
@@ -577,21 +577,21 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_Dither, FREE_IMAGE_DITHER
 	*/
-	BOOL dither(FREE_IMAGE_DITHER algorithm);
+	FI_BOOL dither(FREE_IMAGE_DITHER algorithm);
 
 	/** 
 	Converts the bitmap to 4 bits. Unless the bitmap is a 1-bit palettized bitmap, colour values are converted to greyscale.
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertTo4Bits
 	*/
-	BOOL convertTo4Bits();
+	FI_BOOL convertTo4Bits();
 
 	/** 
 	Converts the bitmap to 8 bits. If the bitmap is 24 or 32-bit RGB, the colour values are converted to greyscale.
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertTo8Bits
 	*/
-	BOOL convertTo8Bits();
+	FI_BOOL convertTo8Bits();
 
 	/** 
 	Converts the bitmap to 8 bits.<br> 
@@ -599,7 +599,7 @@ public:
 	@see FreeImage_ConvertToGreyscale
 	@return Returns TRUE if successful, FALSE otherwise. 
 	*/
-	BOOL convertToGrayscale();
+	FI_BOOL convertToGrayscale();
 	
 	/** 
 	Quantizes a full colour 24-bit bitmap to a palletised 8-bit bitmap.<br>
@@ -608,77 +608,77 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ColorQuantize, FREE_IMAGE_QUANTIZE
 	*/
-	BOOL colorQuantize(FREE_IMAGE_QUANTIZE algorithm);
+	FI_BOOL colorQuantize(FREE_IMAGE_QUANTIZE algorithm);
 
 	/** 
 	Converts the bitmap to 16 bits. The resulting bitmap has a layout of 5 bits red, 5 bits green, 5 bits blue and 1 unused bit. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertTo16Bits555
 	*/
-	BOOL convertTo16Bits555();
+	FI_BOOL convertTo16Bits555();
 	
 	/** 
 	Converts the bitmap to 16 bits. The resulting bitmap has a layout of 5 bits red, 6 bits green and 5 bits blue. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertTo16Bits565
 	*/
-	BOOL convertTo16Bits565();
+	FI_BOOL convertTo16Bits565();
 	
 	/** 
 	Converts the bitmap to 24 bits. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertTo24Bits
 	*/
-	BOOL convertTo24Bits();
+	FI_BOOL convertTo24Bits();
 	
 	/** 
 	Converts the bitmap to 32 bits. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertTo32Bits
 	*/
-	BOOL convertTo32Bits();
+	FI_BOOL convertTo32Bits();
 
 	/** 
 	Converts the bitmap to a 32-bit float image. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertToFloat
 	*/
-	BOOL convertToFloat();
+	FI_BOOL convertToFloat();
 
 	/** 
 	Converts the bitmap to a 96-bit RGBF image. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertToRGBF
 	*/
-	BOOL convertToRGBF();
+	FI_BOOL convertToRGBF();
 
 	/** 
 	Converts the bitmap to a 128-bit RGBAF image. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertToRGBAF
 	*/
-	BOOL convertToRGBAF();
+	FI_BOOL convertToRGBAF();
 
 	/** 
 	Converts the bitmap to a 16-bit unsigned short image. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertToUINT16
 	*/
-	BOOL convertToUINT16();
+	FI_BOOL convertToUINT16();
 
 	/** 
 	Converts the bitmap to a 48-bit RGB16 image. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertToRGB16
 	*/
-	BOOL convertToRGB16();
+	FI_BOOL convertToRGB16();
 
 	/** 
 	Converts the bitmap to a 64-bit RGBA16 image. 
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ConvertToRGBA16
 	*/
-	BOOL convertToRGBA16();
+	FI_BOOL convertToRGBA16();
 
 	/**
 	Converts a High Dynamic Range image (48-bit RGB or 96-bit RGB Float) to a 24-bit RGB image. 
@@ -690,7 +690,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_ToneMapping, FreeImage_TmoReinhard05Ex
 	*/
-	BOOL toneMapping(FREE_IMAGE_TMO tmo, double first_param = 0, double second_param = 0, double third_param = 1, double fourth_param = 0);
+	FI_BOOL toneMapping(FREE_IMAGE_TMO tmo, double first_param = 0, double second_param = 0, double third_param = 1, double fourth_param = 0);
 
 	//@}
 
@@ -701,7 +701,7 @@ public:
 	Returns TRUE if the image is transparent, returns FALSE otherwise
 	@see FreeImage_IsTransparent
 	*/
-	BOOL isTransparent() const;
+	FI_BOOL isTransparent() const;
 
 	/**
 	8-bit transparency : get the number of transparent colors.
@@ -711,14 +711,14 @@ public:
 	unsigned getTransparencyCount() const;
 
 	/**
-	8-bit transparency : get the bitmap’s transparency table.
-	@return Returns a pointer to the bitmap’s transparency table.
+	8-bit transparency : get the bitmapï¿½s transparency table.
+	@return Returns a pointer to the bitmapï¿½s transparency table.
 	@see FreeImage_GetTransparencyTable
 	*/
 	BYTE* getTransparencyTable() const;
 
 	/** 
-	8-bit transparency : set the bitmap’s transparency table.
+	8-bit transparency : set the bitmapï¿½s transparency table.
 	@see FreeImage_SetTransparencyTable
 	*/
 	void setTransparencyTable(BYTE *table, int count);
@@ -727,7 +727,7 @@ public:
 	Returns TRUE when the image has a file background color, FALSE otherwise.
 	@see FreeImage_HasBackgroundColor
 	*/
-	BOOL hasFileBkColor() const;
+	FI_BOOL hasFileBkColor() const;
 
 	/**
 	@brief Retrieves the file background color of an image. 
@@ -737,7 +737,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_GetBackgroundColor
 	*/
-	BOOL getFileBkColor(RGBQUAD *bkcolor) const;
+	FI_BOOL getFileBkColor(RGBQUAD *bkcolor) const;
 
 	/**
 	@brief Set the file background color of an image. 
@@ -747,7 +747,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise. 
 	@see FreeImage_SetBackgroundColor
 	*/
-	BOOL setFileBkColor(RGBQUAD *bkcolor);
+	FI_BOOL setFileBkColor(RGBQUAD *bkcolor);
 	//@}
 
 	/**@name Channel processing support */
@@ -758,7 +758,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_GetChannel, FREE_IMAGE_COLOR_CHANNEL
 	*/
-	BOOL getChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel) const;
+	FI_BOOL getChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel) const;
 
 	/**
 	@brief Insert a 8-bit dib into a 24- or 32-bit image. 
@@ -767,7 +767,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_SetChannel, FREE_IMAGE_COLOR_CHANNEL
 	*/
-	BOOL setChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel);
+	FI_BOOL setChannel(fipImage& image, FREE_IMAGE_COLOR_CHANNEL channel);
 
 	/** @brief Split a 24-bit RGB image into 3 greyscale images corresponding to the red, green and blue channels.
 	@param RedChannel Output red channel.
@@ -777,7 +777,7 @@ public:
 	one of the output channel can't be allocated. Returns TRUE otherwise.
 	@see FreeImage_GetChannel
 	*/
-	BOOL splitChannels(fipImage& RedChannel, fipImage& GreenChannel, fipImage& BlueChannel);
+	FI_BOOL splitChannels(fipImage& RedChannel, fipImage& GreenChannel, fipImage& BlueChannel);
 
 	/** @brief Builds a 24-bit RGB image given its red, green and blue channel.
 	@param red Input red channel.
@@ -786,7 +786,7 @@ public:
 	@return Returns FALSE if the dib can't be allocated, if the input channels are not 8-bit images. Returns TRUE otherwise.
 	@see FreeImage_SetChannel
 	*/
-	BOOL combineChannels(fipImage& red, fipImage& green, fipImage& blue);
+	FI_BOOL combineChannels(fipImage& red, fipImage& green, fipImage& blue);
 	//@}
 
 	/**@name Rotation and flipping */
@@ -802,7 +802,7 @@ public:
 	@return Returns the translated & rotated dib if successful, returns NULL otherwise
 	@see FreeImage_RotateEx
 	*/
-	BOOL rotateEx(double angle, double x_shift, double y_shift, double x_origin, double y_origin, BOOL use_mask);
+	FI_BOOL rotateEx(double angle, double x_shift, double y_shift, double x_origin, double y_origin, FI_BOOL use_mask);
 
 	/** 
 	Image rotation by means of three shears.
@@ -811,19 +811,19 @@ public:
 	@return Returns rotated dib if successful, returns NULL otherwise
 	@see FreeImage_Rotate
 	*/
-	BOOL rotate(double angle, const void *bkcolor = NULL);
+	FI_BOOL rotate(double angle, const void *bkcolor = NULL);
 
 	/**
 	Flip the image horizontally along the vertical axis
 	@see FreeImage_FlipHorizontal
 	*/
-	BOOL flipHorizontal();
+	FI_BOOL flipHorizontal();
 
 	/**
 	Flip the image vertically along the horizontal axis
 	@see FreeImage_FlipVertical
 	*/
-	BOOL flipVertical();
+	FI_BOOL flipVertical();
 	//@}
 
 	/**@name Color manipulation routines */
@@ -833,7 +833,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_Invert
 	*/
-	BOOL invert();
+	FI_BOOL invert();
 	
 	/** @brief Perfoms an histogram transformation on a 8, 24 or 32-bit image 
 	according to the values of a lookup table (LUT).
@@ -848,7 +848,7 @@ public:
 	@return Returns TRUE if the operation was successful, FALSE otherwise
 	@see FreeImage_AdjustCurve, FREE_IMAGE_COLOR_CHANNEL
 	*/
-	BOOL adjustCurve(BYTE *LUT, FREE_IMAGE_COLOR_CHANNEL channel);
+	FI_BOOL adjustCurve(BYTE *LUT, FREE_IMAGE_COLOR_CHANNEL channel);
 
 	/** @brief Performs gamma correction on a 8, 24 or 32-bit image.
 	@param gamma Gamma value to use. A value of 1.0 leaves the image alone, 
@@ -856,7 +856,7 @@ public:
 	@return Returns TRUE if the operation was successful, FALSE otherwise
 	@see FreeImage_AdjustGamma, adjustCurve
 	*/
-	BOOL adjustGamma(double gamma);
+	FI_BOOL adjustGamma(double gamma);
 
 	/** @brief Adjusts the brightness of a 8, 24 or 32-bit image by a certain amount.
 	@param percentage Where -100 <= percentage <= 100<br>
@@ -865,7 +865,7 @@ public:
 	@return Returns TRUE if the operation was succesful, FALSE otherwise
 	@see FreeImage_AdjustBrightness, adjustCurve
 	*/
-	BOOL adjustBrightness(double percentage);
+	FI_BOOL adjustBrightness(double percentage);
 
 	/** @brief Adjusts the contrast of a 8, 24 or 32-bit image by a certain amount.
 	@param percentage Where -100 <= percentage <= 100<br>
@@ -874,7 +874,7 @@ public:
 	@return Returns TRUE if the operation was succesfull, FALSE otherwise
 	@see FreeImage_AdjustContrast, adjustCurve
 	*/
-	BOOL adjustContrast(double percentage);
+	FI_BOOL adjustContrast(double percentage);
 
 	/**
 	Adjusts an image's brightness, contrast and gamma within a single operation. 
@@ -886,7 +886,7 @@ public:
 	@see adjustGamma
 	@see FreeImage_AdjustColors
 	*/
-	BOOL adjustBrightnessContrastGamma(double brightness, double contrast, double gamma);
+	FI_BOOL adjustBrightnessContrastGamma(double brightness, double contrast, double gamma);
 
 	/** @brief Computes image histogram
 	
@@ -898,7 +898,7 @@ public:
 	@return Returns TRUE if the operation was succesfull, FALSE otherwise
 	@see FreeImage_GetHistogram
 	*/
-	BOOL getHistogram(DWORD *histo, FREE_IMAGE_COLOR_CHANNEL channel = FICC_BLACK) const;
+	FI_BOOL getHistogram(DWORD *histo, FREE_IMAGE_COLOR_CHANNEL channel = FICC_BLACK) const;
 	//@}
 
 	/**@name Upsampling / downsampling */
@@ -912,7 +912,7 @@ public:
 	@return Returns TRUE if the operation was successful, FALSE otherwise
 	@see FreeImage_Rescale, FREE_IMAGE_FILTER
 	*/
-	BOOL rescale(unsigned new_width, unsigned new_height, FREE_IMAGE_FILTER filter);
+	FI_BOOL rescale(unsigned new_width, unsigned new_height, FREE_IMAGE_FILTER filter);
 
 	/** @brief Creates a thumbnail image keeping aspect ratio
 
@@ -921,7 +921,7 @@ public:
 	@return Returns TRUE if the operation was successful, FALSE otherwise
 	@see FreeImage_MakeThumbnail
 	*/
-	BOOL makeThumbnail(unsigned max_size, BOOL convert = TRUE);
+	FI_BOOL makeThumbnail(unsigned max_size, FI_BOOL convert = TRUE);
 	//@}
 
 	/**@name Image status */
@@ -933,7 +933,7 @@ public:
 	@param bStatus TRUE if the image should be marked as modified, FALSE otherwise
 	@see isModified
 	*/
-	void setModified(BOOL bStatus = TRUE) {
+	void setModified(FI_BOOL bStatus = TRUE) {
 		_bHasChanged = bStatus;
 	}
 
@@ -942,7 +942,7 @@ public:
 	@return Returns TRUE if the image is marked as modified, FALSE otherwise
 	@see setModified
 	*/
-	BOOL isModified() {
+	FI_BOOL isModified() {
 		return _bHasChanged;
 	}
 	//@}
@@ -963,7 +963,7 @@ public:
 	@return Returns TRUE if the operation was succesfull, FALSE otherwise
 	@see FreeImage_GetMetadata
 	*/
-	BOOL getMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& tag) const;
+	FI_BOOL getMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& tag) const;
 	/**
 	Attach a new FreeImage tag to the dib.<br>
 	<b>Sample use</b> : <br>
@@ -983,14 +983,14 @@ public:
 	@return Returns TRUE if the operation was succesfull, FALSE otherwise
 	@see FreeImage_SetMetadata
 	*/
-	BOOL setMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& tag);
+	FI_BOOL setMetadata(FREE_IMAGE_MDMODEL model, const char *key, fipTag& tag);
 	//@}
 
 
   protected:
 	/**@name Internal use */
 	//@{
-	  BOOL replace(FIBITMAP *new_dib);
+	  FI_BOOL replace(FIBITMAP *new_dib);
 	//@}
 
 };
@@ -1006,7 +1006,7 @@ public:
 	<li>Capture a window (HWND) and convert it to an image
 	</ul>
 	@version FreeImage 3
-	@author Hervé Drolon
+	@author Hervï¿½ Drolon
 */
 #ifdef _WIN32
 
@@ -1025,7 +1025,7 @@ public:
 	virtual void clear();
 
 	/// Returns TRUE if the image is allocated, FALSE otherwise
-	BOOL isValid() const;
+	FI_BOOL isValid() const;
 	//@}
 
 	/**@name Copying */
@@ -1061,13 +1061,13 @@ public:
 	the bitmap is recognized as non standard and correctly copied. 
 	@return Returns TRUE if successful, returns FALSE otherwise
 	*/
-	BOOL copyFromHandle(HANDLE hMem);
+	FI_BOOL copyFromHandle(HANDLE hMem);
 
 	/** Copy constructor.<br>
 	Converts a HBITMAP object to a FIBITMAP.
 	@return Returns TRUE if successful, returns FALSE otherwise
 	*/
-	BOOL copyFromBitmap(HBITMAP hbmp);
+	FI_BOOL copyFromBitmap(HBITMAP hbmp);
 	//@}
 
 	/**@name Clipboard operations */
@@ -1078,13 +1078,13 @@ public:
 	In MFC, you can use AfxGetApp()->m_pMainWnd->GetSafeHwnd().
 	@return Returns TRUE if successful, returns FALSE otherwise
 	*/
-	BOOL copyToClipboard(HWND hWndNewOwner) const;
+	FI_BOOL copyToClipboard(HWND hWndNewOwner) const;
 
 	/**
 	Retrieves data from the clipboard. The clipboard format must be CF_DIB.
 	@return Returns TRUE if successful, returns FALSE otherwise
 	*/
-	BOOL pasteFromClipboard();
+	FI_BOOL pasteFromClipboard();
 	//@}
 
 	/**@name Screen capture */
@@ -1094,7 +1094,7 @@ public:
 	@param hWndSelectedWindow Handle to the window to be captured
 	@return Returns TRUE if successful, returns FALSE otherwise
 	*/
-	BOOL captureWindow(HWND hWndApplicationWindow, HWND hWndSelectedWindow);
+	FI_BOOL captureWindow(HWND hWndApplicationWindow, HWND hWndSelectedWindow);
 	//@}
 
 
@@ -1130,7 +1130,7 @@ public:
 	@see FreeImage_Composite
 	@see setToneMappingOperator
 	*/
-	void drawEx(HDC hDC, RECT& rcDest, BOOL useFileBkg = FALSE, RGBQUAD *appBkColor = NULL, FIBITMAP *bg = NULL) const;
+	void drawEx(HDC hDC, RECT& rcDest, FI_BOOL useFileBkg = FALSE, RGBQUAD *appBkColor = NULL, FIBITMAP *bg = NULL) const;
 
 	/**
 	Select a tone mapping algorithm used for drawing and set the image as modified 
@@ -1161,7 +1161,7 @@ protected:
 	/// DIB used for display (this allow to display non-standard bitmaps)
 	mutable FIBITMAP *_display_dib;
 	/// remember to delete _display_dib
-	mutable BOOL _bDeleteMe;
+	mutable FI_BOOL _bDeleteMe;
 	/// tone mapping operator
 	FREE_IMAGE_TMO _tmo;
 	/// first tone mapping algorithm parameter
@@ -1182,7 +1182,7 @@ protected:
 	
 	fipMemoryIO is a class that allows you to load / save images from / to a memory stream.
 	@version FreeImage 3
-	@author Hervé Drolon
+	@author Hervï¿½ Drolon
 */
 class FIP_API fipMemoryIO : public fipObject
 {
@@ -1216,7 +1216,7 @@ public :
 
 	/** Returns TRUE if the internal memory buffer is a valid buffer, returns FALSE otherwise
 	*/
-	BOOL isValid() const;
+	FI_BOOL isValid() const;
 
 	/** Returns the buffer image format
 	@see FreeImage_GetFileTypeFromMemory
@@ -1257,7 +1257,7 @@ public :
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SaveToMemory
 	*/
-	BOOL save(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, int flags = 0);
+	FI_BOOL save(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, int flags = 0);
 	/**
 	Saves a multi-page bitmap to a memory stream
 	@param fif Format identifier (FreeImage format)
@@ -1266,7 +1266,7 @@ public :
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SaveMultiBitmapToMemory
 	*/
-	BOOL saveMultiPage(FREE_IMAGE_FORMAT fif, FIMULTIBITMAP *bitmap, int flags = 0);
+	FI_BOOL saveMultiPage(FREE_IMAGE_FORMAT fif, FIMULTIBITMAP *bitmap, int flags = 0);
 	/**
 	Reads data from a memory stream
 	@param buffer Storage location for data
@@ -1294,14 +1294,14 @@ public :
 	Moves the memory pointer to a specified location
 	@see FreeImage_SeekMemory
 	*/
-	BOOL seek(long offset, int origin);
+	FI_BOOL seek(long offset, int origin);
 	/**
 	Provides a direct buffer access to a memory stream
 	@param data Pointer to the memory buffer (returned value)
 	@param size_in_bytes Buffer size in bytes (returned value)
 	@see FreeImage_AcquireMemory
 	*/
-	BOOL acquire(BYTE **data, DWORD *size_in_bytes);
+	FI_BOOL acquire(BYTE **data, DWORD *size_in_bytes);
 	//@}
 
 private:
@@ -1325,14 +1325,14 @@ protected:
 	/// Pointer to a multi-page file stream
 	FIMULTIBITMAP *_mpage;
 	/// TRUE when using a memory cache, FALSE otherwise
-	BOOL _bMemoryCache;
+	FI_BOOL _bMemoryCache;
 
 public:
 	/**
 	Constructor
 	@param keep_cache_in_memory When it is TRUE, all gathered bitmap data in the page manipulation process is kept in memory, otherwise it is lazily flushed to a temporary file on the hard disk in 64 Kb blocks.
 	*/
-	fipMultiPage(BOOL keep_cache_in_memory = FALSE);
+	fipMultiPage(FI_BOOL keep_cache_in_memory = FALSE);
 
 	/**
 	Destructor
@@ -1341,7 +1341,7 @@ public:
 	virtual ~fipMultiPage();
 
 	/// Returns TRUE if the multi-page stream is opened
-	BOOL isValid() const;
+	FI_BOOL isValid() const;
 
 	/**
 	Returns a pointer to the FIMULTIBITMAP data. Used for direct access from FREEIMAGE functions 
@@ -1360,7 +1360,7 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_OpenMultiBitmap
 	*/
-	BOOL open(const char* lpszPathName, BOOL create_new, BOOL read_only, int flags = 0);
+	FI_BOOL open(const char* lpszPathName, FI_BOOL create_new, FI_BOOL read_only, int flags = 0);
 
 	/**
 	Open a multi-page memory stream as read/write. 
@@ -1369,7 +1369,7 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_LoadMultiBitmapFromMemory
 	*/
-	BOOL open(fipMemoryIO& memIO, int flags = 0);
+	FI_BOOL open(fipMemoryIO& memIO, int flags = 0);
 
 	/**
 	Open a multi-page image as read/write, using the specified FreeImageIO struct and fi_handle, and an optional flag.
@@ -1379,7 +1379,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_OpenMultiBitmapFromHandle
 	*/
-	BOOL open(FreeImageIO *io, fi_handle handle, int flags = 0);
+	FI_BOOL open(FreeImageIO *io, fi_handle handle, int flags = 0);
 
 	/**
 	Close a file stream
@@ -1387,7 +1387,7 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_CloseMultiBitmap
 	*/
-	BOOL close(int flags = 0);
+	FI_BOOL close(int flags = 0);
 
 	/**
 	Saves a multi-page image using the specified FreeImageIO struct and fi_handle, and an optional flag.
@@ -1398,7 +1398,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_SaveMultiBitmapToHandle, FreeImage documentation
 	*/
-	BOOL saveToHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int flags = 0) const;
+	FI_BOOL saveToHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int flags = 0) const;
 
 	/**
 	Saves a multi-page image using the specified memory stream and an optional flag.
@@ -1408,7 +1408,7 @@ public:
 	@return Returns TRUE if successful, FALSE otherwise.
 	@see FreeImage_SaveMultiBitmapToMemory, FreeImage documentation
 	*/
-	BOOL saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flags = 0) const;
+	FI_BOOL saveToMemory(FREE_IMAGE_FORMAT fif, fipMemoryIO& memIO, int flags = 0) const;
 
 	/**
 	Returns the number of pages currently available in the multi-paged bitmap
@@ -1445,7 +1445,7 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_MovePage
 	*/
-	BOOL movePage(int target, int source);
+	FI_BOOL movePage(int target, int source);
 
 	/**
 	Locks a page in memory for editing. You must call unlockPage to free the page<br>
@@ -1472,7 +1472,7 @@ public:
 	@param changed When TRUE, the page is marked changed and the new page data is applied in the multi-page bitmap.
 	@see FreeImage_UnlockPage
 	*/
-	void unlockPage(fipImage& image, BOOL changed);
+	void unlockPage(fipImage& image, FI_BOOL changed);
 
 	/**
 	Returns an array of page-numbers that are currently locked in memory. 
@@ -1482,7 +1482,7 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_GetLockedPageNumbers
 	*/
-	BOOL getLockedPageNumbers(int *pages, int *count) const;
+	FI_BOOL getLockedPageNumbers(int *pages, int *count) const;
 };
 
 // ----------------------------------------------------------
@@ -1519,7 +1519,7 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_CreateTag
 	*/
-	BOOL setKeyValue(const char *key, const char *value);
+	FI_BOOL setKeyValue(const char *key, const char *value);
 
 	//@}
 
@@ -1553,7 +1553,7 @@ public:
 	}
 
 	/// Returns TRUE if the tag is allocated, FALSE otherwise
-	BOOL isValid() const;
+	FI_BOOL isValid() const;
 
 	/**@name Tag accessors */
 	//@{	
@@ -1597,43 +1597,43 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SetTagKey
 	*/
-	BOOL setKey(const char *key);
+	FI_BOOL setKey(const char *key);
 	/**
 	Set the (usually optional) tag description
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SetTagDescription
 	*/
-	BOOL setDescription(const char *description);
+	FI_BOOL setDescription(const char *description);
 	/**
 	Set the (usually optional) tad ID
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SetTagID
 	*/
-	BOOL setID(WORD id);
+	FI_BOOL setID(WORD id);
 	/**
 	Set the tag data type 
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SetTagType
 	*/
-	BOOL setType(FREE_IMAGE_MDTYPE type);
+	FI_BOOL setType(FREE_IMAGE_MDTYPE type);
 	/**
 	Set the number of data in the tag 
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SetTagCount
 	*/
-	BOOL setCount(DWORD count);
+	FI_BOOL setCount(DWORD count);
 	/**
 	Set the length of the tag value, in bytes 
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SetTagLength
 	*/
-	BOOL setLength(DWORD length);
+	FI_BOOL setLength(DWORD length);
 	/**
 	Set the tag value 
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_SetTagValue
 	*/
-	BOOL setValue(const void *value);
+	FI_BOOL setValue(const void *value);
 
 	//@}
 
@@ -1680,7 +1680,7 @@ protected:
 
 public:
 	/// Returns TRUE if the search handle is allocated, FALSE otherwise
-	BOOL isValid() const;
+	FI_BOOL isValid() const;
 
 	/// Constructor
 	fipMetadataFind();
@@ -1698,7 +1698,7 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise
 	@see FreeImage_FindFirstMetadata
 	*/
-	BOOL findFirstMetadata(FREE_IMAGE_MDMODEL model, fipImage& image, fipTag& tag);
+	FI_BOOL findFirstMetadata(FREE_IMAGE_MDMODEL model, fipImage& image, fipTag& tag);
 	/**
 	Find the next tag, if any, that matches the metadata model argument 
 	in a previous call to findFirstMetadata
@@ -1706,7 +1706,7 @@ public:
 	@return Returns TRUE if successful, returns FALSE otherwise, indicating that no more matching tags could be found
 	@see FreeImage_FindNextMetadata
 	*/
-	BOOL findNextMetadata(fipTag& tag);
+	FI_BOOL findNextMetadata(fipTag& tag);
 
 };
 

@@ -2,7 +2,7 @@
 // XBM Loader
 //
 // Design and implementation by
-// - Hervé Drolon <drolon@infonie.fr>
+// - Hervï¿½ Drolon <drolon@infonie.fr>
 // part of the code adapted from the netPBM package (xbmtopbm.c)
 //
 // This file is part of FreeImage 3
@@ -95,12 +95,12 @@ readXBMFile(FreeImageIO *io, fi_handle handle, int *widthP, int *heightP, char *
 	int bytes, bytes_per_line, padding;
 	int c1, c2, value1, value2;
 	int hex_table[256];
-	BOOL found_declaration;
+	FI_BOOL found_declaration;
 	/* in scanning through the bitmap file, we have found the first
 	 line of the C declaration of the array (the "static char ..."
 	 or whatever line)
 	 */
-	BOOL eof;	// we've encountered end of file while searching file
+	FI_BOOL eof;	// we've encountered end of file while searching file
 
 	*widthP = *heightP = -1;
 
@@ -289,7 +289,7 @@ MimeType() {
 	return "image/x-xbitmap";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	char magic[8];
 	if(readLine(magic, 7, io, handle)) {
@@ -299,12 +299,12 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV 
+static FI_BOOL DLL_CALLCONV 
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return FALSE;
 }

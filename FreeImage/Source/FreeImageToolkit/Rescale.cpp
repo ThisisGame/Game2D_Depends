@@ -2,7 +2,7 @@
 // Upsampling / downsampling routine
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Carsten Klein (cklein05@users.sourceforge.net)
 //
 // This file is part of FreeImage 3
@@ -94,7 +94,7 @@ FreeImage_Rescale(FIBITMAP *src, int dst_width, int dst_height, FREE_IMAGE_FILTE
 }
 
 FIBITMAP * DLL_CALLCONV
-FreeImage_MakeThumbnail(FIBITMAP *dib, int max_pixel_size, BOOL convert) {
+FreeImage_MakeThumbnail(FIBITMAP *dib, int max_pixel_size, FI_BOOL convert) {
 	FIBITMAP *thumbnail = NULL;
 	int new_width, new_height;
 

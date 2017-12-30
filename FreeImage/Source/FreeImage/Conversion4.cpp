@@ -28,7 +28,7 @@
 
 void DLL_CALLCONV
 FreeImage_ConvertLine1To4(BYTE *target, BYTE *source, int width_in_pixels) {
-	BOOL hinibble = TRUE;
+	FI_BOOL hinibble = TRUE;
 	for (int cols = 0; cols < width_in_pixels; cols++){
 		if (hinibble == TRUE){
 			target[cols >> 1] = ((source[cols >> 3] & (0x80 >> (cols & 0x07))) != 0 ? 15 : 0) << 4;
@@ -43,7 +43,7 @@ FreeImage_ConvertLine1To4(BYTE *target, BYTE *source, int width_in_pixels) {
 
 void DLL_CALLCONV
 FreeImage_ConvertLine8To4(BYTE *target, BYTE *source, int width_in_pixels, RGBQUAD *palette) {
-	BOOL hinibble = TRUE;
+	FI_BOOL hinibble = TRUE;
 	BYTE index;
 
 	for (int cols = 0; cols < width_in_pixels; cols++){
@@ -61,7 +61,7 @@ FreeImage_ConvertLine8To4(BYTE *target, BYTE *source, int width_in_pixels, RGBQU
 void DLL_CALLCONV
 FreeImage_ConvertLine16To4_555(BYTE *target, BYTE *source, int width_in_pixels) {
 	WORD *bits = (WORD *)source;
-	BOOL hinibble = TRUE;
+	FI_BOOL hinibble = TRUE;
 
 	for (int cols = 0; cols < width_in_pixels; cols++) {
 		if (hinibble) {
@@ -83,7 +83,7 @@ FreeImage_ConvertLine16To4_555(BYTE *target, BYTE *source, int width_in_pixels) 
 void DLL_CALLCONV
 FreeImage_ConvertLine16To4_565(BYTE *target, BYTE *source, int width_in_pixels) {
 	WORD *bits = (WORD *)source;
-	BOOL hinibble = TRUE;
+	FI_BOOL hinibble = TRUE;
 
 	for (int cols = 0; cols < width_in_pixels; cols++) {
 		if (hinibble) {
@@ -104,7 +104,7 @@ FreeImage_ConvertLine16To4_565(BYTE *target, BYTE *source, int width_in_pixels) 
 
 void DLL_CALLCONV
 FreeImage_ConvertLine24To4(BYTE *target, BYTE *source, int width_in_pixels) {
-	BOOL hinibble = TRUE;
+	FI_BOOL hinibble = TRUE;
 
 	for (int cols = 0; cols < width_in_pixels; cols++) {
 		if (hinibble) {
@@ -120,7 +120,7 @@ FreeImage_ConvertLine24To4(BYTE *target, BYTE *source, int width_in_pixels) {
 
 void DLL_CALLCONV
 FreeImage_ConvertLine32To4(BYTE *target, BYTE *source, int width_in_pixels) {
-	BOOL hinibble = TRUE;
+	FI_BOOL hinibble = TRUE;
 
 	for (int cols = 0; cols < width_in_pixels; cols++) {
 		if (hinibble) {

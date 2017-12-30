@@ -27,7 +27,7 @@ FreeImage_LoadFromMem(FREE_IMAGE_FORMAT fif, fiio_mem_handle *handle, int flags)
 	return NULL;
 }
 
-BOOL
+FI_BOOL
 FreeImage_SaveToMem(FREE_IMAGE_FORMAT fif, FIBITMAP *dib, fiio_mem_handle *handle, int flags) {
 	FreeImageIO io;
 	SetMemIO(&io);

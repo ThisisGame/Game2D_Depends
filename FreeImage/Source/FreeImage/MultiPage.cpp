@@ -6,7 +6,7 @@
 // - Laurent Rocher (rocherl@club-internet.fr)
 // - Steve Johnson (steve@parisgroup.net)
 // - Petr Pytelka (pyta@lightcomp.com)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Vadim Alexandrov (vadimalexandrov@users.sourceforge.net
 // - Martin Dyring-Andersen (mda@spamfighter.com)
 // - Volodymyr Goncharov (volodymyr.goncharov@gmail.com)
@@ -84,11 +84,11 @@ FI_STRUCT (MULTIBITMAPHEADER) {
 	fi_handle handle;
 	CacheFile *m_cachefile;
 	std::map<FIBITMAP *, int> locked_pages;
-	BOOL changed;
+	FI_BOOL changed;
 	int page_count;
 	BlockList m_blocks;
 	char *m_filename;
-	BOOL read_only;
+	FI_BOOL read_only;
 	FREE_IMAGE_FORMAT cache_fif;
 	int load_flags;
 };
@@ -233,7 +233,7 @@ FreeImage_InternalGetPageCount(FIMULTIBITMAP *bitmap) {
 // =====================================================================
 
 FIMULTIBITMAP * DLL_CALLCONV
-FreeImage_OpenMultiBitmap(FREE_IMAGE_FORMAT fif, const char *filename, BOOL create_new, BOOL read_only, BOOL keep_cache_in_memory, int flags) {
+FreeImage_OpenMultiBitmap(FREE_IMAGE_FORMAT fif, const char *filename, FI_BOOL create_new, FI_BOOL read_only, FI_BOOL keep_cache_in_memory, int flags) {
 
 	FILE *handle = NULL;
 	try {
@@ -325,7 +325,7 @@ FreeImage_OpenMultiBitmap(FREE_IMAGE_FORMAT fif, const char *filename, BOOL crea
 FIMULTIBITMAP * DLL_CALLCONV
 FreeImage_OpenMultiBitmapFromHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_handle handle, int flags) {
 	try {
-		BOOL read_only = FALSE;	// modifications (if any) will be stored into the memory cache
+		FI_BOOL read_only = FALSE;	// modifications (if any) will be stored into the memory cache
 
 		if (io && handle) {
 		
@@ -382,13 +382,13 @@ FreeImage_OpenMultiBitmapFromHandle(FREE_IMAGE_FORMAT fif, FreeImageIO *io, fi_h
 	return NULL;
 }
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_SaveMultiBitmapToHandle(FREE_IMAGE_FORMAT fif, FIMULTIBITMAP *bitmap, FreeImageIO *io, fi_handle handle, int flags) {
 	if(!bitmap || !bitmap->data || !io || !handle) {
 		return FALSE;
 	}
 
-	BOOL success = TRUE;
+	FI_BOOL success = TRUE;
 
 	// retrieve the plugin list to find the node belonging to this plugin
 	PluginList *list = FreeImage_GetPluginList();
@@ -486,10 +486,10 @@ FreeImage_SaveMultiBitmapToHandle(FREE_IMAGE_FORMAT fif, FIMULTIBITMAP *bitmap, 
 }
 
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_CloseMultiBitmap(FIMULTIBITMAP *bitmap, int flags) {
 	if (bitmap) {
-		BOOL success = TRUE;
+		FI_BOOL success = TRUE;
 		
 		if (bitmap->data) {
 			MULTIBITMAPHEADER *header = FreeImage_GetMultiBitmapHeader(bitmap);			
@@ -767,7 +767,7 @@ FreeImage_LockPage(FIMULTIBITMAP *bitmap, int page) {
 }
 
 void DLL_CALLCONV
-FreeImage_UnlockPage(FIMULTIBITMAP *bitmap, FIBITMAP *page, BOOL changed) {
+FreeImage_UnlockPage(FIMULTIBITMAP *bitmap, FIBITMAP *page, FI_BOOL changed) {
 	if ((bitmap) && (page)) {
 		MULTIBITMAPHEADER *header = FreeImage_GetMultiBitmapHeader(bitmap);
 
@@ -839,7 +839,7 @@ FreeImage_UnlockPage(FIMULTIBITMAP *bitmap, FIBITMAP *page, BOOL changed) {
 	}
 }
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_MovePage(FIMULTIBITMAP *bitmap, int target, int source) {
 	if (bitmap) {
 		MULTIBITMAPHEADER *header = FreeImage_GetMultiBitmapHeader(bitmap);
@@ -862,7 +862,7 @@ FreeImage_MovePage(FIMULTIBITMAP *bitmap, int target, int source) {
 	return FALSE;
 }
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_GetLockedPageNumbers(FIMULTIBITMAP *bitmap, int *pages, int *count) {
 	if ((bitmap) && (count)) {
 		MULTIBITMAPHEADER *header = FreeImage_GetMultiBitmapHeader(bitmap);
@@ -894,7 +894,7 @@ FreeImage_GetLockedPageNumbers(FIMULTIBITMAP *bitmap, int *pages, int *count) {
 
 FIMULTIBITMAP * DLL_CALLCONV
 FreeImage_LoadMultiBitmapFromMemory(FREE_IMAGE_FORMAT fif, FIMEMORY *stream, int flags) {
-	BOOL read_only = FALSE;	// modifications (if any) will be stored into the memory cache
+	FI_BOOL read_only = FALSE;	// modifications (if any) will be stored into the memory cache
 
 	// retrieve the plugin list to find the node belonging to this plugin
 
@@ -961,7 +961,7 @@ FreeImage_LoadMultiBitmapFromMemory(FREE_IMAGE_FORMAT fif, FIMEMORY *stream, int
 	return NULL;
 }
 
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_SaveMultiBitmapToMemory(FREE_IMAGE_FORMAT fif, FIMULTIBITMAP *bitmap, FIMEMORY *stream, int flags) {
 	if (stream && stream->data) {
 		FreeImageIO io;

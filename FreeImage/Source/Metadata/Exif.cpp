@@ -3,7 +3,7 @@
 // Exif metadata model
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Mihail Naydenov (mnaydenov@users.sourceforge.net)
 //
 // Based on the following implementations:
@@ -97,7 +97,7 @@ FreeImage_strnicmp(const char *s1, const char *s2, size_t len) {
 // ----------------------------------------------------------
 
 static short 
-ReadInt16(BOOL msb_order, const void *buffer) {
+ReadInt16(FI_BOOL msb_order, const void *buffer) {
 	short value;
 
 	if(msb_order) {
@@ -109,7 +109,7 @@ ReadInt16(BOOL msb_order, const void *buffer) {
 }
 
 static LONG 
-ReadInt32(BOOL msb_order, const void *buffer) {
+ReadInt32(FI_BOOL msb_order, const void *buffer) {
 	LONG value;
 
 	if(msb_order) {
@@ -121,7 +121,7 @@ ReadInt32(BOOL msb_order, const void *buffer) {
 }
 
 static WORD 
-ReadUint16(BOOL msb_order, const void *buffer) {
+ReadUint16(FI_BOOL msb_order, const void *buffer) {
 	WORD value;
 	
 	if(msb_order) {
@@ -133,7 +133,7 @@ ReadUint16(BOOL msb_order, const void *buffer) {
 }
 
 static DWORD 
-ReadUint32(BOOL msb_order, const void *buffer) {
+ReadUint32(FI_BOOL msb_order, const void *buffer) {
 	return ((DWORD) ReadInt32(msb_order, buffer) & 0xFFFFFFFF);
 }
 
@@ -146,7 +146,7 @@ Process a IFD offset
 Returns the offset and the metadata model for this tag
 */
 static void 
-processIFDOffset(FITAG *tag, const char *pval, BOOL msb_order, DWORD *subdirOffset, TagLib::MDMODEL *md_model) {
+processIFDOffset(FITAG *tag, const char *pval, FI_BOOL msb_order, DWORD *subdirOffset, TagLib::MDMODEL *md_model) {
 	// get the IFD offset
 	*subdirOffset = ReadUint32(msb_order, pval);
 
@@ -169,7 +169,7 @@ Process a maker note IFD offset
 Returns the offset and the metadata model for this tag
 */
 static void 
-processMakerNote(FIBITMAP *dib, const char *pval, BOOL msb_order, DWORD *subdirOffset, TagLib::MDMODEL *md_model) {
+processMakerNote(FIBITMAP *dib, const char *pval, FI_BOOL msb_order, DWORD *subdirOffset, TagLib::MDMODEL *md_model) {
 	FITAG *tagMake = NULL;
 
 	*subdirOffset = 0;
@@ -303,7 +303,7 @@ processMakerNote(FIBITMAP *dib, const char *pval, BOOL msb_order, DWORD *subdirO
 Process a Canon maker note tag. 
 A single Canon tag may contain many other tags within.
 */
-static BOOL 
+static FI_BOOL 
 processCanonMakerNoteTag(FIBITMAP *dib, FITAG *tag) {
 	char defaultKey[16];
 	DWORD startIndex = 0;
@@ -399,7 +399,7 @@ processCanonMakerNoteTag(FIBITMAP *dib, FITAG *tag) {
 Process a standard Exif tag
 */
 static void 
-processExifTag(FIBITMAP *dib, FITAG *tag, char *pval, BOOL msb_order, TagLib::MDMODEL md_model) {
+processExifTag(FIBITMAP *dib, FITAG *tag, char *pval, FI_BOOL msb_order, TagLib::MDMODEL md_model) {
 	char defaultKey[16];
 	int n;
 	DWORD i;
@@ -525,8 +525,8 @@ Process Exif directory
 @param starting_md_model Metadata model of the IFD (should be TagLib::EXIF_MAIN for a jpeg)
 @return Returns TRUE if sucessful, returns FALSE otherwise
 */
-static BOOL 
-jpeg_read_exif_dir(FIBITMAP *dib, const BYTE *tiffp, DWORD dwOffsetIfd0, DWORD dwLength, DWORD dwProfileOffset, BOOL msb_order, TagLib::MDMODEL starting_md_model) {
+static FI_BOOL 
+jpeg_read_exif_dir(FIBITMAP *dib, const BYTE *tiffp, DWORD dwOffsetIfd0, DWORD dwLength, DWORD dwProfileOffset, FI_BOOL msb_order, TagLib::MDMODEL starting_md_model) {
 	WORD de, nde;
 
 	std::stack<WORD>			destack;	// directory entries stack
@@ -648,7 +648,7 @@ jpeg_read_exif_dir(FIBITMAP *dib, const BYTE *tiffp, DWORD dwOffsetIfd0, DWORD d
 			}
 
 			// check for a IFD offset
-			BOOL isIFDOffset = FALSE;
+			FI_BOOL isIFDOffset = FALSE;
 			switch(FreeImage_GetTagID(tag)) {
 				case TAG_EXIF_OFFSET:
 				case TAG_GPS_OFFSET:
@@ -809,7 +809,7 @@ Read and decode JPEG_APP1 marker (Exif profile)
 @param length APP1 marker length
 @return Returns TRUE if successful, FALSE otherwise
 */
-BOOL  
+FI_BOOL  
 jpeg_read_exif_profile(FIBITMAP *dib, const BYTE *data, unsigned length) {
     // marker identifying string for Exif = "Exif\0\0"
     BYTE exif_signature[6] = { 0x45, 0x78, 0x69, 0x66, 0x00, 0x00 };
@@ -833,7 +833,7 @@ jpeg_read_exif_profile(FIBITMAP *dib, const BYTE *data, unsigned length) {
 
 		// check the endianess order
 		
-		BOOL bBigEndian = TRUE;
+		FI_BOOL bBigEndian = TRUE;
 
 		if(memcmp(pbProfile, lsb_first, sizeof(lsb_first)) == 0) {
 			// Exif section is in little-endian order
@@ -884,7 +884,7 @@ Read JPEG_APP1 marker (Exif profile)
 @param datalen APP1 marker length
 @return Returns TRUE if successful, FALSE otherwise
 */
-BOOL  
+FI_BOOL  
 jpeg_read_exif_profile_raw(FIBITMAP *dib, const BYTE *profile, unsigned length) {
     // marker identifying string for Exif = "Exif\0\0"
     BYTE exif_signature[6] = { 0x45, 0x78, 0x69, 0x66, 0x00, 0x00 };
@@ -928,10 +928,10 @@ Read and decode JPEG-XR Exif IFD
 @param file_offset Reference offset in the original file of each tag value whose length is > 4
 @return Returns TRUE if successful, FALSE otherwise
 */
-BOOL  
+FI_BOOL  
 jpegxr_read_exif_profile(FIBITMAP *dib, const BYTE *profile, unsigned length, unsigned file_offset) {
 	// assume Little Endian order
-	BOOL bBigEndian = FALSE;
+	FI_BOOL bBigEndian = FALSE;
 	
 	// process Exif specific IFD
 	return jpeg_read_exif_dir(dib, profile, 0, length, file_offset, bBigEndian, TagLib::EXIF_EXIF);
@@ -945,10 +945,10 @@ Read and decode JPEG-XR Exif-GPS IFD
 @param file_offset Reference offset in the original file of each tag value whose length is > 4
 @return Returns TRUE if successful, FALSE otherwise
 */
-BOOL  
+FI_BOOL  
 jpegxr_read_exif_gps_profile(FIBITMAP *dib, const BYTE *profile, unsigned length, unsigned file_offset) {
 	// assume Little Endian order
-	BOOL bBigEndian = FALSE;
+	FI_BOOL bBigEndian = FALSE;
 	
 	// process Exif GPS IFD
 	return jpeg_read_exif_dir(dib, profile, 0, length, file_offset, bBigEndian, TagLib::EXIF_GPS);
@@ -974,12 +974,12 @@ RotateExif(FIBITMAP **dib) {
 		if((tag != NULL) && (FreeImage_GetTagID(tag) == TAG_ORIENTATION)) {
 			const WORD orientation = *((WORD *)FreeImage_GetTagValue(tag));
 			switch (orientation) {
-				case 1:		// "top, left side" => 0°
+				case 1:		// "top, left side" => 0ï¿½
 					break;
 				case 2:		// "top, right side" => flip left-right
 					FreeImage_FlipHorizontal(*dib);
 					break;
-				case 3:		// "bottom, right side" => -180°
+				case 3:		// "bottom, right side" => -180ï¿½
 					rotated = FreeImage_Rotate(*dib, 180);
 					FreeImage_Unload(*dib);
 					*dib = rotated;
@@ -987,24 +987,24 @@ RotateExif(FIBITMAP **dib) {
 				case 4:		// "bottom, left side" => flip up-down
 					FreeImage_FlipVertical(*dib);
 					break;
-				case 5:		// "left side, top" => +90° + flip up-down
+				case 5:		// "left side, top" => +90ï¿½ + flip up-down
 					rotated = FreeImage_Rotate(*dib, 90);
 					FreeImage_Unload(*dib);
 					*dib = rotated;
 					FreeImage_FlipVertical(*dib);
 					break;
-				case 6:		// "right side, top" => -90°
+				case 6:		// "right side, top" => -90ï¿½
 					rotated = FreeImage_Rotate(*dib, -90);
 					FreeImage_Unload(*dib);
 					*dib = rotated;
 					break;
-				case 7:		// "right side, bottom" => -90° + flip up-down
+				case 7:		// "right side, bottom" => -90ï¿½ + flip up-down
 					rotated = FreeImage_Rotate(*dib, -90);
 					FreeImage_Unload(*dib);
 					*dib = rotated;
 					FreeImage_FlipVertical(*dib);
 					break;
-				case 8:		// "left side, bottom" => +90°
+				case 8:		// "left side, bottom" => +90ï¿½
 					rotated = FreeImage_Rotate(*dib, 90);
 					FreeImage_Unload(*dib);
 					*dib = rotated;
@@ -1048,7 +1048,7 @@ The end of the buffer is filled with 4 bytes equal to 0 (end of IFD offset)
 @return Returns TRUE if successful, FALSE otherwise
 @see tiff_get_ifd_profile
 */
-static BOOL
+static FI_BOOL
 tiff_write_ifd(FIBITMAP *dib, FREE_IMAGE_MDMODEL md_model, FIMEMORY *hmem) {
 	FITAG *tag = NULL;
 	FIMETADATA *mdhandle = NULL;
@@ -1207,7 +1207,7 @@ The buffer is allocated by the function and must be freed by the caller, using '
 @return Returns TRUE if successful, FALSE otherwise
 @see tiff_write_ifd
 */
-BOOL
+FI_BOOL
 tiff_get_ifd_profile(FIBITMAP *dib, FREE_IMAGE_MDMODEL md_model, BYTE **ppbProfile, unsigned *uProfileLength) {
 	FIMEMORY *hmem = NULL;
 
@@ -1219,7 +1219,7 @@ tiff_get_ifd_profile(FIBITMAP *dib, FREE_IMAGE_MDMODEL md_model, BYTE **ppbProfi
 		}
 
 		// write the metadata model as a TIF IFD
-		BOOL bResult = tiff_write_ifd(dib, md_model, hmem);
+		FI_BOOL bResult = tiff_write_ifd(dib, md_model, hmem);
 
 		if(bResult) {
 			BYTE *data = NULL;

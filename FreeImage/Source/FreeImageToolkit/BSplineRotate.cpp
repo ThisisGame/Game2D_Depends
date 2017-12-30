@@ -2,9 +2,9 @@
 // Bitmap rotation using B-Splines
 //
 // Design and implementation by
-// - Philippe Thévenaz (philippe.thevenaz@epfl.ch)
+// - Philippe Thï¿½venaz (philippe.thevenaz@epfl.ch)
 // Adaptation for FreeImage by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -25,7 +25,7 @@
 ==========================================================
 This code was taken and adapted from the following reference : 
 
-[1] Philippe Thévenaz, Spline interpolation, a C source code 
+[1] Philippe Thï¿½venaz, Spline interpolation, a C source code 
 implementation. http://bigwww.epfl.ch/thevenaz/
 
 It implements ideas described in the following papers : 
@@ -68,7 +68,7 @@ static void	PutRow(double *Image, long y, double *Line, long Width);
 static bool SamplesToCoefficients(double *Image, long Width, long Height, long spline_degree);
 static double InterpolatedValue(double *Bcoeff, long Width, long Height, double x, double y, long spline_degree);
 
-static FIBITMAP * Rotate8Bit(FIBITMAP *dib, double angle, double x_shift, double y_shift, double x_origin, double y_origin, long spline_degree, BOOL use_mask);
+static FIBITMAP * Rotate8Bit(FIBITMAP *dib, double angle, double x_shift, double y_shift, double x_origin, double y_origin, long spline_degree, FI_BOOL use_mask);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Coefficients routines
@@ -521,7 +521,7 @@ InterpolatedValue(double *Bcoeff, long Width, long Height, double x, double y, l
  @return Returns the translated & rotated dib if successful, returns NULL otherwise
 */
 static FIBITMAP * 
-Rotate8Bit(FIBITMAP *dib, double angle, double x_shift, double y_shift, double x_origin, double y_origin, long spline_degree, BOOL use_mask) {
+Rotate8Bit(FIBITMAP *dib, double angle, double x_shift, double y_shift, double x_origin, double y_origin, long spline_degree, FI_BOOL use_mask) {
 	double	*ImageRasterArray;
 	double	p;
 	double	a11, a12, a21, a22;
@@ -645,7 +645,7 @@ Rotate8Bit(FIBITMAP *dib, double angle, double x_shift, double y_shift, double x
  @return Returns the translated & rotated dib if successful, returns NULL otherwise
 */
 FIBITMAP * DLL_CALLCONV 
-FreeImage_RotateEx(FIBITMAP *dib, double angle, double x_shift, double y_shift, double x_origin, double y_origin, BOOL use_mask) {
+FreeImage_RotateEx(FIBITMAP *dib, double angle, double x_shift, double y_shift, double x_origin, double y_origin, FI_BOOL use_mask) {
 
 	int x, y, bpp;
 	int channel, nb_channels;

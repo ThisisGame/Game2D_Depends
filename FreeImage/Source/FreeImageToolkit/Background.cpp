@@ -32,7 +32,7 @@
  @return Returns TRUE if the palette of the image specified contains only
  greyscales, FALSE otherwise.
  */
-static BOOL
+static FI_BOOL
 IsVisualGreyscaleImage(FIBITMAP *dib) {
 
 	switch (FreeImage_GetBPP(dib)) {
@@ -183,7 +183,7 @@ GetPaletteIndex(FIBITMAP *dib, const RGBQUAD *color, int options, FREE_IMAGE_COL
  @return Returns TRUE on success, FALSE otherwise. This function fails if any of
  the color arguments is a null pointer.
  */
-static BOOL
+static FI_BOOL
 GetAlphaBlendedColor(const RGBQUAD *bgcolor, const RGBQUAD *fgcolor, RGBQUAD *blended) {
 	
 	if ((!bgcolor) || (!fgcolor) || (!blended)) {
@@ -211,7 +211,7 @@ GetAlphaBlendedColor(const RGBQUAD *bgcolor, const RGBQUAD *fgcolor, RGBQUAD *bl
  @return Returns TRUE on success, FALSE otherwise. This function fails if any of
  the dib and color is NULL or the provided image is not a FIT_BITMAP image.
  */
-static BOOL
+static FI_BOOL
 FillBackgroundBitmap(FIBITMAP *dib, const RGBQUAD *color, int options) {
 
 	if ((!dib) || (FreeImage_GetImageType(dib) != FIT_BITMAP)) {
@@ -233,7 +233,7 @@ FillBackgroundBitmap(FIBITMAP *dib, const RGBQUAD *color, int options) {
 	BYTE *src_bits = FreeImage_GetScanLine(dib, 0);
 	BYTE *dst_bits = src_bits;	
 	
-	BOOL supports_alpha = ((bpp >= 24) || ((bpp == 8) && (color_type != FIC_PALETTE)));
+	FI_BOOL supports_alpha = ((bpp >= 24) || ((bpp == 8) && (color_type != FIC_PALETTE)));
 	
 	// Check for RGBA case if bitmap supports alpha 
 	// blending (8-bit greyscale, 24- or 32-bit images)
@@ -417,7 +417,7 @@ FillBackgroundBitmap(FIBITMAP *dib, const RGBQUAD *color, int options) {
  @return Returns TRUE on success, FALSE otherwise. This function fails if any of
  dib and color is NULL.
  */
-BOOL DLL_CALLCONV
+FI_BOOL DLL_CALLCONV
 FreeImage_FillBackground(FIBITMAP *dib, const void *color, int options) {
 
 	if (!FreeImage_HasPixels(dib)) {

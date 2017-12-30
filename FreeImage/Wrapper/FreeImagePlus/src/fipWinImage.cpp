@@ -2,7 +2,7 @@
 // fipWinImage class implementation
 //
 // Design and implementation by
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 //
 // This file is part of FreeImage 3
 //
@@ -68,7 +68,7 @@ void fipWinImage::clear() {
 	fipImage::clear();
 }
 
-BOOL fipWinImage::isValid() const {
+FI_BOOL fipWinImage::isValid() const {
 	return fipImage::isValid();
 }
 
@@ -154,7 +154,7 @@ HANDLE fipWinImage::copyToHandle() const {
 	return hMem;
 }
 
-BOOL fipWinImage::copyFromHandle(HANDLE hMem) {
+FI_BOOL fipWinImage::copyFromHandle(HANDLE hMem) {
 	BYTE *lpVoid = NULL;
 	BITMAPINFOHEADER *pHead = NULL;
 	RGBQUAD *pPalette = NULL;
@@ -225,7 +225,7 @@ BOOL fipWinImage::copyFromHandle(HANDLE hMem) {
 	return FALSE;
 }
 
-BOOL fipWinImage::copyFromBitmap(HBITMAP hbmp) {
+FI_BOOL fipWinImage::copyFromBitmap(HBITMAP hbmp) {
 	if(hbmp) { 
 		int Success;
         BITMAP bm;
@@ -267,7 +267,7 @@ BOOL fipWinImage::copyFromBitmap(HBITMAP hbmp) {
 	return FALSE;
 }
 
-BOOL fipWinImage::copyToClipboard(HWND hWndNewOwner) const {
+FI_BOOL fipWinImage::copyToClipboard(HWND hWndNewOwner) const {
 	HANDLE hDIB = copyToHandle();
 
 	if(OpenClipboard(hWndNewOwner)) {
@@ -284,7 +284,7 @@ BOOL fipWinImage::copyToClipboard(HWND hWndNewOwner) const {
 	return TRUE;
 }
 
-BOOL fipWinImage::pasteFromClipboard() {
+FI_BOOL fipWinImage::pasteFromClipboard() {
 	if(!IsClipboardFormatAvailable(CF_DIB))
 		return FALSE;
 
@@ -302,7 +302,7 @@ BOOL fipWinImage::pasteFromClipboard() {
 ///////////////////////////////////////////////////////////////////
 // Screen capture
 
-BOOL fipWinImage::captureWindow(HWND hWndApplicationWindow, HWND hWndSelectedWindow) {
+FI_BOOL fipWinImage::captureWindow(HWND hWndApplicationWindow, HWND hWndSelectedWindow) {
 	int xScreen, yScreen, xshift, yshift;
 	RECT r;
 
@@ -376,7 +376,7 @@ BOOL fipWinImage::captureWindow(HWND hWndApplicationWindow, HWND hWndSelectedWin
 ///////////////////////////////////////////////////////////////////
 // Painting operations
 
-void fipWinImage::drawEx(HDC hDC, RECT& rcDest, BOOL useFileBkg, RGBQUAD *appBkColor, FIBITMAP *bg) const {
+void fipWinImage::drawEx(HDC hDC, RECT& rcDest, FI_BOOL useFileBkg, RGBQUAD *appBkColor, FIBITMAP *bg) const {
 	// Convert to a standard bitmap if needed
 	if(_bHasChanged) {
 		if(_bDeleteMe) {
@@ -387,8 +387,8 @@ void fipWinImage::drawEx(HDC hDC, RECT& rcDest, BOOL useFileBkg, RGBQUAD *appBkC
 
 		FREE_IMAGE_TYPE image_type = getImageType();
 		if(image_type == FIT_BITMAP) {
-			BOOL bHasBackground = FreeImage_HasBackgroundColor(_dib);
-			BOOL bIsTransparent = FreeImage_IsTransparent(_dib);
+			FI_BOOL bHasBackground = FreeImage_HasBackgroundColor(_dib);
+			FI_BOOL bIsTransparent = FreeImage_IsTransparent(_dib);
 
 			if(!bIsTransparent && (!bHasBackground || !useFileBkg)) {
 				// Copy pointer

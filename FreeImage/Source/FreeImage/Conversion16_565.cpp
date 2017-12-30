@@ -3,7 +3,7 @@
 //
 // Design and implementation by
 // - Floris van den Berg (flvdberg@wxs.nl)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // - Jani Kajala (janik@remedy.fi)
 //
 // This file is part of FreeImage 3
@@ -42,7 +42,7 @@ FreeImage_ConvertLine1To16_565(BYTE *target, BYTE *source, int width_in_pixels, 
 void DLL_CALLCONV
 FreeImage_ConvertLine4To16_565(BYTE *target, BYTE *source, int width_in_pixels, RGBQUAD *palette) {
 	WORD *new_bits = (WORD *)target;
-	BOOL lonibble = FALSE;
+	FI_BOOL lonibble = FALSE;
 	int x = 0;
 
 	for (int cols = 0; cols < width_in_pixels; cols++) {

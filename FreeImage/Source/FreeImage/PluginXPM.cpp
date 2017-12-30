@@ -25,7 +25,7 @@
 // ------------------------
 // Initial design and implementation by
 // - Karl-Heinz Bussian (khbussian@moss.de)
-// - Hervé Drolon (drolon@infonie.fr)
+// - Hervï¿½ Drolon (drolon@infonie.fr)
 // Completely rewritten from scratch by Ryan Rubley (ryan@lostreality.org)
 // in order to address the following major fixes:
 // * Supports any number of chars per pixel (not just 1 or 2)
@@ -48,7 +48,7 @@ static int s_format_id;
 // ==========================================================
 
 // read in and skip all junk until we find a certain char
-static BOOL
+static FI_BOOL
 FindChar(FreeImageIO *io, fi_handle handle, BYTE look_for) {
 	BYTE c;
 	io->read_proc(&c, sizeof(BYTE), 1, handle);
@@ -119,7 +119,7 @@ MimeType() {
 	return "image/x-xpixmap";
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Validate(FreeImageIO *io, fi_handle handle) {
 	char buffer[256];
 
@@ -133,7 +133,7 @@ Validate(FreeImageIO *io, fi_handle handle) {
 	return FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportDepth(int depth) {
 	return (
 			(depth == 8) ||
@@ -141,12 +141,12 @@ SupportsExportDepth(int depth) {
 		);
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsExportType(FREE_IMAGE_TYPE type) {
 	return (type == FIT_BITMAP) ? TRUE : FALSE;
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 SupportsNoPixels() {
 	return TRUE;
 }
@@ -163,7 +163,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
     try {
 		char *str;
 		
-		BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
+		FI_BOOL header_only = (flags & FIF_LOAD_NOPIXELS) == FIF_LOAD_NOPIXELS;
 		
 		//find the starting brace
 		if( !FindChar(io, handle,'{') )
@@ -345,7 +345,7 @@ Load(FreeImageIO *io, fi_handle handle, int page, int flags, void *data) {
     }
 }
 
-static BOOL DLL_CALLCONV
+static FI_BOOL DLL_CALLCONV
 Save(FreeImageIO *io, FIBITMAP *dib, fi_handle handle, int page, int flags, void *data) {
 	if ((dib != NULL) && (handle != NULL)) {
 		char header[] = "/* XPM */\nstatic char *freeimage[] = {\n/* width height num_colors chars_per_pixel */\n\"",

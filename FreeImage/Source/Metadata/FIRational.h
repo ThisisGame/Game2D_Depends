@@ -2,7 +2,7 @@
 // Helper class for rational numbers
 //
 // Design and implementation by
-// - Hervé Drolon <drolon@infonie.fr>
+// - Hervï¿½ Drolon <drolon@infonie.fr>
 //
 // This file is part of FreeImage 3
 //
@@ -87,7 +87,7 @@ public:
 	//@}
 
 	/// Checks if this rational number is an integer, either positive or negative
-	BOOL isInteger();
+	FI_BOOL isInteger();
 
 	/// Convert as "numerator/denominator"
 	std::string toString();

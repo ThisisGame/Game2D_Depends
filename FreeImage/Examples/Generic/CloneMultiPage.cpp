@@ -2,7 +2,7 @@
 // Multipage functions demonstration
 //
 // Design and implementation by 
-// - Hervé Drolon
+// - Hervï¿½ Drolon
 //
 // This file is part of FreeImage 3
 //
@@ -48,7 +48,7 @@ void MyMessageFunc(FREE_IMAGE_FORMAT fif, const char *message) {
 
 bool CloneMultiPage(FREE_IMAGE_FORMAT fif, char *input, char *output, int output_flag) {
 
-	BOOL bMemoryCache = TRUE;
+	FI_BOOL bMemoryCache = TRUE;
 
 	// Open src file (read-only, use memory cache)
 	FIMULTIBITMAP *src = FreeImage_OpenMultiBitmap(fif, input, FALSE, TRUE, bMemoryCache);

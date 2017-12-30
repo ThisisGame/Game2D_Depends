@@ -28,7 +28,7 @@
 
 // ----------------------------------------------------------
 
-CacheFile::CacheFile(const std::string filename, BOOL keep_in_memory) :
+CacheFile::CacheFile(const std::string filename, FI_BOOL keep_in_memory) :
 m_file(NULL),
 m_filename(filename),
 m_free_pages(),
@@ -43,7 +43,7 @@ m_keep_in_memory(keep_in_memory) {
 CacheFile::~CacheFile() {
 }
 
-BOOL
+FI_BOOL
 CacheFile::open() {
 	if ((!m_filename.empty()) && (!m_keep_in_memory)) {
 		m_file = fopen(m_filename.c_str(), "w+b");
@@ -160,7 +160,7 @@ CacheFile::lockBlock(int nr) {
 	return NULL;
 }
 
-BOOL
+FI_BOOL
 CacheFile::unlockBlock(int nr) {
 	if (m_current_block) {
 		m_current_block = NULL;
@@ -171,7 +171,7 @@ CacheFile::unlockBlock(int nr) {
 	return FALSE;
 }
 
-BOOL
+FI_BOOL
 CacheFile::deleteBlock(int nr) {
 	if (!m_current_block) {
 		PageMapIt it = m_page_map.find(nr);
@@ -191,7 +191,7 @@ CacheFile::deleteBlock(int nr) {
 	return FALSE;
 }
 
-BOOL
+FI_BOOL
 CacheFile::readFile(BYTE *data, int nr, int size) {
 	if ((data) && (size > 0)) {
 		int s = 0;
