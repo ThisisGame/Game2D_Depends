@@ -97,6 +97,7 @@
 #endif
 
 #include <CoreServices/CoreServices.h>
+
 #include <ApplicationServices/ApplicationServices.h>
 #include <sys/syslimits.h> /* PATH_MAX */
 
