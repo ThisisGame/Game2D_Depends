@@ -190,6 +190,11 @@ PluginList::IsEmpty() const {
 	return m_plugin_map.empty();
 }
 
+PluginNode* PluginList::FindNodeFromIndex(int varIndex)
+{
+    return m_plugin_map[varIndex];
+}
+
 PluginList::~PluginList() {
 	for (map<int, PluginNode *>::iterator i = m_plugin_map.begin(); i != m_plugin_map.end(); ++i) {
 #ifdef _WIN32
@@ -572,6 +577,21 @@ int DLL_CALLCONV
 FreeImage_GetFIFCount() {
 	return (s_plugins != NULL) ? s_plugins->Size() : 0;
 }
+
+FREE_IMAGE_FORMAT DLL_CALLCONV
+FreeImage_GetFIFFromIndex(int varIndex)
+{
+    if(s_plugins!=NULL)
+    {
+        PluginNode* tmpnode=s_plugins->FindNodeFromIndex(varIndex);
+        if(tmpnode!=NULL)
+        {
+            return (FREE_IMAGE_FORMAT)FreeImage_GetFIFFromFormat(tmpnode->m_format);
+        }
+    }
+    return (FREE_IMAGE_FORMAT)FIF_UNKNOWN;
+}
+
 
 FREE_IMAGE_FORMAT DLL_CALLCONV
 FreeImage_GetFIFFromFormat(const char *format) {

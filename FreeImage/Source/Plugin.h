@@ -71,6 +71,8 @@ public :
 	PluginNode *FindNodeFromFormat(const char *format);
 	PluginNode *FindNodeFromMime(const char *mime);
 	PluginNode *FindNodeFromFIF(int node_id);
+    
+    PluginNode *FindNodeFromIndex(int varIndex);
 
 	int Size() const;
 	FI_BOOL IsEmpty() const;

@@ -11,7 +11,7 @@
 
 #include <stdlib.h>
 
-#if HAVE_STDINT_H
+#if HAVE_STDINT_H || __APPLE__
 #include <stdint.h>
 #elif HAVE___INT8
 typedef __int8 int8_t;

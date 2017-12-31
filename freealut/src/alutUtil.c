@@ -1,6 +1,6 @@
 #include "alutInternal.h"
 
-#if HAVE_NANOSLEEP && HAVE_TIME_H
+#if (HAVE_NANOSLEEP && HAVE_TIME_H) || __APPLE__
 #include <time.h>
 #include <errno.h>
 #elif HAVE_USLEEP && HAVE_UNISTD_H

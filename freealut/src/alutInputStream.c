@@ -4,8 +4,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#if HAVE_STAT
-#if HAVE_UNISTD_H
+#if HAVE_STAT || __APPLE__
+#if HAVE_UNISTD_H || __APPLE
 #include <unistd.h>
 #endif
 #define structStat struct stat
