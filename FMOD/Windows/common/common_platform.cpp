@@ -3,7 +3,7 @@
 #include "common.h"
 #include <stdio.h>
 #include <conio.h>
-#include <Windows.h>
+
 #include <Objbase.h>
 #include <vector>
 
@@ -23,11 +23,14 @@ void (*Common_Private_Update)(unsigned int*);
 void (*Common_Private_Print)(const char*);
 void (*Common_Private_Close)();
 
+extern int FMOD_Main();
 int FMOD_Platform_Main(int argc, char** argv)
 {
     Common_Private_Argc = argc;
     Common_Private_Argv = argv;
     return FMOD_Main();
+
+	//return 0;
 }
 
 void Common_Init(void** /*extraDriverData*/)

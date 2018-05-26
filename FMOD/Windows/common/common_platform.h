@@ -4,7 +4,7 @@
 
 #include <windows.h>
 
-int FMOD_Main();
+
 
 #define COMMON_PLATFORM_SUPPORTS_FOPEN
 
